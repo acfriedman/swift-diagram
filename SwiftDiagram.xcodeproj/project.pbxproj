@@ -3,67 +3,91 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4946A6B72639A74600DC4660 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4946A6B62639A74600DC4660 /* AppDelegate.swift */; };
-		4946A6BA2639A74600DC4660 /* SwiftDiagram.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4946A6B82639A74600DC4660 /* SwiftDiagram.xcdatamodeld */; };
-		4946A6BC2639A74700DC4660 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4946A6BB2639A74700DC4660 /* Assets.xcassets */; };
-		4946A6BF2639A74700DC4660 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4946A6BD2639A74700DC4660 /* MainMenu.xib */; };
-		4946A6CB2639A74700DC4660 /* SwiftDiagramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4946A6CA2639A74700DC4660 /* SwiftDiagramTests.swift */; };
-		4946A6D62639A74700DC4660 /* SwiftDiagramUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4946A6D52639A74700DC4660 /* SwiftDiagramUITests.swift */; };
+		49DEF35F2642D56800FD342D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF35E2642D56800FD342D /* AppDelegate.swift */; };
+		49DEF3612642D56800FD342D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF3602642D56800FD342D /* ViewController.swift */; };
+		49DEF3632642D56900FD342D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DEF3622642D56900FD342D /* Assets.xcassets */; };
+		49DEF3662642D56900FD342D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DEF3642642D56900FD342D /* Main.storyboard */; };
+		49DEF3722642D56900FD342D /* SwiftDiagramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF3712642D56900FD342D /* SwiftDiagramTests.swift */; };
+		49DEF37D2642D56900FD342D /* SwiftDiagramUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF37C2642D56900FD342D /* SwiftDiagramUITests.swift */; };
+		49DEF38C2642D81700FD342D /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF38A2642D81700FD342D /* FilePicker.swift */; };
+		49DEF38D2642D81700FD342D /* SwiftViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF38B2642D81700FD342D /* SwiftViewer.swift */; };
+		49DEF3922642D89400FD342D /* SwiftSyntax in Frameworks */ = {isa = PBXBuildFile; productRef = 49DEF3912642D89400FD342D /* SwiftSyntax */; };
+		49DEF3952642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49DEF3942642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib */; };
+		49DEF3962642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 49DEF3942642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4946A6C72639A74700DC4660 /* PBXContainerItemProxy */ = {
+		49DEF36E2642D56900FD342D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4946A6AB2639A74500DC4660 /* Project object */;
+			containerPortal = 49DEF3532642D56800FD342D /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4946A6B22639A74600DC4660;
+			remoteGlobalIDString = 49DEF35A2642D56800FD342D;
 			remoteInfo = SwiftDiagram;
 		};
-		4946A6D22639A74700DC4660 /* PBXContainerItemProxy */ = {
+		49DEF3792642D56900FD342D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4946A6AB2639A74500DC4660 /* Project object */;
+			containerPortal = 49DEF3532642D56800FD342D /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4946A6B22639A74600DC4660;
+			remoteGlobalIDString = 49DEF35A2642D56800FD342D;
 			remoteInfo = SwiftDiagram;
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		49DEF3972642D8BB00FD342D /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				49DEF3962642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		4946A6B32639A74600DC4660 /* SwiftDiagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDiagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4946A6B62639A74600DC4660 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4946A6B92639A74600DC4660 /* SwiftDiagram.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftDiagram.xcdatamodel; sourceTree = "<group>"; };
-		4946A6BB2639A74700DC4660 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4946A6BE2639A74700DC4660 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		4946A6C02639A74700DC4660 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4946A6C12639A74700DC4660 /* SwiftDiagram.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftDiagram.entitlements; sourceTree = "<group>"; };
-		4946A6C62639A74700DC4660 /* SwiftDiagramTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDiagramTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4946A6CA2639A74700DC4660 /* SwiftDiagramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDiagramTests.swift; sourceTree = "<group>"; };
-		4946A6CC2639A74700DC4660 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4946A6D12639A74700DC4660 /* SwiftDiagramUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDiagramUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4946A6D52639A74700DC4660 /* SwiftDiagramUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDiagramUITests.swift; sourceTree = "<group>"; };
-		4946A6D72639A74700DC4660 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49DEF35B2642D56800FD342D /* SwiftDiagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDiagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		49DEF35E2642D56800FD342D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		49DEF3602642D56800FD342D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		49DEF3622642D56900FD342D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		49DEF3652642D56900FD342D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		49DEF3672642D56900FD342D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49DEF3682642D56900FD342D /* SwiftDiagram.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftDiagram.entitlements; sourceTree = "<group>"; };
+		49DEF36D2642D56900FD342D /* SwiftDiagramTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDiagramTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		49DEF3712642D56900FD342D /* SwiftDiagramTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDiagramTests.swift; sourceTree = "<group>"; };
+		49DEF3732642D56900FD342D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49DEF3782642D56900FD342D /* SwiftDiagramUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDiagramUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		49DEF37C2642D56900FD342D /* SwiftDiagramUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDiagramUITests.swift; sourceTree = "<group>"; };
+		49DEF37E2642D56900FD342D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49DEF38A2642D81700FD342D /* FilePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePicker.swift; sourceTree = "<group>"; };
+		49DEF38B2642D81700FD342D /* SwiftViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftViewer.swift; sourceTree = "<group>"; };
+		49DEF3942642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = lib_InternalSwiftSyntaxParser.dylib; path = ../../Desktop/lib_InternalSwiftSyntaxParser.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4946A6B02639A74600DC4660 /* Frameworks */ = {
+		49DEF3582642D56800FD342D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49DEF3922642D89400FD342D /* SwiftSyntax in Frameworks */,
+				49DEF3952642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49DEF36A2642D56900FD342D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4946A6C32639A74700DC4660 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4946A6CE2639A74700DC4660 /* Frameworks */ = {
+		49DEF3752642D56900FD342D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -73,136 +97,167 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4946A6AA2639A74500DC4660 = {
+		49DEF3522642D56800FD342D = {
 			isa = PBXGroup;
 			children = (
-				4946A6B52639A74600DC4660 /* SwiftDiagram */,
-				4946A6C92639A74700DC4660 /* SwiftDiagramTests */,
-				4946A6D42639A74700DC4660 /* SwiftDiagramUITests */,
-				4946A6B42639A74600DC4660 /* Products */,
+				49DEF35D2642D56800FD342D /* SwiftDiagram */,
+				49DEF3702642D56900FD342D /* SwiftDiagramTests */,
+				49DEF37B2642D56900FD342D /* SwiftDiagramUITests */,
+				49DEF35C2642D56800FD342D /* Products */,
+				49DEF3932642D8BB00FD342D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		4946A6B42639A74600DC4660 /* Products */ = {
+		49DEF35C2642D56800FD342D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4946A6B32639A74600DC4660 /* SwiftDiagram.app */,
-				4946A6C62639A74700DC4660 /* SwiftDiagramTests.xctest */,
-				4946A6D12639A74700DC4660 /* SwiftDiagramUITests.xctest */,
+				49DEF35B2642D56800FD342D /* SwiftDiagram.app */,
+				49DEF36D2642D56900FD342D /* SwiftDiagramTests.xctest */,
+				49DEF3782642D56900FD342D /* SwiftDiagramUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4946A6B52639A74600DC4660 /* SwiftDiagram */ = {
+		49DEF35D2642D56800FD342D /* SwiftDiagram */ = {
 			isa = PBXGroup;
 			children = (
-				4946A6B62639A74600DC4660 /* AppDelegate.swift */,
-				4946A6BB2639A74700DC4660 /* Assets.xcassets */,
-				4946A6BD2639A74700DC4660 /* MainMenu.xib */,
-				4946A6C02639A74700DC4660 /* Info.plist */,
-				4946A6C12639A74700DC4660 /* SwiftDiagram.entitlements */,
-				4946A6B82639A74600DC4660 /* SwiftDiagram.xcdatamodeld */,
+				49DEF35E2642D56800FD342D /* AppDelegate.swift */,
+				49DEF38E2642D81E00FD342D /* Services */,
+				49DEF38F2642D82900FD342D /* Views */,
+				49DEF3622642D56900FD342D /* Assets.xcassets */,
+				49DEF3642642D56900FD342D /* Main.storyboard */,
+				49DEF3672642D56900FD342D /* Info.plist */,
+				49DEF3682642D56900FD342D /* SwiftDiagram.entitlements */,
 			);
 			path = SwiftDiagram;
 			sourceTree = "<group>";
 		};
-		4946A6C92639A74700DC4660 /* SwiftDiagramTests */ = {
+		49DEF3702642D56900FD342D /* SwiftDiagramTests */ = {
 			isa = PBXGroup;
 			children = (
-				4946A6CA2639A74700DC4660 /* SwiftDiagramTests.swift */,
-				4946A6CC2639A74700DC4660 /* Info.plist */,
+				49DEF3712642D56900FD342D /* SwiftDiagramTests.swift */,
+				49DEF3732642D56900FD342D /* Info.plist */,
 			);
 			path = SwiftDiagramTests;
 			sourceTree = "<group>";
 		};
-		4946A6D42639A74700DC4660 /* SwiftDiagramUITests */ = {
+		49DEF37B2642D56900FD342D /* SwiftDiagramUITests */ = {
 			isa = PBXGroup;
 			children = (
-				4946A6D52639A74700DC4660 /* SwiftDiagramUITests.swift */,
-				4946A6D72639A74700DC4660 /* Info.plist */,
+				49DEF37C2642D56900FD342D /* SwiftDiagramUITests.swift */,
+				49DEF37E2642D56900FD342D /* Info.plist */,
 			);
 			path = SwiftDiagramUITests;
+			sourceTree = "<group>";
+		};
+		49DEF38E2642D81E00FD342D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				49DEF38A2642D81700FD342D /* FilePicker.swift */,
+				49DEF38B2642D81700FD342D /* SwiftViewer.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		49DEF38F2642D82900FD342D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				49DEF3602642D56800FD342D /* ViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		49DEF3932642D8BB00FD342D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				49DEF3942642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4946A6B22639A74600DC4660 /* SwiftDiagram */ = {
+		49DEF35A2642D56800FD342D /* SwiftDiagram */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4946A6DA2639A74700DC4660 /* Build configuration list for PBXNativeTarget "SwiftDiagram" */;
+			buildConfigurationList = 49DEF3812642D56900FD342D /* Build configuration list for PBXNativeTarget "SwiftDiagram" */;
 			buildPhases = (
-				4946A6AF2639A74600DC4660 /* Sources */,
-				4946A6B02639A74600DC4660 /* Frameworks */,
-				4946A6B12639A74600DC4660 /* Resources */,
+				49DEF3572642D56800FD342D /* Sources */,
+				49DEF3582642D56800FD342D /* Frameworks */,
+				49DEF3592642D56800FD342D /* Resources */,
+				49DEF3972642D8BB00FD342D /* Embed Libraries */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = SwiftDiagram;
+			packageProductDependencies = (
+				49DEF3912642D89400FD342D /* SwiftSyntax */,
+			);
 			productName = SwiftDiagram;
-			productReference = 4946A6B32639A74600DC4660 /* SwiftDiagram.app */;
+			productReference = 49DEF35B2642D56800FD342D /* SwiftDiagram.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4946A6C52639A74700DC4660 /* SwiftDiagramTests */ = {
+		49DEF36C2642D56900FD342D /* SwiftDiagramTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4946A6DD2639A74700DC4660 /* Build configuration list for PBXNativeTarget "SwiftDiagramTests" */;
+			buildConfigurationList = 49DEF3842642D56900FD342D /* Build configuration list for PBXNativeTarget "SwiftDiagramTests" */;
 			buildPhases = (
-				4946A6C22639A74700DC4660 /* Sources */,
-				4946A6C32639A74700DC4660 /* Frameworks */,
-				4946A6C42639A74700DC4660 /* Resources */,
+				49DEF3692642D56900FD342D /* Sources */,
+				49DEF36A2642D56900FD342D /* Frameworks */,
+				49DEF36B2642D56900FD342D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4946A6C82639A74700DC4660 /* PBXTargetDependency */,
+				49DEF36F2642D56900FD342D /* PBXTargetDependency */,
 			);
 			name = SwiftDiagramTests;
 			productName = SwiftDiagramTests;
-			productReference = 4946A6C62639A74700DC4660 /* SwiftDiagramTests.xctest */;
+			productReference = 49DEF36D2642D56900FD342D /* SwiftDiagramTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		4946A6D02639A74700DC4660 /* SwiftDiagramUITests */ = {
+		49DEF3772642D56900FD342D /* SwiftDiagramUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4946A6E02639A74700DC4660 /* Build configuration list for PBXNativeTarget "SwiftDiagramUITests" */;
+			buildConfigurationList = 49DEF3872642D56900FD342D /* Build configuration list for PBXNativeTarget "SwiftDiagramUITests" */;
 			buildPhases = (
-				4946A6CD2639A74700DC4660 /* Sources */,
-				4946A6CE2639A74700DC4660 /* Frameworks */,
-				4946A6CF2639A74700DC4660 /* Resources */,
+				49DEF3742642D56900FD342D /* Sources */,
+				49DEF3752642D56900FD342D /* Frameworks */,
+				49DEF3762642D56900FD342D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4946A6D32639A74700DC4660 /* PBXTargetDependency */,
+				49DEF37A2642D56900FD342D /* PBXTargetDependency */,
 			);
 			name = SwiftDiagramUITests;
 			productName = SwiftDiagramUITests;
-			productReference = 4946A6D12639A74700DC4660 /* SwiftDiagramUITests.xctest */;
+			productReference = 49DEF3782642D56900FD342D /* SwiftDiagramUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		4946A6AB2639A74500DC4660 /* Project object */ = {
+		49DEF3532642D56800FD342D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
-					4946A6B22639A74600DC4660 = {
+					49DEF35A2642D56800FD342D = {
 						CreatedOnToolsVersion = 12.5;
 					};
-					4946A6C52639A74700DC4660 = {
+					49DEF36C2642D56900FD342D = {
 						CreatedOnToolsVersion = 12.5;
-						TestTargetID = 4946A6B22639A74600DC4660;
+						TestTargetID = 49DEF35A2642D56800FD342D;
 					};
-					4946A6D02639A74700DC4660 = {
+					49DEF3772642D56900FD342D = {
 						CreatedOnToolsVersion = 12.5;
-						TestTargetID = 4946A6B22639A74600DC4660;
+						TestTargetID = 49DEF35A2642D56800FD342D;
 					};
 				};
 			};
-			buildConfigurationList = 4946A6AE2639A74500DC4660 /* Build configuration list for PBXProject "SwiftDiagram" */;
+			buildConfigurationList = 49DEF3562642D56800FD342D /* Build configuration list for PBXProject "SwiftDiagram" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -210,36 +265,39 @@
 				en,
 				Base,
 			);
-			mainGroup = 4946A6AA2639A74500DC4660;
-			productRefGroup = 4946A6B42639A74600DC4660 /* Products */;
+			mainGroup = 49DEF3522642D56800FD342D;
+			packageReferences = (
+				49DEF3902642D89400FD342D /* XCRemoteSwiftPackageReference "swift-syntax" */,
+			);
+			productRefGroup = 49DEF35C2642D56800FD342D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4946A6B22639A74600DC4660 /* SwiftDiagram */,
-				4946A6C52639A74700DC4660 /* SwiftDiagramTests */,
-				4946A6D02639A74700DC4660 /* SwiftDiagramUITests */,
+				49DEF35A2642D56800FD342D /* SwiftDiagram */,
+				49DEF36C2642D56900FD342D /* SwiftDiagramTests */,
+				49DEF3772642D56900FD342D /* SwiftDiagramUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4946A6B12639A74600DC4660 /* Resources */ = {
+		49DEF3592642D56800FD342D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4946A6BC2639A74700DC4660 /* Assets.xcassets in Resources */,
-				4946A6BF2639A74700DC4660 /* MainMenu.xib in Resources */,
+				49DEF3632642D56900FD342D /* Assets.xcassets in Resources */,
+				49DEF3662642D56900FD342D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4946A6C42639A74700DC4660 /* Resources */ = {
+		49DEF36B2642D56900FD342D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4946A6CF2639A74700DC4660 /* Resources */ = {
+		49DEF3762642D56900FD342D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -249,59 +307,61 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4946A6AF2639A74600DC4660 /* Sources */ = {
+		49DEF3572642D56800FD342D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4946A6B72639A74600DC4660 /* AppDelegate.swift in Sources */,
-				4946A6BA2639A74600DC4660 /* SwiftDiagram.xcdatamodeld in Sources */,
+				49DEF38C2642D81700FD342D /* FilePicker.swift in Sources */,
+				49DEF3612642D56800FD342D /* ViewController.swift in Sources */,
+				49DEF35F2642D56800FD342D /* AppDelegate.swift in Sources */,
+				49DEF38D2642D81700FD342D /* SwiftViewer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4946A6C22639A74700DC4660 /* Sources */ = {
+		49DEF3692642D56900FD342D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4946A6CB2639A74700DC4660 /* SwiftDiagramTests.swift in Sources */,
+				49DEF3722642D56900FD342D /* SwiftDiagramTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4946A6CD2639A74700DC4660 /* Sources */ = {
+		49DEF3742642D56900FD342D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4946A6D62639A74700DC4660 /* SwiftDiagramUITests.swift in Sources */,
+				49DEF37D2642D56900FD342D /* SwiftDiagramUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4946A6C82639A74700DC4660 /* PBXTargetDependency */ = {
+		49DEF36F2642D56900FD342D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4946A6B22639A74600DC4660 /* SwiftDiagram */;
-			targetProxy = 4946A6C72639A74700DC4660 /* PBXContainerItemProxy */;
+			target = 49DEF35A2642D56800FD342D /* SwiftDiagram */;
+			targetProxy = 49DEF36E2642D56900FD342D /* PBXContainerItemProxy */;
 		};
-		4946A6D32639A74700DC4660 /* PBXTargetDependency */ = {
+		49DEF37A2642D56900FD342D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4946A6B22639A74600DC4660 /* SwiftDiagram */;
-			targetProxy = 4946A6D22639A74700DC4660 /* PBXContainerItemProxy */;
+			target = 49DEF35A2642D56800FD342D /* SwiftDiagram */;
+			targetProxy = 49DEF3792642D56900FD342D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		4946A6BD2639A74700DC4660 /* MainMenu.xib */ = {
+		49DEF3642642D56900FD342D /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4946A6BE2639A74700DC4660 /* Base */,
+				49DEF3652642D56900FD342D /* Base */,
 			);
-			name = MainMenu.xib;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		4946A6D82639A74700DC4660 /* Debug */ = {
+		49DEF37F2642D56900FD342D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -362,7 +422,7 @@
 			};
 			name = Debug;
 		};
-		4946A6D92639A74700DC4660 /* Release */ = {
+		49DEF3802642D56900FD342D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -416,7 +476,7 @@
 			};
 			name = Release;
 		};
-		4946A6DB2639A74700DC4660 /* Debug */ = {
+		49DEF3822642D56900FD342D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -424,6 +484,8 @@
 				CODE_SIGN_ENTITLEMENTS = SwiftDiagram/SwiftDiagram.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 7757B4WUKZ;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = SwiftDiagram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -435,7 +497,7 @@
 			};
 			name = Debug;
 		};
-		4946A6DC2639A74700DC4660 /* Release */ = {
+		49DEF3832642D56900FD342D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -443,6 +505,8 @@
 				CODE_SIGN_ENTITLEMENTS = SwiftDiagram/SwiftDiagram.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 7757B4WUKZ;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = SwiftDiagram/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -454,13 +518,14 @@
 			};
 			name = Release;
 		};
-		4946A6DE2639A74700DC4660 /* Debug */ = {
+		49DEF3852642D56900FD342D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 7757B4WUKZ;
 				INFOPLIST_FILE = SwiftDiagramTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -475,13 +540,14 @@
 			};
 			name = Debug;
 		};
-		4946A6DF2639A74700DC4660 /* Release */ = {
+		49DEF3862642D56900FD342D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 7757B4WUKZ;
 				INFOPLIST_FILE = SwiftDiagramTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -496,12 +562,13 @@
 			};
 			name = Release;
 		};
-		4946A6E12639A74700DC4660 /* Debug */ = {
+		49DEF3882642D56900FD342D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 7757B4WUKZ;
 				INFOPLIST_FILE = SwiftDiagramUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -515,12 +582,13 @@
 			};
 			name = Debug;
 		};
-		4946A6E22639A74700DC4660 /* Release */ = {
+		49DEF3892642D56900FD342D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 7757B4WUKZ;
 				INFOPLIST_FILE = SwiftDiagramUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -537,56 +605,62 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4946A6AE2639A74500DC4660 /* Build configuration list for PBXProject "SwiftDiagram" */ = {
+		49DEF3562642D56800FD342D /* Build configuration list for PBXProject "SwiftDiagram" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4946A6D82639A74700DC4660 /* Debug */,
-				4946A6D92639A74700DC4660 /* Release */,
+				49DEF37F2642D56900FD342D /* Debug */,
+				49DEF3802642D56900FD342D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4946A6DA2639A74700DC4660 /* Build configuration list for PBXNativeTarget "SwiftDiagram" */ = {
+		49DEF3812642D56900FD342D /* Build configuration list for PBXNativeTarget "SwiftDiagram" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4946A6DB2639A74700DC4660 /* Debug */,
-				4946A6DC2639A74700DC4660 /* Release */,
+				49DEF3822642D56900FD342D /* Debug */,
+				49DEF3832642D56900FD342D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4946A6DD2639A74700DC4660 /* Build configuration list for PBXNativeTarget "SwiftDiagramTests" */ = {
+		49DEF3842642D56900FD342D /* Build configuration list for PBXNativeTarget "SwiftDiagramTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4946A6DE2639A74700DC4660 /* Debug */,
-				4946A6DF2639A74700DC4660 /* Release */,
+				49DEF3852642D56900FD342D /* Debug */,
+				49DEF3862642D56900FD342D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4946A6E02639A74700DC4660 /* Build configuration list for PBXNativeTarget "SwiftDiagramUITests" */ = {
+		49DEF3872642D56900FD342D /* Build configuration list for PBXNativeTarget "SwiftDiagramUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4946A6E12639A74700DC4660 /* Debug */,
-				4946A6E22639A74700DC4660 /* Release */,
+				49DEF3882642D56900FD342D /* Debug */,
+				49DEF3892642D56900FD342D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCVersionGroup section */
-		4946A6B82639A74600DC4660 /* SwiftDiagram.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				4946A6B92639A74600DC4660 /* SwiftDiagram.xcdatamodel */,
-			);
-			currentVersion = 4946A6B92639A74600DC4660 /* SwiftDiagram.xcdatamodel */;
-			path = SwiftDiagram.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
+/* Begin XCRemoteSwiftPackageReference section */
+		49DEF3902642D89400FD342D /* XCRemoteSwiftPackageReference "swift-syntax" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-syntax";
+			requirement = {
+				kind = exactVersion;
+				version = 0.50400.0;
+			};
 		};
-/* End XCVersionGroup section */
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		49DEF3912642D89400FD342D /* SwiftSyntax */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 49DEF3902642D89400FD342D /* XCRemoteSwiftPackageReference "swift-syntax" */;
+			productName = SwiftSyntax;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 4946A6AB2639A74500DC4660 /* Project object */;
+	rootObject = 49DEF3532642D56800FD342D /* Project object */;
 }
