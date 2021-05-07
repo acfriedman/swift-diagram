@@ -18,6 +18,7 @@
 		49DEF3922642D89400FD342D /* SwiftSyntax in Frameworks */ = {isa = PBXBuildFile; productRef = 49DEF3912642D89400FD342D /* SwiftSyntax */; };
 		49DEF3952642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49DEF3942642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib */; };
 		49DEF3962642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 49DEF3942642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		49DEF3992642E72300FD342D /* RoundedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF3982642E72300FD342D /* RoundedTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		49DEF38A2642D81700FD342D /* FilePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePicker.swift; sourceTree = "<group>"; };
 		49DEF38B2642D81700FD342D /* SwiftViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftViewer.swift; sourceTree = "<group>"; };
 		49DEF3942642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = lib_InternalSwiftSyntaxParser.dylib; path = ../../Desktop/lib_InternalSwiftSyntaxParser.dylib; sourceTree = "<group>"; };
+		49DEF3982642E72300FD342D /* RoundedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				49DEF3602642D56800FD342D /* ViewController.swift */,
+				49DEF3982642E72300FD342D /* RoundedTextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				49DEF3612642D56800FD342D /* ViewController.swift in Sources */,
 				49DEF35F2642D56800FD342D /* AppDelegate.swift in Sources */,
 				49DEF38D2642D81700FD342D /* SwiftViewer.swift in Sources */,
+				49DEF3992642E72300FD342D /* RoundedTextView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

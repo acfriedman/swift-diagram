@@ -12,18 +12,17 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        FilePicker.presentModal { result in
-            switch result {
-            case .success(let url):
-                do {
-                    try SwiftViewer().parse(url)
-                } catch {
-                    print(error.localizedDescription)
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+    }
+    
+    override func viewWillAppear() {
+        super.viewWillAppear()
+        
+        let roundedTextView = RoundedTextView(frame: NSRect(x: Int(view.frame.width)/2,
+                                                      y: Int(view.frame.height)/2,
+                                                      width: 100,
+                                                      height: 100))
+        roundedTextView.text = "Hello World"
+        view.addSubview(roundedTextView)
     }
 
     override var representedObject: Any? {
@@ -32,6 +31,9 @@ class ViewController: NSViewController {
         }
     }
 
+    private func makeClassBox(with name: String, and frame: NSRect) -> RoundedTextView {
+        return RoundedTextView(frame: frame)
+    }
 
 }
 
