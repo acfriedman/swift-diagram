@@ -45,7 +45,6 @@ class RoundedTextView: NSView {
         textField.wantsLayer = true
         textField.alignment = .center
         textField.maximumNumberOfLines = 0
-        textField.layer?.backgroundColor = NSColor.green.cgColor
         textField.sizeToFit()
         addSubview(textField)
     }
@@ -54,7 +53,6 @@ class RoundedTextView: NSView {
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            textField.centerXAnchor.constraint(equalTo: centerXAnchor),
             textField.centerYAnchor.constraint(equalTo: centerYAnchor),
             textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             textField.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor, constant: 8),

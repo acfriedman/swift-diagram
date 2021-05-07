@@ -17,25 +17,28 @@ struct SwiftViewer {
         extractProtocols(from: sourceFileSyntax)
     }
     
-    func extractStructs(from sourceFileSyntax: SourceFileSyntax) {
+    @discardableResult
+    func extractStructs(from sourceFileSyntax: SourceFileSyntax) -> [String] {
         let structVisitor = StructVisitor()
         structVisitor.walk(sourceFileSyntax)
         let structArray = structVisitor.structs
-        print(structArray)
+        return structArray
     }
     
-    func extractClasses(from sourceFileSyntax: SourceFileSyntax) {
+    @discardableResult
+    func extractClasses(from sourceFileSyntax: SourceFileSyntax) -> [String] {
         let classVisitor = ClassVisitor()
         classVisitor.walk(sourceFileSyntax)
         let classesArray = classVisitor.classes
-        print(classesArray)
+        return classesArray
     }
     
-    func extractProtocols(from sourceFileSyntax: SourceFileSyntax) {
+    @discardableResult
+    func extractProtocols(from sourceFileSyntax: SourceFileSyntax) -> [String] {
         let protocolVisitor = ProtocolVisitor()
         protocolVisitor.walk(sourceFileSyntax)
         let protocolsArray = protocolVisitor.protocols
-        print(protocolsArray)
+        return protocolsArray
     }
 }
 
