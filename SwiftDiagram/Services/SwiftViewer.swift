@@ -6,39 +6,18 @@
 //
 
 import Foundation
+import AppKit
 import SwiftSyntax
 
 
+
+
 struct SwiftViewer {
-    func parse(_ url: URL) throws {
+    static func parse(_ url: URL) throws -> [SyntaxNode] {
         let sourceFileSyntax = try SyntaxParser.parse(url)
-        extractStructs(from: sourceFileSyntax)
-        extractClasses(from: sourceFileSyntax)
-        extractProtocols(from: sourceFileSyntax)
-    }
-    
-    @discardableResult
-    func extractStructs(from sourceFileSyntax: SourceFileSyntax) -> [String] {
-        let structVisitor = StructVisitor()
-        structVisitor.walk(sourceFileSyntax)
-        let structArray = structVisitor.structs
-        return structArray
-    }
-    
-    @discardableResult
-    func extractClasses(from sourceFileSyntax: SourceFileSyntax) -> [String] {
-        let classVisitor = ClassVisitor()
-        classVisitor.walk(sourceFileSyntax)
-        let classesArray = classVisitor.classes
-        return classesArray
-    }
-    
-    @discardableResult
-    func extractProtocols(from sourceFileSyntax: SourceFileSyntax) -> [String] {
-        let protocolVisitor = ProtocolVisitor()
-        protocolVisitor.walk(sourceFileSyntax)
-        let protocolsArray = protocolVisitor.protocols
-        return protocolsArray
+        let visitor = DiagramVisitor()
+        visitor.walk(sourceFileSyntax)
+        return visitor.extractedNodes
     }
 }
 
@@ -56,42 +35,14 @@ extension SwiftViewer.Error: LocalizedError {
     }
 }
 
-class StructVisitor: SyntaxVisitor {
+class DiagramVisitor: SyntaxVisitor {
     
-    var structs: [String] = []
-    
-    override func visitPost(_ node: TokenSyntax) {
-        guard node.tokenKind == .structKeyword,
-              let structTextName = node.nextToken?.text else {
-            return
-        }
-        structs += [structTextName]
-    }
-}
-
-class ClassVisitor: SyntaxVisitor {
-    
-    var classes: [String] = []
+    var extractedNodes: [SyntaxNode] = []
     
     override func visitPost(_ node: TokenSyntax) {
-        guard node.tokenKind == .classKeyword,
-              let classTextName = node.nextToken?.text else {
+        guard let node = try? SyntaxNodeFactory.make(from: node) else {
             return
         }
-        classes += [classTextName]
+        extractedNodes += [node]
     }
 }
-
-class ProtocolVisitor: SyntaxVisitor {
-    
-    var protocols: [String] = []
-    
-    override func visitPost(_ node: TokenSyntax) {
-        guard node.tokenKind == .protocolKeyword,
-              let protocolTextName = node.nextToken?.text else {
-            return
-        }
-        protocols += [protocolTextName]
-    }
-}
-

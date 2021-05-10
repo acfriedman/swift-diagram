@@ -22,50 +22,8 @@ class ViewController: NSViewController {
             switch result {
             case .success(let url):
                 do {
-                    let sourceFileSyntax = try SyntaxParser.parse(url)
-                    let viewer = SwiftViewer()
-                    
-                    let classes = viewer.extractClasses(from: sourceFileSyntax)
-                    var xClassCoord = 100
-                    var yClassCoord = 100
-                    classes.forEach {
-                        self.view.addSubview(self.makeRoundedBox(with: $0,
-                                                               and: NSRect(x: xClassCoord,
-                                                                           y: yClassCoord,
-                                                                           width: 150,
-                                                                           height: 100),
-                                                               color: .green))
-                        xClassCoord += 25
-                        yClassCoord += 25
-                    }
-                    
-                    let structs = viewer.extractStructs(from: sourceFileSyntax)
-                    var xStructCoord = 200
-                    var yStructCoord = 200
-                    structs.forEach {
-                        self.view.addSubview(self.makeRoundedBox(with: $0,
-                                                               and: NSRect(x: xStructCoord,
-                                                                           y: yStructCoord,
-                                                                           width: 150,
-                                                                           height: 100),
-                                                               color: .blue))
-                        xStructCoord += 25
-                        yStructCoord += 25
-                    }
-                    
-                    let protocols = viewer.extractProtocols(from: sourceFileSyntax)
-                    var xProtocolCoord = 300
-                    var yProtocolCoord = 300
-                    protocols.forEach {
-                        self.view.addSubview(self.makeRoundedBox(with: $0,
-                                                               and: NSRect(x: xProtocolCoord,
-                                                                           y: yProtocolCoord,
-                                                                           width: 150,
-                                                                           height: 100),
-                                                               color: .purple))
-                        xProtocolCoord += 25
-                        yProtocolCoord += 25
-                    }
+                    let nodes = try SwiftViewer.parse(url)
+                    nodes.forEach { self.display($0) }
                     
                 } catch {
                     print(error.localizedDescription)
@@ -75,8 +33,17 @@ class ViewController: NSViewController {
             }
         })
     }
+    
+    // MARK: Private Methods
+    
+    private func display(_ node: SyntaxNode) {
+        let roundedBox = makeRoundedBox(with: node.name,
+                       frame: NSRect(x: 50, y: 50, width: 100, height: 80),
+                       color: node.displayColor)
+        view.addSubview(roundedBox)
+    }
 
-    private func makeRoundedBox(with name: String, and frame: NSRect, color: NSColor) -> RoundedTextView {
+    private func makeRoundedBox(with name: String, frame: NSRect, color: NSColor) -> RoundedTextView {
         let roundedTextView = RoundedTextView(frame: frame)
         roundedTextView.layer?.backgroundColor = color.cgColor
         roundedTextView.text = name

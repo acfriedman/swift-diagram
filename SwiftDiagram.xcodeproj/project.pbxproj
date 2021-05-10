@@ -19,6 +19,7 @@
 		49DEF3952642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49DEF3942642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib */; };
 		49DEF3962642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 49DEF3942642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		49DEF3992642E72300FD342D /* RoundedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF3982642E72300FD342D /* RoundedTextView.swift */; };
+		49ED0F88264971A400A9C9FC /* SwiftNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED0F87264971A400A9C9FC /* SwiftNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		49DEF38B2642D81700FD342D /* SwiftViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftViewer.swift; sourceTree = "<group>"; };
 		49DEF3942642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = lib_InternalSwiftSyntaxParser.dylib; path = ../../Desktop/lib_InternalSwiftSyntaxParser.dylib; sourceTree = "<group>"; };
 		49DEF3982642E72300FD342D /* RoundedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextView.swift; sourceTree = SOURCE_ROOT; };
+		49ED0F87264971A400A9C9FC /* SwiftNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 			children = (
 				49DEF35E2642D56800FD342D /* AppDelegate.swift */,
 				49DEF38E2642D81E00FD342D /* Services */,
+				49ED0F89264971B600A9C9FC /* Model */,
 				49DEF38F2642D82900FD342D /* Views */,
 				49DEF3622642D56900FD342D /* Assets.xcassets */,
 				49DEF3642642D56900FD342D /* Main.storyboard */,
@@ -176,6 +179,14 @@
 				49DEF3942642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		49ED0F89264971B600A9C9FC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				49ED0F87264971A400A9C9FC /* SwiftNode.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +330,7 @@
 				49DEF35F2642D56800FD342D /* AppDelegate.swift in Sources */,
 				49DEF38D2642D81700FD342D /* SwiftViewer.swift in Sources */,
 				49DEF3992642E72300FD342D /* RoundedTextView.swift in Sources */,
+				49ED0F88264971A400A9C9FC /* SwiftNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
