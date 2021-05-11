@@ -20,6 +20,7 @@
 		49DEF3962642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 49DEF3942642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		49DEF3992642E72300FD342D /* RoundedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF3982642E72300FD342D /* RoundedTextView.swift */; };
 		49ED0F88264971A400A9C9FC /* SwiftNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED0F87264971A400A9C9FC /* SwiftNode.swift */; };
+		49ED0F8B264ABE0400A9C9FC /* CanvasCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED0F8A264ABE0400A9C9FC /* CanvasCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		49DEF3942642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = lib_InternalSwiftSyntaxParser.dylib; path = ../../Desktop/lib_InternalSwiftSyntaxParser.dylib; sourceTree = "<group>"; };
 		49DEF3982642E72300FD342D /* RoundedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextView.swift; sourceTree = SOURCE_ROOT; };
 		49ED0F87264971A400A9C9FC /* SwiftNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftNode.swift; sourceTree = "<group>"; };
+		49ED0F8A264ABE0400A9C9FC /* CanvasCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 			children = (
 				49DEF38A2642D81700FD342D /* FilePicker.swift */,
 				49DEF38B2642D81700FD342D /* SwiftViewer.swift */,
+				49ED0F8A264ABE0400A9C9FC /* CanvasCoordinator.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				49DEF38C2642D81700FD342D /* FilePicker.swift in Sources */,
 				49DEF3612642D56800FD342D /* ViewController.swift in Sources */,
 				49DEF35F2642D56800FD342D /* AppDelegate.swift in Sources */,
+				49ED0F8B264ABE0400A9C9FC /* CanvasCoordinator.swift in Sources */,
 				49DEF38D2642D81700FD342D /* SwiftViewer.swift in Sources */,
 				49DEF3992642E72300FD342D /* RoundedTextView.swift in Sources */,
 				49ED0F88264971A400A9C9FC /* SwiftNode.swift in Sources */,

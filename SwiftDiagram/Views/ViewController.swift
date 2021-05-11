@@ -9,10 +9,13 @@ import Cocoa
 import SwiftSyntax
 
 class ViewController: NSViewController {
+    
+    private let canvasCoordinator: CanvasCoordinator = DefaultCanvasCoordinator()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.wantsLayer = true
+        view.layer?.backgroundColor = .white
     }
     
     override func viewDidAppear() {
@@ -23,7 +26,7 @@ class ViewController: NSViewController {
             case .success(let url):
                 do {
                     let nodes = try SwiftViewer.parse(url)
-                    nodes.forEach { self.display($0) }
+                    self.coordinate(nodes)
                     
                 } catch {
                     print(error.localizedDescription)
@@ -36,9 +39,15 @@ class ViewController: NSViewController {
     
     // MARK: Private Methods
     
-    private func display(_ node: SyntaxNode) {
+    private func coordinate(_ nodes: [SyntaxNode]) {
+        canvasCoordinator.coordinate(nodes) { node, rect in
+            self.display(node, in: rect)
+        }
+    }
+    
+    private func display(_ node: SyntaxNode, in frame: NSRect) {
         let roundedBox = makeRoundedBox(with: node.name,
-                       frame: NSRect(x: 50, y: 50, width: 100, height: 80),
+                       frame: frame,
                        color: node.displayColor)
         view.addSubview(roundedBox)
     }

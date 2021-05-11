@@ -35,7 +35,18 @@ struct SyntaxNodeFactory {
 
 protocol SyntaxNode {
     var displayColor: NSColor { get }
+    var displayWidth: CGFloat { get }
+    var displayHeight: CGFloat { get }
     var name: String { get }
+}
+
+extension SyntaxNode {
+    var displayWidth: CGFloat {
+        return 100.0
+    }
+    var displayHeight: CGFloat {
+        return 80.0
+    }
 }
 
 struct ClassNode: SyntaxNode {
