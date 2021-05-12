@@ -7,7 +7,7 @@
 
 import AppKit
 
-class RoundedTextView: NSView {
+class RoundedTextView: DraggableView {
     
     var text: String {
         get { return textField.stringValue }
@@ -15,8 +15,6 @@ class RoundedTextView: NSView {
     }
     
     private var textField: NSTextField!
-    
-    private var lastDragLocation: NSPoint?
     
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -59,28 +57,5 @@ class RoundedTextView: NSView {
             textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             textField.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor, constant: 8),
         ])
-    }
-    
-    // MARK: Mouse Events
-    
-    override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
-        return true
-    }
-    
-    override func mouseDown(with event: NSEvent) {
-        lastDragLocation = superview?.convert(event.locationInWindow, from: nil)
-    }
-    
-    override func mouseDragged(with event: NSEvent) {
-        
-        guard let newDragLocation = superview?.convert(event.locationInWindow, from: nil),
-              let lastDragLocation = lastDragLocation else {
-            return
-        }
-        var thisOrigin = frame.origin
-        thisOrigin.x += -lastDragLocation.x + newDragLocation.x
-        thisOrigin.y += -lastDragLocation.y + newDragLocation.y
-        setFrameOrigin(thisOrigin)
-        self.lastDragLocation = newDragLocation
     }
 }
