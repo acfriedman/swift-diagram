@@ -43,12 +43,7 @@ struct FilePicker {
         guard let subPaths = fileManager.subpaths(atPath: directory.path) else {
             return []
         }
-        
-        var subUrls: [URL] = []
-        for subPath in subPaths {
-            subUrls += [directory.absoluteURL.appendingPathComponent(subPath)]
-        }
-        return subUrls
+        return subPaths.compactMap { directory.absoluteURL.appendingPathComponent($0) }
     }
 }
 

@@ -15,11 +15,7 @@ import SwiftSyntax
 struct SwiftViewer {
     
     static func parse(_ urls: [URL]) throws -> [SyntaxNode] {
-        var syntaxNodes: [SyntaxNode] = []
-        for url in urls {
-            syntaxNodes += try parse(url)
-        }
-        return syntaxNodes
+        return try urls.flatMap { try parse($0) }
     }
     
     static func parse(_ url: URL) throws -> [SyntaxNode] {
