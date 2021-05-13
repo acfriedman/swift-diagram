@@ -13,6 +13,15 @@ import SwiftSyntax
 
 
 struct SwiftViewer {
+    
+    static func parse(_ urls: [URL]) throws -> [SyntaxNode] {
+        var syntaxNodes: [SyntaxNode] = []
+        for url in urls {
+            syntaxNodes += try parse(url)
+        }
+        return syntaxNodes
+    }
+    
     static func parse(_ url: URL) throws -> [SyntaxNode] {
         let sourceFileSyntax = try SyntaxParser.parse(url)
         let visitor = DiagramVisitor()

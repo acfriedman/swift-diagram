@@ -23,9 +23,9 @@ class ViewController: NSViewController {
         
         FilePicker.presentModal(completion: { result in
             switch result {
-            case .success(let url):
+            case .success(let urls):
                 do {
-                    let nodes = try SwiftViewer.parse(url)
+                    let nodes = try SwiftViewer.parse(urls)
                     self.coordinate(nodes)
                     
                 } catch {

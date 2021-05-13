@@ -10,24 +10,45 @@ import AppKit
 
 struct FilePicker {
     
-    static func presentModal(completion: @escaping (Result<URL, Error>) -> Void) {
-        let dialog = NSOpenPanel();
+    static func presentModal(completion: @escaping (Result<[URL], Error>) -> Void) {
+        let openPanel = NSOpenPanel();
 
-        dialog.title                   = "Choose a file| Our Code World";
-        dialog.showsResizeIndicator    = true;
-        dialog.showsHiddenFiles        = false;
-        dialog.allowsMultipleSelection = false;
-        dialog.canChooseDirectories = false;
+        openPanel.message = "Choose your directory or file"
+        openPanel.prompt = "Choose"
+        openPanel.allowedFileTypes = ["none", "swift"]
+        openPanel.showsResizeIndicator    = true;
+        openPanel.showsHiddenFiles        = false;
+        openPanel.allowsMultipleSelection = true;
+        openPanel.canChooseDirectories = true;
 
-        if (dialog.runModal() ==  NSApplication.ModalResponse.OK) {
-            guard let url = dialog.url else {
+        if (openPanel.runModal() ==  NSApplication.ModalResponse.OK) {
+            guard let url = openPanel.url else {
                 completion(.failure(Error.failedToSerializeURL))
                 return
             }
-            completion(.success(url))
+            
+            guard url.hasDirectoryPath else {
+                completion(.success([url]))
+                return
+            }
+            completion(.success(allSubUrlsAt(url)))
         } else {
             completion(.failure(Error.userDidSelectCancel))
         }
+    }
+    
+    
+    private static func allSubUrlsAt(_ directory: URL) -> [URL] {
+        let fileManager = FileManager.default
+        guard let subPaths = fileManager.subpaths(atPath: directory.path) else {
+            return []
+        }
+        
+        var subUrls: [URL] = []
+        for subPath in subPaths {
+            subUrls += [directory.absoluteURL.appendingPathComponent(subPath)]
+        }
+        return subUrls
     }
 }
 
