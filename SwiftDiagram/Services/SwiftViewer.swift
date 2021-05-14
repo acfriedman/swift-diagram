@@ -14,11 +14,18 @@ import SwiftSyntax
 
 struct SwiftViewer {
     
+    private static let acceptableFileTypes: Set<String> = ["swift"]
+    
     static func parse(_ urls: [URL]) throws -> [SyntaxNode] {
-        return try urls.flatMap { try parse($0) }
+        return urls.compactMap { try? parse($0) }.flatMap { $0 }
     }
     
     static func parse(_ url: URL) throws -> [SyntaxNode] {
+        
+        guard acceptableFileTypes.contains(url.pathExtension) else {
+            throw Error.unacceptableFileTypeExtension
+        }
+        
         let sourceFileSyntax = try SyntaxParser.parse(url)
         let visitor = DiagramVisitor()
         visitor.walk(sourceFileSyntax)
@@ -29,6 +36,7 @@ struct SwiftViewer {
 extension SwiftViewer {
     enum Error: Swift.Error {
         case couldNotFindFile
+        case unacceptableFileTypeExtension
     }
 }
 extension SwiftViewer.Error: LocalizedError {
@@ -36,6 +44,8 @@ extension SwiftViewer.Error: LocalizedError {
         switch self {
         case .couldNotFindFile:
             return "Could not find file, or file is not of swift type"
+        case .unacceptableFileTypeExtension:
+            return "Attempted to parse a file type other than swift"
         }
     }
 }

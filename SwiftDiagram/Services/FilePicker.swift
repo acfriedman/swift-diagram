@@ -31,12 +31,31 @@ struct FilePicker {
                 completion(.success([url]))
                 return
             }
-            completion(.success(allSubUrlsAt(url)))
+            completion(.success(allRecursiveFiles(at: url)))
         } else {
             completion(.failure(Error.userDidSelectCancel))
         }
     }
     
+    
+    private static func allRecursiveFiles(at directory: URL) -> [URL] {
+        var files = [URL]()
+        if let enumerator = FileManager.default.enumerator(at: directory,
+                                                           includingPropertiesForKeys: [.isRegularFileKey],
+                                                           options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
+            for case let fileURL as URL in enumerator {
+                do {
+                    let fileAttributes = try fileURL.resourceValues(forKeys:[.isRegularFileKey])
+                    if fileAttributes.isRegularFile! {
+                        files.append(fileURL)
+                    }
+                } catch {
+                    print(error, fileURL)
+                }
+            }
+        }
+        return files
+    }
     
     private static func allSubUrlsAt(_ directory: URL) -> [URL] {
         let fileManager = FileManager.default
