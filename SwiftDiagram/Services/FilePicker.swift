@@ -10,6 +10,10 @@ import AppKit
 
 struct FilePicker {
     
+    static var defaultFileManager: FileManager = {
+        .default
+    }()
+    
     static func presentModal(completion: @escaping (Result<[URL], Error>) -> Void) {
         let openPanel = NSOpenPanel();
 
@@ -40,7 +44,7 @@ struct FilePicker {
     
     private static func allRecursiveFiles(at directory: URL) -> [URL] {
         var files = [URL]()
-        if let enumerator = FileManager.default.enumerator(at: directory,
+        if let enumerator = defaultFileManager.enumerator(at: directory,
                                                            includingPropertiesForKeys: [.isRegularFileKey],
                                                            options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
             for case let fileURL as URL in enumerator {
@@ -58,8 +62,7 @@ struct FilePicker {
     }
     
     private static func allSubUrlsAt(_ directory: URL) -> [URL] {
-        let fileManager = FileManager.default
-        guard let subPaths = fileManager.subpaths(atPath: directory.path) else {
+        guard let subPaths = defaultFileManager.subpaths(atPath: directory.path) else {
             return []
         }
         return subPaths.compactMap { directory.absoluteURL.appendingPathComponent($0) }
