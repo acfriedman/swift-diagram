@@ -6,6 +6,7 @@
 //
 
 import AppKit
+import SnapKit
 
 /// A view that can be relocated by clicking and dragging it within its superview
 class DraggableView: NSView {
@@ -25,15 +26,23 @@ class DraggableView: NSView {
     }
     
     override func mouseDragged(with event: NSEvent) {
-        
+                
         guard let newDragLocation = superview?.convert(event.locationInWindow, from: nil),
               let lastDragLocation = lastDragLocation else {
             return
         }
+        
+        print("New Drag Location: \(newDragLocation)")
+        print("Location in Window: \(event.locationInWindow)")
+        
         var thisOrigin = frame.origin
         thisOrigin.x += -lastDragLocation.x + newDragLocation.x
         thisOrigin.y += -lastDragLocation.y + newDragLocation.y
-        setFrameOrigin(thisOrigin)
-        self.lastDragLocation = newDragLocation
+        
+        snp.updateConstraints{
+            $0.bottom.equalToSuperview().offset(-newDragLocation.y)
+            $0.left.equalToSuperview().offset(newDragLocation.x)
+        }
+        
     }
 }

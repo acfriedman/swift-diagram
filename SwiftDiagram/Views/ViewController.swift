@@ -7,15 +7,17 @@
 
 import Cocoa
 import SwiftSyntax
+import SnapKit
 
 class ViewController: NSViewController {
     
-    private let canvasCoordinator: CanvasCoordinator = DefaultCanvasCoordinator()
-
+    var contentView: NSView!
+    var canvasView: CanvasView!
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.wantsLayer = true
-        view.layer?.backgroundColor = .white
+        makeContentView()
+        makeCanvasView()
     }
     
     override func viewDidAppear() {
@@ -39,24 +41,38 @@ class ViewController: NSViewController {
     
     // MARK: Private Methods
     
-    private func coordinate(_ nodes: [SyntaxNode]) {
-        canvasCoordinator.coordinate(nodes) { node, rect in
-            self.display(node, in: rect)
+    private func makeContentView() {
+        contentView = NSView()
+        contentView.wantsLayer = true
+        contentView.layer?.backgroundColor = NSColor.lightGray.cgColor
+    }
+    
+    private func makeCanvasView() {
+        canvasView = CanvasView()
+        canvasView.documentView = contentView
+        view.addSubview(canvasView)
+        canvasView.snp.makeConstraints{ $0.edges.equalTo(view) }
+        contentView.snp.makeConstraints{
+            $0.width.equalTo(3000)
+            $0.height.equalTo(1000)
         }
     }
     
-    private func display(_ node: SyntaxNode, in frame: NSRect) {
-        let roundedBox = makeRoundedBox(with: node.name,
-                       frame: frame,
-                       color: node.displayColor)
-        view.addSubview(roundedBox)
-    }
-
-    private func makeRoundedBox(with name: String, frame: NSRect, color: NSColor) -> RoundedTextView {
-        let roundedTextView = RoundedTextView(frame: frame)
-        roundedTextView.layer?.backgroundColor = color.cgColor
-        roundedTextView.text = name
-        return roundedTextView
+    private func coordinate(_ nodes: [SyntaxNode]) {
+        var pointX: CGFloat = -50.0
+        nodes.forEach { node in
+            let nodeBox = RoundedTextView()
+            nodeBox.text = node.name
+            nodeBox.layer?.backgroundColor = node.displayColor.cgColor
+            contentView.addSubview(nodeBox)
+            nodeBox.snp.makeConstraints{
+                pointX += node.displayWidth
+                $0.left.equalTo(contentView).offset(pointX)
+                $0.bottom.equalTo(contentView)
+                $0.width.equalTo(node.displayWidth)
+                $0.height.equalTo(node.displayHeight)
+            }
+        }
     }
 }
 

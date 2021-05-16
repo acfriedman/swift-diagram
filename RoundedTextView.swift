@@ -35,7 +35,7 @@ class RoundedTextView: DraggableView {
         wantsLayer = true
         layer?.masksToBounds = true
         layer?.cornerRadius = 10.0
-        layer?.backgroundColor = NSColor.red.cgColor
+        layer?.backgroundColor = NSColor.lightGray.cgColor
         
         
         textField = NSTextField(frame: frame)
@@ -59,3 +59,19 @@ class RoundedTextView: DraggableView {
         ])
     }
 }
+
+#if canImport(SwiftUI) && DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
+struct RoundedTextView_Preview: PreviewProvider {
+    static var previews: some View {
+        NSViewPreview {
+            let roundedTextView = RoundedTextView()
+            roundedTextView.text = "AppDelegate"
+            return roundedTextView
+        }.previewLayout(.fixed(width: 400, height: 250))
+        .padding(10)
+    }
+}
+#endif

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4945BBFE265069C400EF6224 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4945BBFD265069C400EF6224 /* CanvasView.swift */; };
+		4945BC0126507B9D00EF6224 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4945BC0026507B9D00EF6224 /* SnapKit */; };
+		4945BC0326507F2500EF6224 /* SwiftUI+AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4945BC0226507F2500EF6224 /* SwiftUI+AppKit.swift */; };
 		49DEF35F2642D56800FD342D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF35E2642D56800FD342D /* AppDelegate.swift */; };
 		49DEF3612642D56800FD342D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF3602642D56800FD342D /* ViewController.swift */; };
 		49DEF3632642D56900FD342D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DEF3622642D56900FD342D /* Assets.xcassets */; };
@@ -21,7 +24,6 @@
 		49DEF3992642E72300FD342D /* RoundedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF3982642E72300FD342D /* RoundedTextView.swift */; };
 		49E8FE0E264C15AC00FF60B5 /* DraggableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8FE0D264C15AC00FF60B5 /* DraggableView.swift */; };
 		49ED0F88264971A400A9C9FC /* SwiftNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED0F87264971A400A9C9FC /* SwiftNode.swift */; };
-		49ED0F8B264ABE0400A9C9FC /* CanvasCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED0F8A264ABE0400A9C9FC /* CanvasCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4945BBFD265069C400EF6224 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		4945BC0226507F2500EF6224 /* SwiftUI+AppKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+AppKit.swift"; sourceTree = "<group>"; };
 		49DEF35B2642D56800FD342D /* SwiftDiagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDiagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DEF35E2642D56800FD342D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49DEF3602642D56800FD342D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -75,7 +79,6 @@
 		49DEF3982642E72300FD342D /* RoundedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextView.swift; sourceTree = SOURCE_ROOT; };
 		49E8FE0D264C15AC00FF60B5 /* DraggableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableView.swift; sourceTree = "<group>"; };
 		49ED0F87264971A400A9C9FC /* SwiftNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftNode.swift; sourceTree = "<group>"; };
-		49ED0F8A264ABE0400A9C9FC /* CanvasCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4945BC0126507B9D00EF6224 /* SnapKit in Frameworks */,
 				49DEF3922642D89400FD342D /* SwiftSyntax in Frameworks */,
 				49DEF3952642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib in Frameworks */,
 			);
@@ -105,6 +109,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4945BC0426507F2D00EF6224 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				4945BC0226507F2500EF6224 /* SwiftUI+AppKit.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		49DEF3522642D56800FD342D = {
 			isa = PBXGroup;
 			children = (
@@ -164,7 +176,6 @@
 			children = (
 				49DEF38A2642D81700FD342D /* FilePicker.swift */,
 				49DEF38B2642D81700FD342D /* SwiftViewer.swift */,
-				49ED0F8A264ABE0400A9C9FC /* CanvasCoordinator.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -172,9 +183,11 @@
 		49DEF38F2642D82900FD342D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4945BC0426507F2D00EF6224 /* Utilities */,
 				49DEF3602642D56800FD342D /* ViewController.swift */,
 				49DEF3982642E72300FD342D /* RoundedTextView.swift */,
 				49E8FE0D264C15AC00FF60B5 /* DraggableView.swift */,
+				4945BBFD265069C400EF6224 /* CanvasView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -214,6 +227,7 @@
 			name = SwiftDiagram;
 			packageProductDependencies = (
 				49DEF3912642D89400FD342D /* SwiftSyntax */,
+				4945BC0026507B9D00EF6224 /* SnapKit */,
 			);
 			productName = SwiftDiagram;
 			productReference = 49DEF35B2642D56800FD342D /* SwiftDiagram.app */;
@@ -288,6 +302,7 @@
 			mainGroup = 49DEF3522642D56800FD342D;
 			packageReferences = (
 				49DEF3902642D89400FD342D /* XCRemoteSwiftPackageReference "swift-syntax" */,
+				4945BBFF26507B9D00EF6224 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 49DEF35C2642D56800FD342D /* Products */;
 			projectDirPath = "";
@@ -335,10 +350,11 @@
 				49DEF3612642D56800FD342D /* ViewController.swift in Sources */,
 				49E8FE0E264C15AC00FF60B5 /* DraggableView.swift in Sources */,
 				49DEF35F2642D56800FD342D /* AppDelegate.swift in Sources */,
-				49ED0F8B264ABE0400A9C9FC /* CanvasCoordinator.swift in Sources */,
+				4945BC0326507F2500EF6224 /* SwiftUI+AppKit.swift in Sources */,
 				49DEF38D2642D81700FD342D /* SwiftViewer.swift in Sources */,
 				49DEF3992642E72300FD342D /* RoundedTextView.swift in Sources */,
 				49ED0F88264971A400A9C9FC /* SwiftNode.swift in Sources */,
+				4945BBFE265069C400EF6224 /* CanvasView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,6 +684,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4945BBFF26507B9D00EF6224 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
 		49DEF3902642D89400FD342D /* XCRemoteSwiftPackageReference "swift-syntax" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-syntax";
@@ -679,6 +703,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4945BC0026507B9D00EF6224 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4945BBFF26507B9D00EF6224 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
 		49DEF3912642D89400FD342D /* SwiftSyntax */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 49DEF3902642D89400FD342D /* XCRemoteSwiftPackageReference "swift-syntax" */;
