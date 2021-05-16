@@ -21,8 +21,6 @@ class CanvasView: NSScrollView {
     }
     
     private func setupView() {
-        drawsBackground = true
-        backgroundColor = .blue
         verticalScrollElasticity = .allowed
         horizontalScrollElasticity = .allowed
         hasHorizontalScroller = true
