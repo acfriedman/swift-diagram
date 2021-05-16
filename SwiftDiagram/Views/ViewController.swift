@@ -13,6 +13,8 @@ class ViewController: NSViewController {
     
     var contentView: NSView!
     var canvasView: CanvasView!
+    
+    private let canvasCoordinator: CanvasCoordinator = DefaultCanvasCoordinator()
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,20 +61,23 @@ class ViewController: NSViewController {
     }
     
     private func coordinate(_ nodes: [SyntaxNode]) {
-        var pointX: CGFloat = -50.0
-        nodes.forEach { node in
-            let nodeBox = RoundedTextView()
-            nodeBox.text = node.name
-            nodeBox.layer?.backgroundColor = node.displayColor.cgColor
-            contentView.addSubview(nodeBox)
-            nodeBox.snp.makeConstraints{
-                pointX += node.displayWidth
-                $0.left.equalTo(contentView).offset(pointX)
-                $0.bottom.equalTo(contentView)
-                $0.width.equalTo(node.displayWidth)
-                $0.height.equalTo(node.displayHeight)
-            }
+        canvasCoordinator.coordinate(nodes) { node, rect in
+            self.display(node, in: rect)
         }
+    }
+    
+    private func display(_ node: SyntaxNode, in frame: NSRect) {
+        let roundedBox = makeRoundedBox(with: node.name,
+                       frame: frame,
+                       color: node.displayColor)
+        contentView.addSubview(roundedBox)
+    }
+
+    private func makeRoundedBox(with name: String, frame: NSRect, color: NSColor) -> RoundedTextView {
+        let roundedTextView = RoundedTextView(frame: frame)
+        roundedTextView.layer?.backgroundColor = color.cgColor
+        roundedTextView.text = name
+        return roundedTextView
     }
 }
 

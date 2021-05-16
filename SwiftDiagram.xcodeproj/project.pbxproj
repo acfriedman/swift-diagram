@@ -10,6 +10,7 @@
 		4945BBFE265069C400EF6224 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4945BBFD265069C400EF6224 /* CanvasView.swift */; };
 		4945BC0126507B9D00EF6224 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4945BC0026507B9D00EF6224 /* SnapKit */; };
 		4945BC0326507F2500EF6224 /* SwiftUI+AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4945BC0226507F2500EF6224 /* SwiftUI+AppKit.swift */; };
+		49D25978265168E40067970A /* CanvasCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D25977265168E40067970A /* CanvasCoordinator.swift */; };
 		49DEF35F2642D56800FD342D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF35E2642D56800FD342D /* AppDelegate.swift */; };
 		49DEF3612642D56800FD342D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF3602642D56800FD342D /* ViewController.swift */; };
 		49DEF3632642D56900FD342D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DEF3622642D56900FD342D /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 /* Begin PBXFileReference section */
 		4945BBFD265069C400EF6224 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		4945BC0226507F2500EF6224 /* SwiftUI+AppKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+AppKit.swift"; sourceTree = "<group>"; };
+		49D25977265168E40067970A /* CanvasCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasCoordinator.swift; sourceTree = "<group>"; };
 		49DEF35B2642D56800FD342D /* SwiftDiagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDiagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DEF35E2642D56800FD342D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49DEF3602642D56800FD342D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 			children = (
 				49DEF38A2642D81700FD342D /* FilePicker.swift */,
 				49DEF38B2642D81700FD342D /* SwiftViewer.swift */,
+				49D25977265168E40067970A /* CanvasCoordinator.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				49DEF35F2642D56800FD342D /* AppDelegate.swift in Sources */,
 				4945BC0326507F2500EF6224 /* SwiftUI+AppKit.swift in Sources */,
 				49DEF38D2642D81700FD342D /* SwiftViewer.swift in Sources */,
+				49D25978265168E40067970A /* CanvasCoordinator.swift in Sources */,
 				49DEF3992642E72300FD342D /* RoundedTextView.swift in Sources */,
 				49ED0F88264971A400A9C9FC /* SwiftNode.swift in Sources */,
 				4945BBFE265069C400EF6224 /* CanvasView.swift in Sources */,
