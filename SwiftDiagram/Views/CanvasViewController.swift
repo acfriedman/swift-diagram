@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CanvasViewController.swift
 //  SwiftDiagram
 //
 //  Created by Andrew Friedman on 5/5/21.
@@ -9,7 +9,7 @@ import Cocoa
 import SwiftSyntax
 import SnapKit
 
-class ViewController: NSViewController {
+class CanvasViewController: NSViewController {
     
     var contentView: NSView!
     var canvasView: CanvasView!
