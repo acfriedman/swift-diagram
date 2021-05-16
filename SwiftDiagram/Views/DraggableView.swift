@@ -14,18 +14,14 @@ class DraggableView: NSView {
         
     // MARK: Mouse Events
     
+    var mouseDownClickPoint: CGPoint!
+    
     override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
         return true
     }
     
     override func mouseDown(with event: NSEvent) {
-        guard let clickPoint = superview?.convert(event.locationInWindow, from: nil) else {
-            return
-        }
-        
-        print("Click point: \(clickPoint)")
-        print("origin y: \(frame.origin.y)")
-        print("height: \(frame.height)")
+        mouseDownClickPoint = convert(event.locationInWindow, from: nil)
     }
     
     override func mouseDragged(with event: NSEvent) {
@@ -33,10 +29,10 @@ class DraggableView: NSView {
         guard let newDragLocation = superview?.convert(event.locationInWindow, from: nil) else {
             return
         }
-                
+  
         snp.updateConstraints{
-            $0.bottom.equalToSuperview().offset(-(newDragLocation.y - frame.height/2))
-            $0.left.equalToSuperview().offset(newDragLocation.x - frame.width/2)
+            $0.bottom.equalToSuperview().offset(-(newDragLocation.y - mouseDownClickPoint.y))
+            $0.left.equalToSuperview().offset(newDragLocation.x - mouseDownClickPoint.x)
         }
     }
 }
