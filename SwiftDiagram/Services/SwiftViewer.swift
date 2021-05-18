@@ -16,20 +16,22 @@ struct SwiftViewer {
     
     private static let acceptableFileTypes: Set<String> = ["swift"]
     
-    static func parse(_ urls: [URL]) throws -> [SyntaxNode] {
+    static func parse(_ urls: [URL]) throws -> [DeclarationNode] {
         return urls.compactMap { try? parse($0) }.flatMap { $0 }
     }
     
-    static func parse(_ url: URL) throws -> [SyntaxNode] {
+    static func parse(_ url: URL) throws -> [DeclarationNode] {
         
         guard acceptableFileTypes.contains(url.pathExtension) else {
             throw Error.unacceptableFileTypeExtension
         }
         
         let sourceFileSyntax = try SyntaxParser.parse(url)
-        let visitor = DiagramVisitor()
-        visitor.walk(sourceFileSyntax)
-        return visitor.extractedNodes
+        let declCollector = DeclarationCollector()
+        declCollector.walk(sourceFileSyntax)
+        declCollector.all.forEach { print($0.debugDescription + "\n") }
+        
+        return declCollector.all
     }
 }
 
@@ -50,14 +52,42 @@ extension SwiftViewer.Error: LocalizedError {
     }
 }
 
-class DiagramVisitor: SyntaxVisitor {
+class DeclarationCollector: SyntaxVisitor {
     
-    var extractedNodes: [SyntaxNode] = []
+    var classes: [DeclarationNode] = []
     
-    override func visitPost(_ node: TokenSyntax) {
-        guard let node = try? SyntaxNodeFactory.make(from: node) else {
-            return
-        }
-        extractedNodes += [node]
+    var structs: [DeclarationNode] = []
+    
+    var protocols: [DeclarationNode] = []
+    
+    var all: [DeclarationNode] {
+        return classes + structs + protocols
+    }
+    
+    override func visitPost(_ node: ClassDeclSyntax) {
+        let name = node.identifier.text
+        let inheritance = node.inheritanceClause?
+            .inheritedTypeCollection
+            .map { $0.typeName.withoutTrivia().description
+        } ?? []
+        classes.append(ClassNode(name: name, inheritance: inheritance))
+    }
+    
+    override func visitPost(_ node: ProtocolDeclSyntax) {
+        let name = node.identifier.text
+        let inheritance = node.inheritanceClause?
+            .inheritedTypeCollection
+            .map { $0.typeName.withoutTrivia().description
+        } ?? []
+        protocols.append(ProtocolNode(name: name, inheritance: inheritance))
+    }
+    
+    override func visitPost(_ node: StructDeclSyntax) {
+        let name = node.identifier.text
+        let inheritance = node.inheritanceClause?
+            .inheritedTypeCollection
+            .map { $0.typeName.withoutTrivia().description
+        } ?? []
+        structs.append(StructNode(name: name, inheritance: inheritance))
     }
 }

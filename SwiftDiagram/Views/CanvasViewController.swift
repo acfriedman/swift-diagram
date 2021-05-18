@@ -60,13 +60,13 @@ class CanvasViewController: NSViewController {
         }
     }
     
-    private func coordinate(_ nodes: [SyntaxNode]) {
+    private func coordinate(_ nodes: [DeclarationNode]) {
         canvasCoordinator.coordinate(nodes) { node, rect in
             self.display(node, in: rect)
         }
     }
     
-    private func display(_ node: SyntaxNode, in frame: NSRect) {
+    private func display(_ node: DeclarationNode, in frame: NSRect) {
         let roundedBox = makeRoundedBox(with: node.name,
                        frame: frame,
                        color: node.displayColor)

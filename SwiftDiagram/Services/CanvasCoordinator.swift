@@ -8,12 +8,12 @@
 import Foundation
 
 protocol CanvasCoordinator {
-    func coordinate(_ nodes: [SyntaxNode], display: (SyntaxNode, NSRect) -> Void)
+    func coordinate(_ nodes: [DeclarationNode], display: (DeclarationNode, NSRect) -> Void)
 }
 
 struct DefaultCanvasCoordinator: CanvasCoordinator {
     
-    func coordinate(_ nodes: [SyntaxNode], display:  (SyntaxNode, NSRect) -> Void) {
+    func coordinate(_ nodes: [DeclarationNode], display:  (DeclarationNode, NSRect) -> Void) {
         
         let leadingInset: CGFloat = 8.0
         let yPoint: CGFloat = 20.0
