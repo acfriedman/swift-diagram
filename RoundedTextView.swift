@@ -30,6 +30,8 @@ class RoundedTextView: DraggableView {
         setupConstraints()
     }
     
+    // MARK: - Private Functions
+    
     private func setupView() {
         
         wantsLayer = true
