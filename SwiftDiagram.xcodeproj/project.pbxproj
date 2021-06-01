@@ -26,7 +26,6 @@
 		49DEF3992642E72300FD342D /* RoundedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF3982642E72300FD342D /* RoundedTextView.swift */; };
 		49E8FE0E264C15AC00FF60B5 /* DraggableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8FE0D264C15AC00FF60B5 /* DraggableView.swift */; };
 		49ED0F88264971A400A9C9FC /* SwiftNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED0F87264971A400A9C9FC /* SwiftNode.swift */; };
-		49EE7CB226554D25002953B7 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EE7CB126554D25002953B7 /* Line.swift */; };
 		49EE7CB4265552E2002953B7 /* NSView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EE7CB3265552E2002953B7 /* NSView+Extensions.swift */; };
 		49EE7CB62655558B002953B7 /* NSBezierPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EE7CB52655558B002953B7 /* NSBezierPath+Extensions.swift */; };
 		49EE7CB8265556BC002953B7 /* SwiftDeclarationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EE7CB7265556BC002953B7 /* SwiftDeclarationNode.swift */; };
@@ -87,7 +86,6 @@
 		49DEF3982642E72300FD342D /* RoundedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextView.swift; sourceTree = SOURCE_ROOT; };
 		49E8FE0D264C15AC00FF60B5 /* DraggableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableView.swift; sourceTree = "<group>"; };
 		49ED0F87264971A400A9C9FC /* SwiftNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftNode.swift; sourceTree = "<group>"; };
-		49EE7CB126554D25002953B7 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		49EE7CB3265552E2002953B7 /* NSView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extensions.swift"; sourceTree = "<group>"; };
 		49EE7CB52655558B002953B7 /* NSBezierPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSBezierPath+Extensions.swift"; sourceTree = "<group>"; };
 		49EE7CB7265556BC002953B7 /* SwiftDeclarationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDeclarationNode.swift; sourceTree = "<group>"; };
@@ -213,7 +211,6 @@
 				49DEF3982642E72300FD342D /* RoundedTextView.swift */,
 				49E8FE0D264C15AC00FF60B5 /* DraggableView.swift */,
 				4945BBFD265069C400EF6224 /* CanvasView.swift */,
-				49EE7CB126554D25002953B7 /* Line.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -383,7 +380,6 @@
 				49DEF38D2642D81700FD342D /* SwiftViewer.swift in Sources */,
 				49D25978265168E40067970A /* CanvasCoordinator.swift in Sources */,
 				49DEF3992642E72300FD342D /* RoundedTextView.swift in Sources */,
-				49EE7CB226554D25002953B7 /* Line.swift in Sources */,
 				49EE7CB4265552E2002953B7 /* NSView+Extensions.swift in Sources */,
 				49ED0F88264971A400A9C9FC /* SwiftNode.swift in Sources */,
 				4945BBFE265069C400EF6224 /* CanvasView.swift in Sources */,

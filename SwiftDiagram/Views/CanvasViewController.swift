@@ -67,17 +67,7 @@ class CanvasViewController: NSViewController {
     }
     
     private func display(_ node: DeclarationNode, in frame: NSRect) {
-        let roundedBox = makeRoundedBox(with: node.name,
-                       frame: frame,
-                       color: node.displayColor)
-        contentView.addSubview(roundedBox)
-    }
-
-    private func makeRoundedBox(with name: String, frame: NSRect, color: NSColor) -> RoundedTextView {
-        let roundedTextView = RoundedTextView(frame: frame)
-        roundedTextView.layer?.backgroundColor = color.cgColor
-        roundedTextView.text = name
-        return roundedTextView
+        contentView.addSubview(SwiftDeclarationNode(frame: frame, node))
     }
 }
 

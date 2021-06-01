@@ -14,6 +14,17 @@ class SwiftDeclarationNode: RoundedTextView {
     var outgoingNodes: [SwiftDeclarationNode] = []
     var incomingNodes: [SwiftDeclarationNode] = []
     
+    init(frame: NSRect, _ node: DeclarationNode) {
+        super.init(frame: frame)
+        
+        layer?.backgroundColor = node.displayColor.cgColor
+        text = node.name
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     func makeLines(to nodes: [SwiftDeclarationNode]) -> [CAShapeLayer] {
         
         let path = NSBezierPath()
