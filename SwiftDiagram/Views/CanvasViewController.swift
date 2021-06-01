@@ -31,6 +31,7 @@ class CanvasViewController: NSViewController {
                 do {
                     let nodes = try SwiftViewer.parse(urls)
                     self.coordinate(nodes)
+                    self.drawLines()
                     
                 } catch {
                     print(error.localizedDescription)
@@ -60,14 +61,30 @@ class CanvasViewController: NSViewController {
         }
     }
     
+    private var nodeIndex: [String: DeclarationNodeView] = [:]
+    private var nodeMap: [String: Set<DeclarationNodeView>] = [:]
+    
     private func coordinate(_ nodes: [DeclarationNode]) {
         canvasCoordinator.coordinate(nodes) { node, rect in
-            self.display(node, in: rect)
+            let displayNode = display(node, in: rect)
+            nodeIndex[node.name] = displayNode
+            node.inheritance.forEach { nodeMap[$0, default: []].insert(displayNode) }
         }
     }
     
-    private func display(_ node: DeclarationNode, in frame: NSRect) {
-        contentView.addSubview(SwiftDeclarationNode(frame: frame, node))
+    private func drawLines() {
+        for map in nodeMap {
+            nodeIndex[map.key]?
+                .makeLines(to: Array(map.value))
+                .forEach { contentView.layer?.addSublayer($0) }
+            
+        }
+    }
+    
+    private func display(_ node: DeclarationNode, in frame: NSRect) -> DeclarationNodeView {
+        let nodeView = DeclarationNodeView(frame: frame, node)
+        contentView.addSubview(nodeView)
+        return nodeView
     }
 }
 

@@ -7,12 +7,12 @@
 
 import AppKit
 
-class SwiftDeclarationNode: RoundedTextView {
+class DeclarationNodeView: RoundedTextView {
     
     var outgoingLines: [CAShapeLayer] = []
     var incomingLines: [CAShapeLayer] = []
-    var outgoingNodes: [SwiftDeclarationNode] = []
-    var incomingNodes: [SwiftDeclarationNode] = []
+    var outgoingNodes: [DeclarationNodeView] = []
+    var incomingNodes: [DeclarationNodeView] = []
     
     init(frame: NSRect, _ node: DeclarationNode) {
         super.init(frame: frame)
@@ -25,7 +25,7 @@ class SwiftDeclarationNode: RoundedTextView {
         super.init(coder: coder)
     }
     
-    func makeLines(to nodes: [SwiftDeclarationNode]) -> [CAShapeLayer] {
+    func makeLines(to nodes: [DeclarationNodeView]) -> [CAShapeLayer] {
         
         let path = NSBezierPath()
         path.move(to: center)
