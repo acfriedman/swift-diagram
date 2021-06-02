@@ -43,4 +43,20 @@ class DeclarationNodeView: RoundedTextView {
             return line
         }
     }
+    
+    override func mouseDragged(with event: NSEvent) {
+        super.mouseDragged(with: event)
+        zip(outgoingNodes, outgoingLines).forEach { node, line in
+            let path = NSBezierPath()
+            path.move(to: center)
+            path.line(to: node.center)
+            line.path = path.cgPath
+        }
+        zip(incomingNodes, incomingLines).forEach { node, line in
+            let path = NSBezierPath()
+            path.move(to: node.center)
+            path.line(to: center)
+            line.path = path.cgPath
+        }
+    }
 }

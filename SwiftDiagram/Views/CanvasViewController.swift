@@ -31,7 +31,7 @@ class CanvasViewController: NSViewController {
                 do {
                     let nodes = try SwiftViewer.parse(urls)
                     self.coordinate(nodes)
-                    self.drawLines()
+                    self.drawInheritanceLines()
                     
                 } catch {
                     print(error.localizedDescription)
@@ -72,12 +72,11 @@ class CanvasViewController: NSViewController {
         }
     }
     
-    private func drawLines() {
-        for map in nodeMap {
-            nodeIndex[map.key]?
-                .makeLines(to: Array(map.value))
+    private func drawInheritanceLines() {
+        for (key, inheritedDecls) in nodeMap {
+            nodeIndex[key]?
+                .makeLines(to: Array(inheritedDecls))
                 .forEach { contentView.layer?.addSublayer($0) }
-            
         }
     }
     
