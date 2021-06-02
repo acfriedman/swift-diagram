@@ -1,5 +1,5 @@
 //
-//  SwiftDeclarationNode.swift
+//  DeclarationNodeView.swift
 //  SwiftDiagram
 //
 //  Created by Andrew Friedman on 5/19/21.

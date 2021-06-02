@@ -28,7 +28,7 @@
 		49ED0F88264971A400A9C9FC /* SwiftNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED0F87264971A400A9C9FC /* SwiftNode.swift */; };
 		49EE7CB4265552E2002953B7 /* NSView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EE7CB3265552E2002953B7 /* NSView+Extensions.swift */; };
 		49EE7CB62655558B002953B7 /* NSBezierPath+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EE7CB52655558B002953B7 /* NSBezierPath+Extensions.swift */; };
-		49EE7CB8265556BC002953B7 /* SwiftDeclarationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EE7CB7265556BC002953B7 /* SwiftDeclarationNode.swift */; };
+		49EE7CB8265556BC002953B7 /* DeclarationNodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EE7CB7265556BC002953B7 /* DeclarationNodeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,7 +88,7 @@
 		49ED0F87264971A400A9C9FC /* SwiftNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftNode.swift; sourceTree = "<group>"; };
 		49EE7CB3265552E2002953B7 /* NSView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extensions.swift"; sourceTree = "<group>"; };
 		49EE7CB52655558B002953B7 /* NSBezierPath+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSBezierPath+Extensions.swift"; sourceTree = "<group>"; };
-		49EE7CB7265556BC002953B7 /* SwiftDeclarationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDeclarationNode.swift; sourceTree = "<group>"; };
+		49EE7CB7265556BC002953B7 /* DeclarationNodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeclarationNodeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,7 +207,7 @@
 			children = (
 				4945BC0426507F2D00EF6224 /* Utilities */,
 				49DEF3602642D56800FD342D /* CanvasViewController.swift */,
-				49EE7CB7265556BC002953B7 /* SwiftDeclarationNode.swift */,
+				49EE7CB7265556BC002953B7 /* DeclarationNodeView.swift */,
 				49DEF3982642E72300FD342D /* RoundedTextView.swift */,
 				49E8FE0D264C15AC00FF60B5 /* DraggableView.swift */,
 				4945BBFD265069C400EF6224 /* CanvasView.swift */,
@@ -375,7 +375,7 @@
 				49DEF35F2642D56800FD342D /* AppDelegate.swift in Sources */,
 				49EE7CB62655558B002953B7 /* NSBezierPath+Extensions.swift in Sources */,
 				4945BC0326507F2500EF6224 /* SwiftUI+AppKit.swift in Sources */,
-				49EE7CB8265556BC002953B7 /* SwiftDeclarationNode.swift in Sources */,
+				49EE7CB8265556BC002953B7 /* DeclarationNodeView.swift in Sources */,
 				495E1A492654029700D31649 /* StringProtocol+Extensions.swift in Sources */,
 				49DEF38D2642D81700FD342D /* SwiftViewer.swift in Sources */,
 				49D25978265168E40067970A /* CanvasCoordinator.swift in Sources */,
