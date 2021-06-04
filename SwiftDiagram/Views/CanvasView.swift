@@ -31,4 +31,31 @@ class CanvasView: NSScrollView {
         contentView = clipView
         clipView.snp.makeConstraints { $0.edges.equalTo(self) }
     }
+    
+    var mouseDownLocation: NSPoint!
+    var lastScrollPoint: NSPoint = NSPoint(x: 0, y: 0)
+    
+    override func mouseDown(with event: NSEvent) {
+        mouseDownLocation = event.locationInWindow
+    }
+    
+    override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
+        return true
+    }
+    
+    override func mouseDragged(with event: NSEvent) {
+        
+        let dragPoint = event.locationInWindow
+        
+        print("dragPoint: \(dragPoint)")
+        print("mouseDownLocation: \(mouseDownLocation)")
+        
+        
+        lastScrollPoint.y = mouseDownLocation.y - dragPoint.y
+        lastScrollPoint.x = mouseDownLocation.x - dragPoint.x
+                
+        print("lastScrollPoint: \(lastScrollPoint)")
+        print("\n\n")
+        contentView.scroll(lastScrollPoint)
+    }
 }
