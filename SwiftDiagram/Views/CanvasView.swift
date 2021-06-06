@@ -10,6 +10,9 @@ import SnapKit
 
 class CanvasView: NSScrollView {
     
+    private var mouseDownLocation: NSPoint!
+    private var lastScrollPoint: NSPoint = NSPoint(x: 0, y: 0)
+    
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         setupView()
@@ -32,30 +35,24 @@ class CanvasView: NSScrollView {
         clipView.snp.makeConstraints { $0.edges.equalTo(self) }
     }
     
-    var mouseDownLocation: NSPoint!
-    var lastScrollPoint: NSPoint = NSPoint(x: 0, y: 0)
+    override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
+        return true
+    }
     
     override func mouseDown(with event: NSEvent) {
         mouseDownLocation = event.locationInWindow
     }
     
-    override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
-        return true
+    override func mouseUp(with event: NSEvent) {
+        lastScrollPoint = NSPoint(x: contentView.documentVisibleRect.minX,
+                                  y: contentView.documentVisibleRect.minY)
     }
     
     override func mouseDragged(with event: NSEvent) {
-        
-        let dragPoint = event.locationInWindow
-        
-        print("dragPoint: \(dragPoint)")
-        print("mouseDownLocation: \(mouseDownLocation)")
-        
-        
-        lastScrollPoint.y = mouseDownLocation.y - dragPoint.y
-        lastScrollPoint.x = mouseDownLocation.x - dragPoint.x
-                
-        print("lastScrollPoint: \(lastScrollPoint)")
-        print("\n\n")
-        contentView.scroll(lastScrollPoint)
+        let startPoint = event.locationInWindow
+        var newPoint = NSPoint()
+        newPoint.y = mouseDownLocation.y - startPoint.y + lastScrollPoint.y
+        newPoint.x = mouseDownLocation.x - startPoint.x + lastScrollPoint.x
+        contentView.scroll(newPoint)
     }
 }
