@@ -39,16 +39,16 @@ class CanvasView: NSScrollView {
         return true
     }
     
-    override func mouseDown(with event: NSEvent) {
+    override func rightMouseDown(with event: NSEvent) {
         mouseDownLocation = event.locationInWindow
     }
-    
-    override func mouseUp(with event: NSEvent) {
+        
+    override func rightMouseUp(with event: NSEvent) {
         lastScrollPoint = NSPoint(x: contentView.documentVisibleRect.minX,
                                   y: contentView.documentVisibleRect.minY)
     }
     
-    override func mouseDragged(with event: NSEvent) {
+    override func rightMouseDragged(with event: NSEvent) {
         let startPoint = event.locationInWindow
         var newPoint = NSPoint()
         newPoint.y = mouseDownLocation.y - startPoint.y + lastScrollPoint.y
