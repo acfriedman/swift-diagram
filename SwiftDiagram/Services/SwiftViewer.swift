@@ -29,8 +29,6 @@ struct SwiftViewer {
         let sourceFileSyntax = try SyntaxParser.parse(url)
         let declCollector = DeclarationCollector()
         declCollector.walk(sourceFileSyntax)
-        declCollector.all.forEach { print($0.debugDescription + "\n") }
-        
         return declCollector.all
     }
 }
