@@ -29,10 +29,17 @@ class CanvasView: NSScrollView {
         hasHorizontalScroller = true
         hasVerticalScroller = true
         
-        
         let clipView = NSClipView()
         contentView = clipView
+        backgroundColor = NSColor.lightGray
         clipView.snp.makeConstraints { $0.edges.equalTo(self) }
+    }
+    
+    override func scrollWheel(with event: NSEvent) {
+        let deltaY = event.scrollingDeltaY
+        let magnification = magnification + deltaY/30
+        let point = contentView.convert(event.locationInWindow, from: nil)
+        setMagnification(magnification, centeredAt: point)
     }
     
     override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
