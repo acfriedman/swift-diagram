@@ -31,7 +31,7 @@ class CanvasView: NSScrollView {
         
         let clipView = NSClipView()
         contentView = clipView
-        backgroundColor = NSColor.lightGray
+        backgroundColor = NSColor.green
         clipView.snp.makeConstraints { $0.edges.equalTo(self) }
     }
     
@@ -40,6 +40,12 @@ class CanvasView: NSScrollView {
         let magnification = magnification + deltaY/30
         let point = contentView.convert(event.locationInWindow, from: nil)
         setMagnification(magnification, centeredAt: point)
+        if magnification < 1.0 {
+            documentView?.snp.updateConstraints {
+                $0.height.equalTo(documentVisibleRect.height)
+                $0.width.equalTo(documentVisibleRect.width)
+            }
+        }
     }
     
     override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
