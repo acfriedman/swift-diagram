@@ -14,7 +14,7 @@ class CanvasViewController: NSViewController {
     var contentView: NSView!
     var canvasView: CanvasView!
     
-    private let canvasCoordinator: CanvasCoordinator = DefaultCanvasCoordinator()
+    private let canvasCoordinator = CanvasCoordinator()
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +40,8 @@ class CanvasViewController: NSViewController {
                 print(error.localizedDescription)
             }
         })
+    
+        canvasView.contentView.scroll(to: contentView.center)
     }
     
     // MARK: Private Methods
@@ -56,8 +58,8 @@ class CanvasViewController: NSViewController {
         view.addSubview(canvasView)
         canvasView.snp.makeConstraints{ $0.edges.equalTo(view) }
         contentView.snp.makeConstraints{
-            $0.width.equalTo(3000)
-            $0.height.equalTo(1000)
+            $0.width.equalTo(5000)
+            $0.height.equalTo(5000)
         }
     }
     
@@ -65,7 +67,7 @@ class CanvasViewController: NSViewController {
     private var nodeMap: [String: Set<DeclarationNodeView>] = [:]
     
     private func coordinate(_ nodes: [DeclarationNode]) {
-        canvasCoordinator.coordinate(nodes) { node, rect in
+        canvasCoordinator.coordinate(nodes, at: contentView.center) { node, rect in
             let displayNode = display(node, in: rect)
             nodeIndex[node.name] = displayNode
             node.inheritance.forEach { nodeMap[$0, default: []].insert(displayNode) }

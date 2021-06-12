@@ -35,19 +35,6 @@ class CanvasView: NSScrollView {
         clipView.snp.makeConstraints { $0.edges.equalTo(self) }
     }
     
-    override func scrollWheel(with event: NSEvent) {
-        let deltaY = event.scrollingDeltaY
-        let magnification = magnification + deltaY/30
-        let point = contentView.convert(event.locationInWindow, from: nil)
-        setMagnification(magnification, centeredAt: point)
-        if magnification < 1.0 {
-            documentView?.snp.updateConstraints {
-                $0.height.equalTo(documentVisibleRect.height)
-                $0.width.equalTo(documentVisibleRect.width)
-            }
-        }
-    }
-    
     override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
         return true
     }

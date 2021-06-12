@@ -7,17 +7,14 @@
 
 import Foundation
 
-protocol CanvasCoordinator {
-    func coordinate(_ nodes: [DeclarationNode], display: (DeclarationNode, NSRect) -> Void)
-}
 
-struct DefaultCanvasCoordinator: CanvasCoordinator {
+struct CanvasCoordinator {
     
-    func coordinate(_ nodes: [DeclarationNode], display:  (DeclarationNode, NSRect) -> Void) {
+    func coordinate(_ nodes: [DeclarationNode], at point: CGPoint, display:  (DeclarationNode, NSRect) -> Void) {
         
         let leadingInset: CGFloat = 8.0
-        let yPoint: CGFloat = 20.0
-        var xPoint: CGFloat = leadingInset
+        let yPoint: CGFloat = point.y
+        var xPoint: CGFloat = point.x
         var placementRect: NSRect!
         
         nodes.forEach { node in
