@@ -12,18 +12,21 @@ struct CanvasCoordinator {
     
     func coordinate(_ nodes: [DeclarationNode], at point: CGPoint, display:  (DeclarationNode, NSRect) -> Void) {
         
-        let leadingInset: CGFloat = 8.0
-        let yPoint: CGFloat = point.y
-        var xPoint: CGFloat = point.x
-        var placementRect: NSRect!
-        
+        let area = computeArea(for: nodes)
+        let maxX = area/2
+        let maxY = area/2
+                
         nodes.forEach { node in
-            xPoint += node.displayWidth + leadingInset
-            placementRect = NSRect(x: xPoint,
-                                   y: yPoint,
-                                   width: node.displayWidth,
-                                   height: node.displayHeight)
-            display(node, placementRect)
+            display(node, NSRect(x: point.x + CGFloat.random(in: -maxX/2...maxX/2),
+                                 y: point.y + CGFloat.random(in: -maxY/2...maxY/2),
+                                 width: node.displayWidth,
+                                 height: node.displayHeight))
         }
+    }
+    
+    private func computeArea(for nodes: [DeclarationNode]) -> CGFloat {
+        guard let node = nodes.first else { return 0.0 }
+        let maxDimension = max(node.displayWidth, node.displayHeight)
+        return maxDimension * CGFloat(nodes.count)
     }
 }

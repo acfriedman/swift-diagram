@@ -41,7 +41,9 @@ class CanvasViewController: NSViewController {
             }
         })
     
-        canvasView.contentView.scroll(to: contentView.center)
+        let scrollPoint = NSPoint(x: contentView.center.x - (canvasView.frame.width/2),
+                                  y: contentView.center.y - (canvasView.frame.height/2))
+        canvasView.contentView.scroll(to: scrollPoint)
     }
     
     // MARK: Private Methods
