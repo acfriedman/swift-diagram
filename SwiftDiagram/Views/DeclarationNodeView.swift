@@ -27,11 +27,12 @@ class DeclarationNodeView: RoundedTextView {
     
     func makeLines(to nodes: [DeclarationNodeView]) -> [CAShapeLayer] {
         
-        let path = NSBezierPath()
-        path.move(to: center)
-        nodes.forEach { path.line(to: $0.center) }
-        
         return nodes.compactMap { node in
+            
+            let path = NSBezierPath()
+            path.move(to: center)
+            path.line(to: node.center)
+            
             let line = CAShapeLayer()
             line.path = path.cgPath
             line.lineWidth = 3
