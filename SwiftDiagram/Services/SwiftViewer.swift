@@ -17,31 +17,47 @@ struct SwiftViewer {
     private static let acceptableFileTypes: Set<String> = ["swift"]
     
     static func parse(_ urls: [URL]) throws -> [DeclarationNode] {
-        return urls.compactMap { try? parse($0) }.flatMap { $0 }
+        
+        urls.filter { acceptableFileTypes.contains($0.pathExtension) }
+            .compactMap { try? parse(String(contentsOf: $0)) }
+            .flatMap { $0 }
     }
     
-    static func parse(_ url: URL) throws -> [DeclarationNode] {
-        
-        guard acceptableFileTypes.contains(url.pathExtension) else {
-            throw Error.unacceptableFileTypeExtension
-        }
-        
-        let sourceFileSyntax = try SyntaxParser.parse(url)
+    static func parse(_ string: String) throws -> [DeclarationNode] {
+            
+        let sourceFileSyntax = try SyntaxParser.parse(source: string)
         let declCollector = DeclarationCollector()
         declCollector.walk(sourceFileSyntax)
-        return declCollector.all
+        return constructChildRelationships(for: declCollector.all)
+    }
+    
+    private static func constructChildRelationships(for nodes: [DeclarationNode]) -> [DeclarationNode] {
+        
+        var map = nodes.reduce(into: [String: DeclarationNode](), { $0[$1.name] = $1 })
+        
+        nodes.forEach { node in
+            node.inheritance.forEach { parent in
+                map[parent]?.add(node)
+            }
+        }
+        
+        return Array(map.values)
     }
 }
 
 extension SwiftViewer {
     enum Error: Swift.Error {
         case couldNotFindFile
+        case invalidStringURL
         case unacceptableFileTypeExtension
     }
 }
+
 extension SwiftViewer.Error: LocalizedError {
     var errorDescription: String? {
         switch self {
+        case .invalidStringURL:
+            return "The string value passed could not be converted to URL."
         case .couldNotFindFile:
             return "Could not find file, or file is not of swift type"
         case .unacceptableFileTypeExtension:
@@ -58,6 +74,7 @@ class DeclarationCollector: SyntaxVisitor {
     
     var protocols: [DeclarationNode] = []
     
+    /// All `DeclarationNode`s in the order of Class --> Struct --> Protocol
     var all: [DeclarationNode] {
         return classes + structs + protocols
     }
