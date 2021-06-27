@@ -11,6 +11,9 @@
 		4945BC0126507B9D00EF6224 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4945BC0026507B9D00EF6224 /* SnapKit */; };
 		4945BC0326507F2500EF6224 /* SwiftUI+AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4945BC0226507F2500EF6224 /* SwiftUI+AppKit.swift */; };
 		495E1A492654029700D31649 /* StringProtocol+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495E1A482654029700D31649 /* StringProtocol+Extensions.swift */; };
+		497649F62688CF5D00293CCB /* Test_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F52688CF5D00293CCB /* Test_1.swift */; };
+		497649F82688CF8800293CCB /* Test_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F72688CF8700293CCB /* Test_2.swift */; };
+		497649FA2688CFB300293CCB /* Test_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F92688CFB300293CCB /* Test_3.swift */; };
 		49D25978265168E40067970A /* CanvasCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D25977265168E40067970A /* CanvasCoordinator.swift */; };
 		49DEF35F2642D56800FD342D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF35E2642D56800FD342D /* AppDelegate.swift */; };
 		49DEF3612642D56800FD342D /* CanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF3602642D56800FD342D /* CanvasViewController.swift */; };
@@ -66,6 +69,9 @@
 		4945BBFD265069C400EF6224 /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		4945BC0226507F2500EF6224 /* SwiftUI+AppKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+AppKit.swift"; sourceTree = "<group>"; };
 		495E1A482654029700D31649 /* StringProtocol+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringProtocol+Extensions.swift"; sourceTree = "<group>"; };
+		497649F52688CF5D00293CCB /* Test_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_1.swift; sourceTree = "<group>"; };
+		497649F72688CF8700293CCB /* Test_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_2.swift; sourceTree = "<group>"; };
+		497649F92688CFB300293CCB /* Test_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_3.swift; sourceTree = "<group>"; };
 		49D25977265168E40067970A /* CanvasCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasCoordinator.swift; sourceTree = "<group>"; };
 		49DEF35B2642D56800FD342D /* SwiftDiagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDiagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DEF35E2642D56800FD342D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,7 +89,7 @@
 		49DEF38A2642D81700FD342D /* FilePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePicker.swift; sourceTree = "<group>"; };
 		49DEF38B2642D81700FD342D /* SwiftViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftViewer.swift; sourceTree = "<group>"; };
 		49DEF3942642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = lib_InternalSwiftSyntaxParser.dylib; path = ../../Desktop/lib_InternalSwiftSyntaxParser.dylib; sourceTree = "<group>"; };
-		49DEF3982642E72300FD342D /* RoundedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextView.swift; sourceTree = SOURCE_ROOT; };
+		49DEF3982642E72300FD342D /* RoundedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoundedTextView.swift; path = SwiftDiagram/Views/RoundedTextView.swift; sourceTree = SOURCE_ROOT; };
 		49E8FE0D264C15AC00FF60B5 /* DraggableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableView.swift; sourceTree = "<group>"; };
 		49ED0F87264971A400A9C9FC /* SwiftNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftNode.swift; sourceTree = "<group>"; };
 		49EE7CB3265552E2002953B7 /* NSView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extensions.swift"; sourceTree = "<group>"; };
@@ -137,6 +143,16 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		497649F42688CF4300293CCB /* Stub */ = {
+			isa = PBXGroup;
+			children = (
+				497649F52688CF5D00293CCB /* Test_1.swift */,
+				497649F72688CF8700293CCB /* Test_2.swift */,
+				497649F92688CFB300293CCB /* Test_3.swift */,
+			);
+			path = Stub;
+			sourceTree = "<group>";
+		};
 		49DEF3522642D56800FD342D = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +193,7 @@
 		49DEF3702642D56900FD342D /* SwiftDiagramTests */ = {
 			isa = PBXGroup;
 			children = (
+				497649F42688CF4300293CCB /* Stub */,
 				49DEF3712642D56900FD342D /* SwiftViewerTests.swift */,
 				49DEF3732642D56900FD342D /* Info.plist */,
 			);
@@ -390,7 +407,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				497649F62688CF5D00293CCB /* Test_1.swift in Sources */,
+				497649FA2688CFB300293CCB /* Test_3.swift in Sources */,
 				49DEF3722642D56900FD342D /* SwiftViewerTests.swift in Sources */,
+				497649F82688CF8800293CCB /* Test_2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

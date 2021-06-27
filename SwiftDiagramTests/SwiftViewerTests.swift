@@ -65,6 +65,32 @@ class SwiftViewerTests: XCTestCase {
         XCTAssert(declarations[0].children.count == 1)
     }
     
+    func test_map_child_relationship_single_child_class() throws {
+        
+        let contents = """
+            
+            class BaseView: NSView { }
+            class NextView: BaseView { }
+            class NextViewTwo: NextView { }
+            
+            """
+        let declarations = try SwiftViewer.parse(contents).sorted { $0.name  < $1.name }
+        XCTAssert(declarations.count == 3)
+        XCTAssert(declarations[0].name == "BaseView")
+        XCTAssert(declarations[0].children[0] == "NextView")
+        XCTAssert(declarations[0].children.count == 1)
+        XCTAssert(declarations[0].inheritance.count == 1)
+        
+        XCTAssert(declarations[1].name == "NextView")
+        XCTAssert(declarations[1].children[0] == "NextViewTwo")
+        XCTAssert(declarations[1].children.count == 1)
+        XCTAssert(declarations[1].inheritance.count == 1)
+        
+        XCTAssert(declarations[2].name == "NextViewTwo")
+        XCTAssert(declarations[2].children.count == 0)
+        XCTAssert(declarations[2].inheritance.count == 1)
+    }
+    
     func test_map_child_relationship_multiple_children() throws {
         
         let contents = """
@@ -136,5 +162,26 @@ class SwiftViewerTests: XCTestCase {
         
         XCTAssert(declarations[4].name == "TestStructC")
         XCTAssert(declarations[4].children.count == 0)
+    }
+    
+    func test_map_child_relationship_multiple_parents_children_multiple_files() throws {
+        let testBundle = Bundle(for: type(of: self))
+        let url1 = testBundle.url(forResource: "Test_1", withExtension: "swift")!
+        let declarations = try SwiftViewer.parse([url1]).sorted { $0.name  < $1.name }
+        
+        XCTAssert(declarations.count == 3)
+        XCTAssert(declarations[0].name == "BaseView")
+        XCTAssert(declarations[0].children[0] == "NextView")
+        XCTAssert(declarations[0].children.count == 1)
+        XCTAssert(declarations[0].inheritance.count == 1)
+        
+        XCTAssert(declarations[1].name == "NextView")
+        XCTAssert(declarations[1].children[0] == "NextViewTwo")
+        XCTAssert(declarations[1].children.count == 1)
+        XCTAssert(declarations[1].inheritance.count == 1)
+        
+        XCTAssert(declarations[2].name == "NextViewTwo")
+        XCTAssert(declarations[2].children.count == 0)
+        XCTAssert(declarations[2].inheritance.count == 1)
     }
 }

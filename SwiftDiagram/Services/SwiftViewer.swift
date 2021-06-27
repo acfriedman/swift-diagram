@@ -18,9 +18,10 @@ struct SwiftViewer {
     
     static func parse(_ urls: [URL]) throws -> [DeclarationNode] {
         
-        urls.filter { acceptableFileTypes.contains($0.pathExtension) }
+         let nodes = urls.filter { acceptableFileTypes.contains($0.pathExtension) }
             .compactMap { try? parse(String(contentsOf: $0)) }
             .flatMap { $0 }
+        return constructChildRelationships(for: nodes)
     }
     
     static func parse(_ string: String) throws -> [DeclarationNode] {
@@ -37,6 +38,10 @@ struct SwiftViewer {
         
         nodes.forEach { node in
             node.inheritance.forEach { parent in
+                // Do not add the node to the list of children if it has already been added.
+                guard let children = map[parent]?.children, !children.contains(node.name) else {
+                    return
+                }
                 map[parent]?.add(node)
             }
         }

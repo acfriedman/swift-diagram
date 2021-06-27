@@ -37,6 +37,11 @@
                BlueprintName = "SwiftDiagramTests"
                ReferencedContainer = "container:SwiftDiagram.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "SwiftViewerTests/test_map_child_relationship_multiple_parents_children_multiple_files()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "NO">

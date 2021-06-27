@@ -34,6 +34,7 @@ extension DeclarationNode {
         """
         name: \(name)
         inheritance: \(inheritance)
+        children: \(children)
         """
     }
 }

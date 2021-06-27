@@ -12,7 +12,7 @@ struct CanvasCoordinator {
     
     func coordinate(_ nodes: [DeclarationNode], at point: CGPoint, display:  (DeclarationNode, NSRect) -> Void) {
         
-        compute(nodes: nodes)
+        nodes.forEach { print($0.debugDescription + "\n") }
         
         let area = computeArea(for: nodes)
         let maxX = area/2
