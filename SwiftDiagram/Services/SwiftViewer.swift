@@ -18,18 +18,63 @@ struct SwiftViewer {
     
     static func parse(_ urls: [URL]) throws -> [DeclarationNode] {
         
-         let nodes = urls.filter { acceptableFileTypes.contains($0.pathExtension) }
-            .compactMap { try? parse(String(contentsOf: $0)) }
-            .flatMap { $0 }
-        return constructChildRelationships(for: nodes)
-    }
-    
-    static func parse(_ string: String) throws -> [DeclarationNode] {
+        let filteredURLs = urls.filter { acceptableFileTypes.contains($0.pathExtension) }
+        
+        var declSyntax: [DeclSyntaxProtocol] = []
+        var declNodeIds: Set<String> = []
+        for url in filteredURLs {
+            let sourceFileSyntax = try SyntaxParser.parse(url)
+            let declCollector = DeclarationCollector()
+            declCollector.walk(sourceFileSyntax)
+            declSyntax += declCollector.allDeclSyntax
+            declNodeIds.formUnion(declCollector.allNodeIds)
+        }
+        
+        var nodes: [DeclarationNode] = []
+        
+        for syntax in declSyntax {
             
-        let sourceFileSyntax = try SyntaxParser.parse(source: string)
-        let declCollector = DeclarationCollector()
-        declCollector.walk(sourceFileSyntax)
-        return constructChildRelationships(for: declCollector.all)
+            switch syntax {
+            case let syntax as StructDeclSyntax:
+                let name = syntax.identifier.text
+                let inheritance = syntax.inheritanceClause?
+                    .inheritedTypeCollection
+                    .map { $0.typeName.withoutTrivia().description
+                    } ?? []
+                let structNode = StructNode(name: name, inheritance: Set(inheritance))
+                let typeCollector = TypeUsageCollector(declNode: structNode, allDeclNodes: declNodeIds)
+                typeCollector.walk(syntax)
+                nodes += [typeCollector.declNode]
+                
+            case let syntax as ProtocolDeclSyntax:
+                let name = syntax.identifier.text
+                let inheritance = syntax.inheritanceClause?
+                    .inheritedTypeCollection
+                    .map { $0.typeName.withoutTrivia().description
+                    } ?? []
+                let protocolNode = ProtocolNode(name: name, inheritance: Set(inheritance))
+                let typeCollector = TypeUsageCollector(declNode: protocolNode, allDeclNodes: declNodeIds)
+                typeCollector.walk(syntax)
+                nodes += [typeCollector.declNode]
+                
+            case let syntax as ClassDeclSyntax:
+                let name = syntax.identifier.text
+                let inheritance = syntax.inheritanceClause?
+                    .inheritedTypeCollection
+                    .map { $0.typeName.withoutTrivia().description
+                    } ?? []
+                
+                let classNode = ClassNode(name: name, inheritance: Set(inheritance))
+                let typeCollector = TypeUsageCollector(declNode: classNode, allDeclNodes: declNodeIds)
+                typeCollector.walk(syntax)
+                nodes += [typeCollector.declNode]
+                
+            default:
+                break
+            }
+        }
+        
+        return constructChildRelationships(for: nodes)
     }
     
     private static func constructChildRelationships(for nodes: [DeclarationNode]) -> [DeclarationNode] {
@@ -38,11 +83,7 @@ struct SwiftViewer {
         
         nodes.forEach { node in
             node.inheritance.forEach { parent in
-                // Do not add the node to the list of children if it has already been added.
-                guard let children = map[parent]?.children, !children.contains(node.name) else {
-                    return
-                }
-                map[parent]?.add(node)
+                map[parent]?.add(child: node)
             }
         }
         
@@ -72,42 +113,52 @@ extension SwiftViewer.Error: LocalizedError {
 }
 
 class DeclarationCollector: SyntaxVisitor {
+
+    var allDeclSyntax: [DeclSyntaxProtocol] = []
     
-    var classes: [DeclarationNode] = []
-    
-    var structs: [DeclarationNode] = []
-    
-    var protocols: [DeclarationNode] = []
-    
-    /// All `DeclarationNode`s in the order of Class --> Struct --> Protocol
-    var all: [DeclarationNode] {
-        return classes + structs + protocols
-    }
+    var allNodeIds: Set<String> = []
     
     override func visitPost(_ node: ClassDeclSyntax) {
-        let name = node.identifier.text
-        let inheritance = node.inheritanceClause?
-            .inheritedTypeCollection
-            .map { $0.typeName.withoutTrivia().description
-        } ?? []
-        classes.append(ClassNode(name: name, inheritance: inheritance))
+        allNodeIds.insert(node.identifier.text)
+        allDeclSyntax.append(node)
     }
     
     override func visitPost(_ node: ProtocolDeclSyntax) {
-        let name = node.identifier.text
-        let inheritance = node.inheritanceClause?
-            .inheritedTypeCollection
-            .map { $0.typeName.withoutTrivia().description
-        } ?? []
-        protocols.append(ProtocolNode(name: name, inheritance: inheritance))
+        allNodeIds.insert(node.identifier.text)
+        allDeclSyntax.append(node)
     }
     
     override func visitPost(_ node: StructDeclSyntax) {
-        let name = node.identifier.text
-        let inheritance = node.inheritanceClause?
-            .inheritedTypeCollection
-            .map { $0.typeName.withoutTrivia().description
-        } ?? []
-        structs.append(StructNode(name: name, inheritance: inheritance))
+        allNodeIds.insert(node.identifier.text)
+        allDeclSyntax.append(node)
+    }
+}
+
+
+class TypeUsageCollector: SyntaxVisitor {
+    
+    var declNode: DeclarationNode
+    
+    var allDeclNodes: Set<String>
+    
+    init(declNode: DeclarationNode, allDeclNodes: Set<String>) {
+        self.declNode = declNode
+        self.allDeclNodes = allDeclNodes
+    }
+    
+    override func visitPost(_ node: SimpleTypeIdentifierSyntax) {
+        let nodeId = node.name.withoutTrivia().description
+        guard allDeclNodes.contains(nodeId) else {
+            return
+        }
+        declNode.add(use: nodeId)
+    }
+    
+    override func visitPost(_ node: IdentifierExprSyntax) {
+        let nodeId = node.withoutTrivia().description
+        guard allDeclNodes.contains(nodeId) else {
+            return
+        }
+        declNode.add(use: nodeId)
     }
 }
