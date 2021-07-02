@@ -32,6 +32,7 @@ class CanvasViewController: NSViewController {
                     let nodes = try SwiftViewer.parse(urls)
                     self.coordinate(nodes)
                     self.drawInheritanceLines()
+                    self.drawUsageLines()
                     
                 } catch {
                     print(error.localizedDescription)
@@ -66,20 +67,30 @@ class CanvasViewController: NSViewController {
     }
     
     private var nodeIndex: [String: DeclarationNodeView] = [:]
-    private var nodeMap: [String: Set<DeclarationNodeView>] = [:]
+    private var inheritanceMap: [String: Set<DeclarationNodeView>] = [:]
+    private var usageMap: [String: Set<DeclarationNodeView>] = [:]
     
     private func coordinate(_ nodes: [DeclarationNode]) {
         canvasCoordinator.coordinate(nodes, at: contentView.center) { node, rect in
             let displayNode = display(node, in: rect)
             nodeIndex[node.name] = displayNode
-            node.inheritance.forEach { nodeMap[$0, default: []].insert(displayNode) }
+            node.inheritance.forEach { inheritanceMap[$0, default: []].insert(displayNode) }
+            node.usage.forEach { usageMap[$0, default: []].insert(displayNode) }
         }
     }
     
     private func drawInheritanceLines() {
-        for (key, inheritedDecls) in nodeMap {
+        for (key, inheritedDecls) in inheritanceMap {
             nodeIndex[key]?
-                .makeLines(to: Array(inheritedDecls))
+                .makeInheritanceLines(to: Array(inheritedDecls))
+                .forEach { contentView.layer?.addSublayer($0) }
+        }
+    }
+    
+    private func drawUsageLines() {
+        for (key, usageDecls) in usageMap {
+            nodeIndex[key]?
+                .makeUsageLines(to: Array(usageDecls))
                 .forEach { contentView.layer?.addSublayer($0) }
         }
     }

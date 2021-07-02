@@ -25,7 +25,7 @@ class DeclarationNodeView: RoundedTextView {
         super.init(coder: coder)
     }
     
-    func makeLines(to nodes: [DeclarationNodeView]) -> [CAShapeLayer] {
+    func makeInheritanceLines(to nodes: [DeclarationNodeView]) -> [CAShapeLayer] {
         
         return nodes.compactMap { node in
             
@@ -34,6 +34,23 @@ class DeclarationNodeView: RoundedTextView {
             path.line(to: node.center)
             
             let line = DashedLine(path: path.cgPath)
+            node.incomingLines.append(line)
+            outgoingLines.append(line)
+            outgoingNodes.append(node)
+            node.incomingNodes.append(self)
+            return line
+        }
+    }
+    
+    func makeUsageLines(to nodes: [DeclarationNodeView]) -> [CAShapeLayer] {
+        
+        return nodes.compactMap { node in
+            
+            let path = NSBezierPath()
+            path.move(to: center)
+            path.line(to: node.center)
+            
+            let line = SolidLine(path: path.cgPath)
             node.incomingLines.append(line)
             outgoingLines.append(line)
             outgoingNodes.append(node)
