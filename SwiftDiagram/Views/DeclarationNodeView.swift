@@ -33,10 +33,7 @@ class DeclarationNodeView: RoundedTextView {
             path.move(to: center)
             path.line(to: node.center)
             
-            let line = CAShapeLayer()
-            line.path = path.cgPath
-            line.lineWidth = 3
-            line.strokeColor = .black
+            let line = DashedLine(path: path.cgPath)
             node.incomingLines.append(line)
             outgoingLines.append(line)
             outgoingNodes.append(node)

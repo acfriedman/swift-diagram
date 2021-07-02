@@ -15,6 +15,8 @@
 		497649F82688CF8800293CCB /* Test_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F72688CF8700293CCB /* Test_2.swift */; };
 		497649FA2688CFB300293CCB /* Test_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F92688CFB300293CCB /* Test_3.swift */; };
 		49D25978265168E40067970A /* CanvasCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D25977265168E40067970A /* CanvasCoordinator.swift */; };
+		49DA116C268FBF2D0083DF05 /* DashedLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA116B268FBF2D0083DF05 /* DashedLine.swift */; };
+		49DA116F268FC5430083DF05 /* SolidLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA116E268FC5430083DF05 /* SolidLine.swift */; };
 		49DEF35F2642D56800FD342D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF35E2642D56800FD342D /* AppDelegate.swift */; };
 		49DEF3612642D56800FD342D /* CanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF3602642D56800FD342D /* CanvasViewController.swift */; };
 		49DEF3632642D56900FD342D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DEF3622642D56900FD342D /* Assets.xcassets */; };
@@ -73,6 +75,8 @@
 		497649F72688CF8700293CCB /* Test_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_2.swift; sourceTree = "<group>"; };
 		497649F92688CFB300293CCB /* Test_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_3.swift; sourceTree = "<group>"; };
 		49D25977265168E40067970A /* CanvasCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasCoordinator.swift; sourceTree = "<group>"; };
+		49DA116B268FBF2D0083DF05 /* DashedLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedLine.swift; sourceTree = "<group>"; };
+		49DA116E268FC5430083DF05 /* SolidLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidLine.swift; sourceTree = "<group>"; };
 		49DEF35B2642D56800FD342D /* SwiftDiagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDiagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DEF35E2642D56800FD342D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49DEF3602642D56800FD342D /* CanvasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +157,15 @@
 			path = Stub;
 			sourceTree = "<group>";
 		};
+		49DA116D268FC2380083DF05 /* Lines */ = {
+			isa = PBXGroup;
+			children = (
+				49DA116B268FBF2D0083DF05 /* DashedLine.swift */,
+				49DA116E268FC5430083DF05 /* SolidLine.swift */,
+			);
+			path = Lines;
+			sourceTree = "<group>";
+		};
 		49DEF3522642D56800FD342D = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +235,7 @@
 		49DEF38F2642D82900FD342D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				49DA116D268FC2380083DF05 /* Lines */,
 				4945BC0426507F2D00EF6224 /* Utilities */,
 				49DEF3602642D56800FD342D /* CanvasViewController.swift */,
 				49EE7CB7265556BC002953B7 /* DeclarationNodeView.swift */,
@@ -390,6 +404,7 @@
 				49DEF3612642D56800FD342D /* CanvasViewController.swift in Sources */,
 				49E8FE0E264C15AC00FF60B5 /* DraggableView.swift in Sources */,
 				49DEF35F2642D56800FD342D /* AppDelegate.swift in Sources */,
+				49DA116C268FBF2D0083DF05 /* DashedLine.swift in Sources */,
 				49EE7CB62655558B002953B7 /* NSBezierPath+Extensions.swift in Sources */,
 				4945BC0326507F2500EF6224 /* SwiftUI+AppKit.swift in Sources */,
 				49EE7CB8265556BC002953B7 /* DeclarationNodeView.swift in Sources */,
@@ -398,6 +413,7 @@
 				49D25978265168E40067970A /* CanvasCoordinator.swift in Sources */,
 				49DEF3992642E72300FD342D /* RoundedTextView.swift in Sources */,
 				49EE7CB4265552E2002953B7 /* NSView+Extensions.swift in Sources */,
+				49DA116F268FC5430083DF05 /* SolidLine.swift in Sources */,
 				49ED0F88264971A400A9C9FC /* SwiftNode.swift in Sources */,
 				4945BBFE265069C400EF6224 /* CanvasView.swift in Sources */,
 			);
