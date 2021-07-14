@@ -35,6 +35,48 @@ class CanvasView: NSScrollView {
         clipView.snp.makeConstraints { $0.edges.equalTo(self) }
     }
     
+    var leftMouseDownPoint: NSPoint!
+    var drawingShape: CAShapeLayer?
+    
+    override func mouseDown(with event: NSEvent) {
+        
+        leftMouseDownPoint = convert(event.locationInWindow, from: nil)
+        
+        let drawingShape = CAShapeLayer()
+        drawingShape.lineWidth = 1.0
+        drawingShape.fillColor = NSColor.clear.cgColor
+        drawingShape.strokeColor = NSColor.black.cgColor
+        drawingShape.lineDashPattern = [10,5]
+        layer?.addSublayer(drawingShape)
+
+        var dashAnimation = CABasicAnimation()
+        dashAnimation = CABasicAnimation(keyPath: "lineDashPhase")
+        dashAnimation.duration = 0.75
+        dashAnimation.fromValue = 0.0
+        dashAnimation.toValue = 15.0
+        dashAnimation.repeatCount = .infinity
+        drawingShape.add(dashAnimation, forKey: "linePhase")
+        self.drawingShape = drawingShape
+    }
+    
+    override func mouseUp(with event: NSEvent) {
+        drawingShape?.removeFromSuperlayer()
+        drawingShape = nil
+    }
+    
+    override func mouseDragged(with event: NSEvent) {
+        
+        let point : NSPoint = self.convert(event.locationInWindow, from: nil)
+        let path = CGMutablePath()
+        path.move(to: leftMouseDownPoint)
+        path.addLine(to: NSPoint(x: leftMouseDownPoint.x, y: point.y))
+        path.addLine(to: point)
+        path.addLine(to: NSPoint(x:point.x, y:leftMouseDownPoint.y))
+        path.closeSubpath()
+        drawingShape?.path = path
+    }
+    
+    
     override func acceptsFirstMouse(for event: NSEvent?) -> Bool {
         return true
     }

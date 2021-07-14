@@ -29,6 +29,8 @@ class DeclarationNodeView: RoundedTextView {
         
         return nodes.compactMap { node in
             
+            guard !outgoingNodes.contains(node) else { return nil }
+            
             let path = NSBezierPath()
             path.move(to: center)
             path.line(to: node.center)
@@ -45,6 +47,8 @@ class DeclarationNodeView: RoundedTextView {
     func makeUsageLines(to nodes: [DeclarationNodeView]) -> [CAShapeLayer] {
         
         return nodes.compactMap { node in
+            
+            guard !outgoingNodes.contains(node) else { return nil }
             
             let path = NSBezierPath()
             path.move(to: center)
