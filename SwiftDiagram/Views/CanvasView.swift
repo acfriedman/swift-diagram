@@ -10,8 +10,11 @@ import SnapKit
 
 class CanvasView: NSScrollView {
     
+    var nodeViews: [DeclarationNodeView] = []
+    
     private var mouseDownLocation: NSPoint!
     private var lastScrollPoint: NSPoint = NSPoint(x: 0, y: 0)
+    
     
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -60,18 +63,30 @@ class CanvasView: NSScrollView {
     }
     
     override func mouseUp(with event: NSEvent) {
+        
+        var nodes: [DeclarationNode] = []
+        for nodeView in nodeViews {
+            if let drawingShape = drawingShape,
+               convert(drawingShape.path!.boundingBox, to: contentView).contains(nodeView.frame) {
+                nodes.append(nodeView.declarationNode!)
+            }
+        }
+        
+        nodes.forEach { print($0.debugDescription) }
+        print("\n")
+        
         drawingShape?.removeFromSuperlayer()
         drawingShape = nil
     }
     
     override func mouseDragged(with event: NSEvent) {
         
-        let point : NSPoint = self.convert(event.locationInWindow, from: nil)
+        let point : NSPoint = convert(event.locationInWindow, from: nil)
         let path = CGMutablePath()
         path.move(to: leftMouseDownPoint)
         path.addLine(to: NSPoint(x: leftMouseDownPoint.x, y: point.y))
         path.addLine(to: point)
-        path.addLine(to: NSPoint(x:point.x, y:leftMouseDownPoint.y))
+        path.addLine(to: NSPoint(x:point.x, y: leftMouseDownPoint.y))
         path.closeSubpath()
         drawingShape?.path = path
     }

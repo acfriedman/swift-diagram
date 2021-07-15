@@ -13,8 +13,11 @@ class DeclarationNodeView: RoundedTextView {
     var incomingLines: [CAShapeLayer] = []
     var outgoingNodes: [DeclarationNodeView] = []
     var incomingNodes: [DeclarationNodeView] = []
+    var declarationNode: DeclarationNode?
     
     init(frame: NSRect, _ node: DeclarationNode) {
+        
+        self.declarationNode = node
         super.init(frame: frame)
         
         layer?.backgroundColor = node.displayColor.cgColor

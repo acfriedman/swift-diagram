@@ -15,6 +15,9 @@ class CanvasViewController: NSViewController {
     var canvasView: CanvasView!
     
     private let canvasCoordinator = CanvasCoordinator()
+    private var nodeIndex: [String: DeclarationNodeView] = [:]
+    private var inheritanceMap: [String: Set<DeclarationNodeView>] = [:]
+    private var usageMap: [String: Set<DeclarationNodeView>] = [:]
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,10 +69,6 @@ class CanvasViewController: NSViewController {
         }
     }
     
-    private var nodeIndex: [String: DeclarationNodeView] = [:]
-    private var inheritanceMap: [String: Set<DeclarationNodeView>] = [:]
-    private var usageMap: [String: Set<DeclarationNodeView>] = [:]
-    
     private func coordinate(_ nodes: [DeclarationNode]) {
         canvasCoordinator.coordinate(nodes, at: contentView.center) { node, rect in
             let displayNode = display(node, in: rect)
@@ -98,6 +97,7 @@ class CanvasViewController: NSViewController {
     private func display(_ node: DeclarationNode, in frame: NSRect) -> DeclarationNodeView {
         let nodeView = DeclarationNodeView(frame: frame, node)
         contentView.addSubview(nodeView)
+        canvasView.nodeViews.append(nodeView)
         return nodeView
     }
 }
