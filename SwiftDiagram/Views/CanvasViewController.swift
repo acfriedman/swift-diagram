@@ -48,6 +48,15 @@ class CanvasViewController: NSViewController {
         let scrollPoint = NSPoint(x: contentView.center.x - (canvasView.frame.width/2),
                                   y: contentView.center.y - (canvasView.frame.height/2))
         canvasView.contentView.scroll(to: scrollPoint)
+        
+        NSEvent.addLocalMonitorForEvents(matching: NSEvent.EventTypeMask.keyDown, handler: myKeyDownEvent)
+    }
+    
+    func myKeyDownEvent(event: NSEvent) -> NSEvent {
+        if event.keyCode == 51 {
+            canvasView.selectedNodes.forEach { $0.remove() }
+        }
+        return event
     }
     
     // MARK: Private Methods

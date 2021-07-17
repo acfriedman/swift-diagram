@@ -11,6 +11,7 @@ import SnapKit
 class CanvasView: NSScrollView {
     
     var nodeViews: [DeclarationNodeView] = []
+    var selectedNodes: [DeclarationNodeView] = []
     
     private var mouseDownLocation: NSPoint!
     private var lastScrollPoint: NSPoint = NSPoint(x: 0, y: 0)
@@ -64,19 +65,25 @@ class CanvasView: NSScrollView {
     
     override func mouseUp(with event: NSEvent) {
         
-        var nodes: [DeclarationNode] = []
+        guard let drawingShape = drawingShape else {
+            return
+        }
+        
+        var highlightedNodes: [DeclarationNodeView] = []
         for nodeView in nodeViews {
-            if let drawingShape = drawingShape,
-               convert(drawingShape.path!.boundingBox, to: contentView).contains(nodeView.frame) {
-                nodes.append(nodeView.declarationNode!)
+            if let path = drawingShape.path,
+               convert(path.boundingBox, to: contentView).contains(nodeView.frame) {
+                highlightedNodes.append(nodeView)
+                nodeView.isHighlighted = true
+            } else {
+                nodeView.isHighlighted = false
             }
         }
         
-        nodes.forEach { print($0.debugDescription) }
-        print("\n")
+        selectedNodes = highlightedNodes
         
-        drawingShape?.removeFromSuperlayer()
-        drawingShape = nil
+        self.drawingShape?.removeFromSuperlayer()
+        self.drawingShape = nil
     }
     
     override func mouseDragged(with event: NSEvent) {
