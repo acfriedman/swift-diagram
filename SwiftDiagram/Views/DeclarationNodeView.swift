@@ -48,10 +48,7 @@ class DeclarationNodeView: RoundedTextView {
             
             guard !outgoingNodes.contains(node) else { return nil }
             
-            let path = NSBezierPath()
-            path.move(to: center)
-            path.line(to: node.center)
-            
+            let path = makeArrowPath(from: self, to: node)
             let line = DashedLine(path: path.cgPath)
             node.incomingLines.append(line)
             outgoingLines.append(line)
@@ -67,10 +64,7 @@ class DeclarationNodeView: RoundedTextView {
             
             guard !outgoingNodes.contains(node) else { return nil }
             
-            let path = NSBezierPath()
-            path.move(to: center)
-            path.line(to: node.center)
-            
+            let path = makeArrowPath(from: self, to: node)
             let line = SolidLine(path: path.cgPath)
             node.incomingLines.append(line)
             outgoingLines.append(line)
@@ -89,16 +83,33 @@ class DeclarationNodeView: RoundedTextView {
     override func mouseDragged(with event: NSEvent) {
         super.mouseDragged(with: event)
         zip(outgoingNodes, outgoingLines).forEach { node, line in
-            let path = NSBezierPath()
-            path.move(to: center)
-            path.line(to: node.center)
-            line.path = path.cgPath
+            line.path = makeArrowPath(from: self, to: node).cgPath
         }
         zip(incomingNodes, incomingLines).forEach { node, line in
-            let path = NSBezierPath()
-            path.move(to: node.center)
-            path.line(to: center)
-            line.path = path.cgPath
+            line.path = makeArrowPath(from: node, to: self).cgPath
         }
+    }
+    
+    
+    func makeArrowPath(from startNode: DeclarationNodeView,
+                       to endNode: DeclarationNodeView) -> ArrowPath {
+        
+        
+        let startEndAngle = atan((endNode.center.y - startNode.center.y) / (endNode.center.x - startNode.center.x)) + ((endNode.center.x - startNode.center.x) < 0 ? CGFloat(Double.pi) : 0)
+        let rightAnglePoint = CGPoint(x: startNode.center.x, y: endNode.center.y)
+        let angle = endNode.center.angleBetweenPoints(firstPoint: startNode.center,
+                                                      secondPoint: rightAnglePoint)
+        let edgePoint = endNode.findEdgePoint(angle: startEndAngle)
+        
+        
+        print("startEndAngle: \(startEndAngle)")
+        print("angle: \(angle)")
+        print("edgePoint: \(edgePoint)")
+        print("\n")
+
+        let computed = CGPoint(x: endNode.center.x+edgePoint.x, y: endNode.center.y+edgePoint.y)
+        
+        
+        return ArrowPath(start: startNode.center, end: computed)
     }
 }
