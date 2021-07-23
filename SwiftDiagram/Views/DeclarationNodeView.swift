@@ -48,7 +48,7 @@ class DeclarationNodeView: RoundedTextView {
             
             guard !outgoingNodes.contains(node) else { return nil }
             
-            let path = makeArrowPath(from: self, to: node)
+            let path = makeArrowPath(from: node, to: self)
             let line = DashedLine(path: path.cgPath)
             node.incomingLines.append(line)
             outgoingLines.append(line)
@@ -64,7 +64,7 @@ class DeclarationNodeView: RoundedTextView {
             
             guard !outgoingNodes.contains(node) else { return nil }
             
-            let path = makeArrowPath(from: self, to: node)
+            let path = makeArrowPath(from: node, to: self)
             let line = SolidLine(path: path.cgPath)
             node.incomingLines.append(line)
             outgoingLines.append(line)
@@ -83,10 +83,10 @@ class DeclarationNodeView: RoundedTextView {
     override func mouseDragged(with event: NSEvent) {
         super.mouseDragged(with: event)
         zip(outgoingNodes, outgoingLines).forEach { node, line in
-            line.path = makeArrowPath(from: self, to: node).cgPath
+            line.path = makeArrowPath(from: node, to: self).cgPath
         }
         zip(incomingNodes, incomingLines).forEach { node, line in
-            line.path = makeArrowPath(from: node, to: self).cgPath
+            line.path = makeArrowPath(from: self, to: node).cgPath
         }
     }
     
@@ -101,7 +101,7 @@ class DeclarationNodeView: RoundedTextView {
         }
 
         let edgePoint = endNode.findEdgePoint(angle: startEndAngle)
-        let computed = CGPoint(x: endNode.center.x+edgePoint.x, y: endNode.center.y+edgePoint.y)
-        return ArrowPath(start: startNode.center, end: computed)
+        let computedEdge = CGPoint(x: endNode.center.x+edgePoint.x, y: endNode.center.y+edgePoint.y)
+        return ArrowPath(start: startNode.center, end: computedEdge)
     }
 }
