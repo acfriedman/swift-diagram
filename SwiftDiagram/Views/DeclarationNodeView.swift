@@ -94,22 +94,14 @@ class DeclarationNodeView: RoundedTextView {
     func makeArrowPath(from startNode: DeclarationNodeView,
                        to endNode: DeclarationNodeView) -> ArrowPath {
         
-        
-        let startEndAngle = atan((endNode.center.y - startNode.center.y) / (endNode.center.x - startNode.center.x)) + ((endNode.center.x - startNode.center.x) < 0 ? CGFloat(Double.pi) : 0)
-        let rightAnglePoint = CGPoint(x: startNode.center.x, y: endNode.center.y)
-        let angle = endNode.center.angleBetweenPoints(firstPoint: startNode.center,
-                                                      secondPoint: rightAnglePoint)
-        let edgePoint = endNode.findEdgePoint(angle: startEndAngle)
-        
-        
-        print("startEndAngle: \(startEndAngle)")
-        print("angle: \(angle)")
-        print("edgePoint: \(edgePoint)")
-        print("\n")
+        var startEndAngle = atan((endNode.center.y - startNode.center.y) / (endNode.center.x - startNode.center.x)) + ((endNode.center.x - startNode.center.x) < 0 ? CGFloat.pi : 0)
+        let degreeToRadian = CGFloat.pi / 180
+        if startEndAngle < 0 {
+            startEndAngle = 360 * degreeToRadian + startEndAngle
+        }
 
+        let edgePoint = endNode.findEdgePoint(angle: startEndAngle)
         let computed = CGPoint(x: endNode.center.x+edgePoint.x, y: endNode.center.y+edgePoint.y)
-        
-        
         return ArrowPath(start: startNode.center, end: computed)
     }
 }

@@ -15,6 +15,10 @@ extension NSView {
                        y: (frame.origin.y + (frame.size.height / 2)))
     }
     
+    
+    /// Computes the intersection of an angle with the edge of the view
+    /// - Parameter angle: The angle intersecting with the view
+    /// - Returns: The point on the perimeter of the view's rect that intersects with the angle
     public func findEdgePoint(angle: CGFloat) -> CGPoint {
 
         let intersection: CGPoint
@@ -22,9 +26,6 @@ extension NSView {
         let xRad = frame.width / 2
         let yRad = frame.height / 2
         
-        let degree = angle * 180 / .pi
-        print("degree: \(degree)")
-
         let tangent = tan(angle)
         let y = xRad * CGFloat(tangent)
 
@@ -39,10 +40,7 @@ extension NSView {
 
             let x = yRad / CGFloat(tangent)
 
-            if degree < 0 {
-                intersection = CGPoint(x: x, y: yRad)
-            }
-            else if angle < CGFloat.pi {
+            if angle < CGFloat.pi {
                 intersection = CGPoint(x: -x, y: -yRad)
             } else {
                 intersection = CGPoint(x: x, y: yRad)
