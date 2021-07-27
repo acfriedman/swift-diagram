@@ -6,57 +6,74 @@
 //
 
 import Foundation
+import AppKit
 
 
-struct CanvasCoordinator {
+
+protocol NodeViewCoordinator {
     
-    func coordinate(_ nodes: [DeclarationNode], at point: CGPoint, display:  (DeclarationNode, NSRect) -> Void) {
-        
-//        nodes.forEach { print($0.debugDescription + "\n") }
+    init(contentView: NSView)
+    mutating func coordinate(_ nodes: [DeclarationNodeView])
+}
+
+struct CanvasCoordinator: NodeViewCoordinator {
+    
+    private var contentView: NSView
+    
+    private var nodeIndex: [String: DeclarationNodeView] = [:]
+    
+    private var inheritanceMap: [String: Set<DeclarationNodeView>] = [:]
+    
+    private var usageMap: [String: Set<DeclarationNodeView>] = [:]
+    
+    init(contentView: NSView) {
+        self.contentView = contentView
+    }
+    
+    mutating func coordinate(_ nodes: [DeclarationNodeView]) {
         
         let area = computeArea(for: nodes)
         let maxX = area/2
         let maxY = area/2
+        let viewCenter = contentView.center
         
-        nodes.forEach { node in
-            display(node, NSRect(x: point.x + CGFloat.random(in: -maxX/2...maxX/2),
-                                 y: point.y + CGFloat.random(in: -maxY/2...maxY/2),
-                                 width: node.displayWidth,
-                                 height: node.displayHeight))
+        nodes.forEach { nodeView in
+            let node = nodeView.declarationNode
+            let plotPoint = NSRect(x: viewCenter.x + CGFloat.random(in: -maxX/2...maxX/2),
+                                   y: viewCenter.y + CGFloat.random(in: -maxY/2...maxY/2),
+                                   width: node.displayWidth,
+                                   height: node.displayHeight)
+            nodeView.frame = plotPoint
+            contentView.addSubview(nodeView)
+            
+            nodeIndex[node.name] = nodeView
+            node.inheritance.forEach { inheritanceMap[$0, default: []].insert(nodeView) }
+            node.usage.forEach { usageMap[$0, default: []].insert(nodeView) }
         }
+        
+        drawInheritanceLines()
+        drawUsageLines()
     }
     
-    private func computeArea(for nodes: [DeclarationNode]) -> CGFloat {
+    private func computeArea(for nodes: [DeclarationNodeView]) -> CGFloat {
         guard let node = nodes.first else { return 0.0 }
-        let maxDimension = max(node.displayWidth, node.displayHeight)
+        let maxDimension = max(node.frame.width, node.frame.height)
         return maxDimension * CGFloat(nodes.count)
     }
     
-    func compute(nodes: [DeclarationNode]) {
-        
-        let nodeMap: [String: DeclarationNode] =
-            nodes.reduce(into: [String: DeclarationNode](), { $0[$1.name] = $1  } )
-        let nodeIndex: Set<String> =
-            nodes.reduce(into: Set<String>(), { $0.insert($1.name)  })
-        
-        
-        var nodeHash: [String: Set<String>] = [:]
-        nodes.forEach { node in
-            node.inheritance.forEach { nodeHash[$0, default: []].insert(node.name) }
+    private func drawInheritanceLines() {
+        for (key, inheritedDecls) in inheritanceMap {
+            nodeIndex[key]?
+                .makeInheritanceLines(to: Array(inheritedDecls))
+                .forEach { contentView.layer?.addSublayer($0) }
         }
-        
-        let noInher = nodes.filter {
-            Set($0.inheritance).subtracting(nodeIndex).count > 0 || $0.inheritance.count == 0
-        }
-        
-        let startQueue = nodeHash.keys.compactMap { nodeMap[$0] }
-        let queue: [DeclarationNode] = startQueue
-        
-        noInher.forEach { print("\($0)\n")}
     }
     
-    
-    // 1. The queue should start subclasses that either have no inheritance, OR, inherit from a Cocoa or NS Framework, i.e, some class that is not a new decleration of the the selected project.
-    // 2. Each of these nodes should have an array of nodes that inherit from it.
-    // 3. The arlgorithm will use a breadth first approach to plotting associated nodes.
+    private func drawUsageLines() {
+        for (key, usageDecls) in usageMap {
+            nodeIndex[key]?
+                .makeUsageLines(to: Array(usageDecls))
+                .forEach { contentView.layer?.addSublayer($0) }
+        }
+    }
 }

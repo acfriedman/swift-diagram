@@ -13,7 +13,7 @@ class DeclarationNodeView: RoundedTextView {
     var incomingLines: [CAShapeLayer] = []
     var outgoingNodes: [DeclarationNodeView] = []
     var incomingNodes: [DeclarationNodeView] = []
-    var declarationNode: DeclarationNode?
+    var declarationNode: DeclarationNode
     
     
     var isHighlighted: Bool = false {
@@ -39,6 +39,7 @@ class DeclarationNodeView: RoundedTextView {
     }
     
     required init?(coder: NSCoder) {
+        self.declarationNode = NullNode()
         super.init(coder: coder)
     }
     

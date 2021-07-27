@@ -93,3 +93,24 @@ struct ProtocolNode: DeclarationNode {
         usage.insert(use)
     }
 }
+
+struct NullNode: DeclarationNode {
+    
+    var name: String { "Null" }
+    
+    var displayColor: NSColor { .black }
+    
+    private(set) var inheritance: Set<String> = []
+    
+    private(set) var children: Set<String> = []
+    
+    private(set) var usage: Set<String> = []
+    
+    mutating func add(child: DeclarationNode) {
+        //
+    }
+    
+    mutating func add(use: String) {
+        //
+    }
+}

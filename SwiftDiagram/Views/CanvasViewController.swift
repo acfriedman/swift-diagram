@@ -14,28 +14,30 @@ class CanvasViewController: NSViewController {
     var contentView: NSView!
     var canvasView: CanvasView!
     
-    private let canvasCoordinator = CanvasCoordinator()
-    private var nodeIndex: [String: DeclarationNodeView] = [:]
-    private var inheritanceMap: [String: Set<DeclarationNodeView>] = [:]
-    private var usageMap: [String: Set<DeclarationNodeView>] = [:]
+    private var coordinator: NodeViewCoordinator!
         
     override func viewDidLoad() {
         super.viewDidLoad()
         makeContentView()
         makeCanvasView()
+        
+        coordinator = CanvasCoordinator(contentView: contentView)
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
         
-        FilePicker.presentModal(completion: { result in
+        FilePicker.presentModal(completion: { [weak self] result in
+            
+            guard let self = self else { return }
+            
             switch result {
             case .success(let urls):
                 do {
+                    
                     let nodes = try SwiftViewer.parse(urls)
-                    self.coordinate(nodes)
-                    self.drawInheritanceLines()
-                    self.drawUsageLines()
+                    let nodeViews = self.makeNodeViews(from: nodes)
+                    self.coordinator.coordinate(nodeViews)
                     
                 } catch {
                     print(error.localizedDescription)
@@ -78,36 +80,11 @@ class CanvasViewController: NSViewController {
         }
     }
     
-    private func coordinate(_ nodes: [DeclarationNode]) {
-        canvasCoordinator.coordinate(nodes, at: contentView.center) { node, rect in
-            let displayNode = display(node, in: rect)
-            nodeIndex[node.name] = displayNode
-            node.inheritance.forEach { inheritanceMap[$0, default: []].insert(displayNode) }
-            node.usage.forEach { usageMap[$0, default: []].insert(displayNode) }
+    private func makeNodeViews(from nodes: [DeclarationNode]) -> [DeclarationNodeView] {
+        return nodes.map {
+            let frame = CGRect(x: 0, y: 0, width: $0.displayWidth, height: $0.displayHeight)
+            return DeclarationNodeView(frame: frame, $0)
         }
-    }
-    
-    private func drawInheritanceLines() {
-        for (key, inheritedDecls) in inheritanceMap {
-            nodeIndex[key]?
-                .makeInheritanceLines(to: Array(inheritedDecls))
-                .forEach { contentView.layer?.addSublayer($0) }
-        }
-    }
-    
-    private func drawUsageLines() {
-        for (key, usageDecls) in usageMap {
-            nodeIndex[key]?
-                .makeUsageLines(to: Array(usageDecls))
-                .forEach { contentView.layer?.addSublayer($0) }
-        }
-    }
-    
-    private func display(_ node: DeclarationNode, in frame: NSRect) -> DeclarationNodeView {
-        let nodeView = DeclarationNodeView(frame: frame, node)
-        contentView.addSubview(nodeView)
-        canvasView.nodeViews.append(nodeView)
-        return nodeView
     }
 }
 
