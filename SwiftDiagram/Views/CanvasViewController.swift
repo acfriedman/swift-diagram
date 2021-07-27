@@ -37,6 +37,7 @@ class CanvasViewController: NSViewController {
                     
                     let nodes = try SwiftViewer.parse(urls)
                     let nodeViews = self.makeNodeViews(from: nodes)
+                    self.canvasView.nodeViews = nodeViews
                     self.coordinator.coordinate(nodeViews)
                     
                 } catch {
