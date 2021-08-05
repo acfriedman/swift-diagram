@@ -16,6 +16,7 @@
 		497649F62688CF5D00293CCB /* Test_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F52688CF5D00293CCB /* Test_1.swift */; };
 		497649F82688CF8800293CCB /* Test_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F72688CF8700293CCB /* Test_2.swift */; };
 		497649FA2688CFB300293CCB /* Test_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F92688CFB300293CCB /* Test_3.swift */; };
+		49CC407826BC1FDF0000F231 /* RelationshipMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CC407726BC1FDF0000F231 /* RelationshipMapper.swift */; };
 		49D25978265168E40067970A /* CanvasCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D25977265168E40067970A /* CanvasCoordinator.swift */; };
 		49DA116C268FBF2D0083DF05 /* DashedLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA116B268FBF2D0083DF05 /* DashedLine.swift */; };
 		49DA116F268FC5430083DF05 /* SolidLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA116E268FC5430083DF05 /* SolidLine.swift */; };
@@ -78,6 +79,7 @@
 		497649F52688CF5D00293CCB /* Test_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_1.swift; sourceTree = "<group>"; };
 		497649F72688CF8700293CCB /* Test_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_2.swift; sourceTree = "<group>"; };
 		497649F92688CFB300293CCB /* Test_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_3.swift; sourceTree = "<group>"; };
+		49CC407726BC1FDF0000F231 /* RelationshipMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipMapper.swift; sourceTree = "<group>"; };
 		49D25977265168E40067970A /* CanvasCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasCoordinator.swift; sourceTree = "<group>"; };
 		49DA116B268FBF2D0083DF05 /* DashedLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedLine.swift; sourceTree = "<group>"; };
 		49DA116E268FC5430083DF05 /* SolidLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidLine.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				49DEF38A2642D81700FD342D /* FilePicker.swift */,
 				49DEF38B2642D81700FD342D /* SwiftViewer.swift */,
 				49D25977265168E40067970A /* CanvasCoordinator.swift */,
+				49CC407726BC1FDF0000F231 /* RelationshipMapper.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				493D636626A4FF5300A224A2 /* CGPoint+Extensions.swift in Sources */,
 				49DEF3992642E72300FD342D /* RoundedTextView.swift in Sources */,
 				49EE7CB4265552E2002953B7 /* NSView+Extensions.swift in Sources */,
+				49CC407826BC1FDF0000F231 /* RelationshipMapper.swift in Sources */,
 				49DA116F268FC5430083DF05 /* SolidLine.swift in Sources */,
 				49ED0F88264971A400A9C9FC /* SwiftNode.swift in Sources */,
 				4945BBFE265069C400EF6224 /* CanvasView.swift in Sources */,

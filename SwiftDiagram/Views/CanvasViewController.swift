@@ -14,7 +14,9 @@ class CanvasViewController: NSViewController {
     var contentView: NSView!
     var canvasView: CanvasView!
     
-    private var coordinator: NodeViewCoordinator!
+    private var coordinator: CanvasCoordinator!
+    
+    private var relationshipMapper: RelationshipMapper!
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,7 @@ class CanvasViewController: NSViewController {
         makeCanvasView()
         
         coordinator = CanvasCoordinator(contentView: contentView)
+        relationshipMapper = RelationshipMapper(contentView: contentView)
     }
     
     override func viewDidAppear() {
@@ -39,6 +42,7 @@ class CanvasViewController: NSViewController {
                     let nodeViews = self.makeNodeViews(from: nodes)
                     self.canvasView.nodeViews = nodeViews
                     self.coordinator.coordinate(nodeViews)
+                    self.relationshipMapper.map(nodeViews)
                     
                 } catch {
                     print(error.localizedDescription)
