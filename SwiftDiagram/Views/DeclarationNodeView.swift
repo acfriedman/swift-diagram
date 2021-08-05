@@ -43,38 +43,6 @@ class DeclarationNodeView: RoundedTextView {
         super.init(coder: coder)
     }
     
-    func makeInheritanceLines(to nodes: [DeclarationNodeView]) -> [CAShapeLayer] {
-        
-        return nodes.compactMap { node in
-            
-            guard !outgoingNodes.contains(node) else { return nil }
-            
-            let path = makeArrowPath(from: node, to: self)
-            let line = DashedLine(path: path.cgPath)
-            node.incomingLines.append(line)
-            outgoingLines.append(line)
-            outgoingNodes.append(node)
-            node.incomingNodes.append(self)
-            return line
-        }
-    }
-    
-    func makeUsageLines(to nodes: [DeclarationNodeView]) -> [CAShapeLayer] {
-        
-        return nodes.compactMap { node in
-            
-            guard !outgoingNodes.contains(node) else { return nil }
-            
-            let path = makeArrowPath(from: node, to: self)
-            let line = SolidLine(path: path.cgPath)
-            node.incomingLines.append(line)
-            outgoingLines.append(line)
-            outgoingNodes.append(node)
-            node.incomingNodes.append(self)
-            return line
-        }
-    }
-    
     func remove() {
         outgoingLines.forEach { $0.removeFromSuperlayer() }
         incomingLines.forEach { $0.removeFromSuperlayer() }
