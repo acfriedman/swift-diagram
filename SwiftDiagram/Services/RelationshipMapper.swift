@@ -8,7 +8,7 @@
 import Foundation
 import AppKit
 
-struct RelationshipMapper {
+class RelationshipMapper: DeclarationNodeViewDelegate {
     
     private let contentView: NSView!
     
@@ -22,13 +22,14 @@ struct RelationshipMapper {
         self.contentView = contentView
     }
     
-    mutating func map(_ nodes: [DeclarationNodeView]) {
+    func map(_ nodes: [DeclarationNodeView]) {
         
         nodes.forEach { nodeView in
             let node = nodeView.declarationNode
             nodeIndex[node.name] = nodeView
             node.inheritance.forEach { inheritanceMap[$0, default: []].insert(nodeView) }
             node.usage.forEach { usageMap[$0, default: []].insert(nodeView) }
+            nodeView.delegate = self
         }
         
         
@@ -93,4 +94,18 @@ struct RelationshipMapper {
         let computedEdge = CGPoint(x: endNode.center.x+edgePoint.x, y: endNode.center.y+edgePoint.y)
         return ArrowPath(start: startNode.center, end: computedEdge)
     }
+    
+    
+    // MARK: DeclarationNodeViewDelegate
+    
+    func declarationNodeViewMouseDidDrag(_ nodeView: DeclarationNodeView) {
+        
+        zip(nodeView.outgoingNodes, nodeView.outgoingLines).forEach { node, line in
+            line.path = makeArrowPath(from: node, to: nodeView).cgPath
+        }
+        zip(nodeView.incomingNodes, nodeView.incomingLines).forEach { node, line in
+            line.path = makeArrowPath(from: nodeView, to: node).cgPath
+        }
+    }
 }
+

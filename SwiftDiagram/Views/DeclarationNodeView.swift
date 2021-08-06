@@ -7,6 +7,10 @@
 
 import AppKit
 
+protocol DeclarationNodeViewDelegate: AnyObject {
+    func declarationNodeViewMouseDidDrag(_ nodeView: DeclarationNodeView)
+}
+
 class DeclarationNodeView: RoundedTextView {
     
     var outgoingLines: [CAShapeLayer] = []
@@ -14,6 +18,7 @@ class DeclarationNodeView: RoundedTextView {
     var outgoingNodes: [DeclarationNodeView] = []
     var incomingNodes: [DeclarationNodeView] = []
     var declarationNode: DeclarationNode
+    weak var delegate: DeclarationNodeViewDelegate?
     
     
     var isHighlighted: Bool = false {
@@ -43,6 +48,8 @@ class DeclarationNodeView: RoundedTextView {
         super.init(coder: coder)
     }
     
+    
+    /// Removes the node view and its associated lines from the parent view
     func remove() {
         outgoingLines.forEach { $0.removeFromSuperlayer() }
         incomingLines.forEach { $0.removeFromSuperlayer() }
@@ -51,26 +58,6 @@ class DeclarationNodeView: RoundedTextView {
     
     override func mouseDragged(with event: NSEvent) {
         super.mouseDragged(with: event)
-        zip(outgoingNodes, outgoingLines).forEach { node, line in
-            line.path = makeArrowPath(from: node, to: self).cgPath
-        }
-        zip(incomingNodes, incomingLines).forEach { node, line in
-            line.path = makeArrowPath(from: self, to: node).cgPath
-        }
-    }
-    
-    
-    func makeArrowPath(from startNode: DeclarationNodeView,
-                       to endNode: DeclarationNodeView) -> ArrowPath {
-        
-        var startEndAngle = atan((endNode.center.y - startNode.center.y) / (endNode.center.x - startNode.center.x)) + ((endNode.center.x - startNode.center.x) < 0 ? CGFloat.pi : 0)
-        let degreeToRadian = CGFloat.pi / 180
-        if startEndAngle < 0 {
-            startEndAngle = 360 * degreeToRadian + startEndAngle
-        }
-
-        let edgePoint = endNode.findEdgePoint(angle: startEndAngle)
-        let computedEdge = CGPoint(x: endNode.center.x+edgePoint.x, y: endNode.center.y+edgePoint.y)
-        return ArrowPath(start: startNode.center, end: computedEdge)
+        delegate?.declarationNodeViewMouseDidDrag(self)
     }
 }
