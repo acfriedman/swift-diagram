@@ -16,6 +16,8 @@
 		497649F62688CF5D00293CCB /* Test_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F52688CF5D00293CCB /* Test_1.swift */; };
 		497649F82688CF8800293CCB /* Test_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F72688CF8700293CCB /* Test_2.swift */; };
 		497649FA2688CFB300293CCB /* Test_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F92688CFB300293CCB /* Test_3.swift */; };
+		49B3108E26BECF4D00C9DF20 /* CanvasToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B3108D26BECF4D00C9DF20 /* CanvasToolBar.swift */; };
+		49B3109026BED1E200C9DF20 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B3108F26BED1E200C9DF20 /* MainWindowController.swift */; };
 		49CC407826BC1FDF0000F231 /* RelationshipMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CC407726BC1FDF0000F231 /* RelationshipMapper.swift */; };
 		49D25978265168E40067970A /* CanvasCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D25977265168E40067970A /* CanvasCoordinator.swift */; };
 		49DA116C268FBF2D0083DF05 /* DashedLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA116B268FBF2D0083DF05 /* DashedLine.swift */; };
@@ -79,6 +81,8 @@
 		497649F52688CF5D00293CCB /* Test_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_1.swift; sourceTree = "<group>"; };
 		497649F72688CF8700293CCB /* Test_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_2.swift; sourceTree = "<group>"; };
 		497649F92688CFB300293CCB /* Test_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_3.swift; sourceTree = "<group>"; };
+		49B3108D26BECF4D00C9DF20 /* CanvasToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasToolBar.swift; sourceTree = "<group>"; };
+		49B3108F26BED1E200C9DF20 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		49CC407726BC1FDF0000F231 /* RelationshipMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipMapper.swift; sourceTree = "<group>"; };
 		49D25977265168E40067970A /* CanvasCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasCoordinator.swift; sourceTree = "<group>"; };
 		49DA116B268FBF2D0083DF05 /* DashedLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedLine.swift; sourceTree = "<group>"; };
@@ -199,12 +203,13 @@
 			isa = PBXGroup;
 			children = (
 				49DEF35E2642D56800FD342D /* AppDelegate.swift */,
+				49B3108F26BED1E200C9DF20 /* MainWindowController.swift */,
+				49DEF3642642D56900FD342D /* Main.storyboard */,
 				495E1A4A2654029D00D31649 /* Extensions */,
 				49DEF38E2642D81E00FD342D /* Services */,
 				49ED0F89264971B600A9C9FC /* Model */,
 				49DEF38F2642D82900FD342D /* Views */,
 				49DEF3622642D56900FD342D /* Assets.xcassets */,
-				49DEF3642642D56900FD342D /* Main.storyboard */,
 				49DEF3672642D56900FD342D /* Info.plist */,
 				49DEF3682642D56900FD342D /* SwiftDiagram.entitlements */,
 			);
@@ -251,6 +256,7 @@
 				49DEF3982642E72300FD342D /* RoundedTextView.swift */,
 				49E8FE0D264C15AC00FF60B5 /* DraggableView.swift */,
 				4945BBFD265069C400EF6224 /* CanvasView.swift */,
+				49B3108D26BECF4D00C9DF20 /* CanvasToolBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -417,6 +423,7 @@
 				49EE7CB62655558B002953B7 /* NSBezierPath+Extensions.swift in Sources */,
 				4945BC0326507F2500EF6224 /* SwiftUI+AppKit.swift in Sources */,
 				49EE7CB8265556BC002953B7 /* DeclarationNodeView.swift in Sources */,
+				49B3109026BED1E200C9DF20 /* MainWindowController.swift in Sources */,
 				495E1A492654029700D31649 /* StringProtocol+Extensions.swift in Sources */,
 				49DEF38D2642D81700FD342D /* SwiftViewer.swift in Sources */,
 				49D25978265168E40067970A /* CanvasCoordinator.swift in Sources */,
@@ -426,6 +433,7 @@
 				49CC407826BC1FDF0000F231 /* RelationshipMapper.swift in Sources */,
 				49DA116F268FC5430083DF05 /* SolidLine.swift in Sources */,
 				49ED0F88264971A400A9C9FC /* SwiftNode.swift in Sources */,
+				49B3108E26BECF4D00C9DF20 /* CanvasToolBar.swift in Sources */,
 				4945BBFE265069C400EF6224 /* CanvasView.swift in Sources */,
 				493D636826A5002E00A224A2 /* Arrow.swift in Sources */,
 			);
