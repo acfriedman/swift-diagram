@@ -18,16 +18,11 @@ class MainWindowController: NSWindowController {
     private func configureToolbar()
     {
         if  let unwrappedWindow = window {
-            
-            let newToolbar = NSToolbar(identifier: NSToolbar.Identifier.mainWindowToolbarIdentifier)
-            newToolbar.delegate = self
-            newToolbar.allowsUserCustomization = true
-            newToolbar.autosavesConfiguration = true
-            newToolbar.displayMode = .default
-            newToolbar.centeredItemIdentifier = NSToolbarItem.Identifier.toolbarSearchItem
+            let canvasToolBar = CanvasToolBar()
+            canvasToolBar.delegate = self
             
             unwrappedWindow.titleVisibility = .hidden
-            unwrappedWindow.toolbar = newToolbar
+            unwrappedWindow.toolbar = canvasToolBar
             unwrappedWindow.toolbar?.validateVisibleItems()
         }
     }
@@ -43,6 +38,7 @@ extension MainWindowController: NSToolbarDelegate {
             let searchItem = NSSearchToolbarItem(itemIdentifier: itemIdentifier)
             searchItem.resignsFirstResponderWithCancel = true
             searchItem.searchField.delegate = self
+            searchItem.searchField.action = #selector(doThing(_:))
             searchItem.toolTip = "Search"
             return searchItem
         }
@@ -52,14 +48,6 @@ extension MainWindowController: NSToolbarDelegate {
     
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
         return [
-            NSToolbarItem.Identifier.toolbarItemToggleTitlebarAccessory,
-            NSToolbarItem.Identifier.toolbarItemUserAccounts,
-            NSToolbarItem.Identifier.toolbarItemMoreInfo,
-            NSToolbarItem.Identifier.flexibleSpace,
-            NSToolbarItem.Identifier.toolbarPickerItem,
-            NSToolbarItem.Identifier.flexibleSpace,
-            NSToolbarItem.Identifier.toolbarMoreActions,
-            NSToolbarItem.Identifier.toolbarShareButtonItem,
             NSToolbarItem.Identifier.toolbarSearchItem
         ]
         
@@ -67,12 +55,6 @@ extension MainWindowController: NSToolbarDelegate {
     
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
         return [
-            NSToolbarItem.Identifier.toolbarItemToggleTitlebarAccessory,
-            NSToolbarItem.Identifier.toolbarMoreActions,
-            NSToolbarItem.Identifier.toolbarItemUserAccounts,
-            NSToolbarItem.Identifier.toolbarItemMoreInfo,
-            NSToolbarItem.Identifier.toolbarPickerItem,
-            NSToolbarItem.Identifier.toolbarShareButtonItem,
             NSToolbarItem.Identifier.toolbarSearchItem,
             NSToolbarItem.Identifier.space,
             NSToolbarItem.Identifier.flexibleSpace]
@@ -106,31 +88,8 @@ extension MainWindowController: NSSearchFieldDelegate {
         print("Search field did end receiving input")
         sender.resignFirstResponder()
     }
-}
-
-extension NSToolbar.Identifier {
-    static let mainWindowToolbarIdentifier = NSToolbar.Identifier("MainWindowToolbar")
-}
-
-extension NSToolbarItem.Identifier
-{
-    //  Standard examples of `NSToolbarItem`
-    static let toolbarItemToggleTitlebarAccessory = NSToolbarItem.Identifier("ToolbarToggleTitlebarAccessoryItem")
     
-    //  `visibilityPriority` is set to `.low` for these items to demonstrate how
-    //  to make some items disappear before others when space gets a bit tight.
-    static let toolbarItemMoreInfo = NSToolbarItem.Identifier("ToolbarMoreInfoItem")
-    static let toolbarItemUserAccounts = NSToolbarItem.Identifier("ToolbarUserAccountsItem")
-    
-    /// Example of `NSMenuToolbarItem`
-    static let toolbarMoreActions = NSToolbarItem.Identifier("ToolbarMoreActionsItem")
-    
-    /// Example of `NSSharingServicePickerToolbarItem`
-    static let toolbarShareButtonItem = NSToolbarItem.Identifier(rawValue: "ToolbarShareButtonItem")
-    
-    /// Example of `NSToolbarItemGroup`
-    static let toolbarPickerItem = NSToolbarItem.Identifier("ToolbarPickerItemGroup")
-    
-    /// Example of `NSSearchToolbarItem`
-    static let toolbarSearchItem = NSToolbarItem.Identifier("ToolbarSearchItem")
+    @objc func doThing(_ sender: NSSearchField) {
+        print(sender.stringValue)
+    }
 }

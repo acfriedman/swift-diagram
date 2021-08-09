@@ -8,5 +8,12 @@
 import AppKit
 
 class CanvasToolBar: NSToolbar {
-
+    
+    init() {
+        super.init(identifier: NSToolbar.Identifier.mainWindowToolbarIdentifier)
+        allowsUserCustomization = true
+        autosavesConfiguration = true
+        displayMode = .default
+        centeredItemIdentifier = NSToolbarItem.Identifier.toolbarSearchItem
+    }
 }
