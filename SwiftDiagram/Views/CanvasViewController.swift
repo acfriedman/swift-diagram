@@ -9,7 +9,7 @@ import Cocoa
 import SwiftSyntax
 import SnapKit
 
-class CanvasViewController: NSViewController {
+class CanvasViewController: NSViewController, MainWindowControllerDelegate {
     
     var contentView: NSView!
     var canvasView: CanvasView!
@@ -29,6 +29,8 @@ class CanvasViewController: NSViewController {
     
     override func viewDidAppear() {
         super.viewDidAppear()
+        
+        setWindowControllerDelegate()
         
         FilePicker.presentModal(completion: { [weak self] result in
             
@@ -66,6 +68,13 @@ class CanvasViewController: NSViewController {
         return event
     }
     
+    // MARK: MainWindowControllerDelegate
+    
+    func mainWindowController(_ controller: MainWindowController, didSearchFor text: String) {
+        // Plot node view that matches text
+        print(text)
+    }
+    
     // MARK: Private Methods
     
     private func makeContentView() {
@@ -83,6 +92,14 @@ class CanvasViewController: NSViewController {
             $0.width.equalTo(5000)
             $0.height.equalTo(5000)
         }
+    }
+    
+    private func setWindowControllerDelegate() {
+        guard let windowController = view.window?.windowController as? MainWindowController else {
+            assertionFailure("The view's window is not of type MainWindowController")
+            return
+        }
+        windowController.delegate = self
     }
     
     private func makeNodeViews(from nodes: [DeclarationNode]) -> [DeclarationNodeView] {

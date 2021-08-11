@@ -7,11 +7,16 @@
 
 import AppKit
 
+protocol MainWindowControllerDelegate: AnyObject {
+    func mainWindowController(_ controller: MainWindowController, didSearchFor text: String)
+}
+
 class MainWindowController: NSWindowController {
+    
+    weak var delegate: MainWindowControllerDelegate?
     
     override func windowDidLoad() {
         super.windowDidLoad()
-        
         configureToolbar()
     }
     
@@ -38,7 +43,6 @@ extension MainWindowController: NSToolbarDelegate {
             let searchItem = NSSearchToolbarItem(itemIdentifier: itemIdentifier)
             searchItem.resignsFirstResponderWithCancel = true
             searchItem.searchField.delegate = self
-            searchItem.searchField.action = #selector(doThing(_:))
             searchItem.toolTip = "Search"
             return searchItem
         }
@@ -81,15 +85,18 @@ extension MainWindowController: NSToolbarDelegate {
 
 extension MainWindowController: NSSearchFieldDelegate {
     func searchFieldDidStartSearching(_ sender: NSSearchField) {
-        print("Search field did start receiving input")
+        //
     }
     
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
-        print("Search field did end receiving input")
         sender.resignFirstResponder()
     }
     
-    @objc func doThing(_ sender: NSSearchField) {
-        print(sender.stringValue)
+    func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+        if commandSelector == #selector(insertNewline) {
+            delegate?.mainWindowController(self, didSearchFor: textView.string)
+            textView.string = ""
+        }
+        return true
     }
 }
