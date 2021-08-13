@@ -27,6 +27,11 @@ class CanvasView: NSScrollView {
         setupView()
     }
     
+    func add(_ nodeView: DeclarationNodeView) {
+        nodeViews += [nodeView]
+        documentView?.addSubview(nodeView)
+    }
+    
     private func setupView() {
         verticalScrollElasticity = .allowed
         horizontalScrollElasticity = .allowed

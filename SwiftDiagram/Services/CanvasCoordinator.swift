@@ -10,10 +10,45 @@ import AppKit
 
 struct CanvasCoordinator {
     
-    private var contentView: NSView
+    enum Error: Swift.Error {
+        case noSuchNodeName
+    }
     
-    init(contentView: NSView) {
-        self.contentView = contentView
+    var nodes: [DeclarationNode] = [] {
+        didSet {
+            nodeIndex = nodes.reduce(into: [String: DeclarationNode](), { $0[$1.name] = $1 })
+        }
+    }
+    
+    private var nodeIndex: [String: DeclarationNode] = [:]
+    
+    private var relationshipMapper: RelationshipMapper!
+    
+    private var canvasView: CanvasView
+    
+    private var nodeViewIndex: [String: DeclarationNodeView] = [:]
+    
+    
+    init(canvasView: CanvasView) {
+        self.canvasView = canvasView
+        self.relationshipMapper = RelationshipMapper(canvasView: canvasView)
+    }
+    
+    mutating func plotNode(_ name: String) throws {
+        
+        guard let node = nodeIndex[name] else {
+            throw Error.noSuchNodeName
+        }
+        
+        let frame = CGRect(x: 0, y: 0, width: node.displayWidth, height: node.displayHeight)
+        let nodeView = DeclarationNodeView(frame: frame, node)
+        
+        relationshipMapper.clearAllLines()
+        coordinate(nodeView)
+    }
+    
+    mutating func coordinate(_ node: DeclarationNodeView) {
+        coordinate([node])
     }
     
     mutating func coordinate(_ nodes: [DeclarationNodeView]) {
@@ -21,16 +56,26 @@ struct CanvasCoordinator {
         let area = computeArea(for: nodes)
         let maxX = area/2
         let maxY = area/2
-        let viewCenter = contentView.center
+        let viewCenter = canvasView.documentView!.center
         
         nodes.forEach { nodeView in
             let node = nodeView.declarationNode
-            let plotPoint = NSRect(x: viewCenter.x + CGFloat.random(in: -maxX/2...maxX/2),
-                                   y: viewCenter.y + CGFloat.random(in: -maxY/2...maxY/2),
+            let plotPoint = NSRect(x: viewCenter.x + .random(in: -maxX/2...maxX/2),
+                                   y: viewCenter.y + .random(in: -maxY/2...maxY/2),
                                    width: node.displayWidth,
                                    height: node.displayHeight)
             nodeView.frame = plotPoint
-            contentView.addSubview(nodeView)
+            canvasView.add(nodeView)
+            nodeViewIndex[node.name] = nodeView
+        }
+        
+        relationshipMapper.mapLines(Array(nodeViewIndex.values))
+    }
+    
+    mutating func remove(_ nodes: [DeclarationNodeView]) {
+        nodes.forEach { node in
+            nodeViewIndex.removeValue(forKey: node.declarationNode.name)
+            node.remove()
         }
     }
     

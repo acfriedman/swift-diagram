@@ -10,7 +10,7 @@ import AppKit
 
 class RelationshipMapper: DeclarationNodeViewDelegate {
     
-    private let contentView: NSView!
+    private let canvasView: CanvasView!
     
     private var nodeIndex: [String: DeclarationNodeView] = [:]
     
@@ -18,11 +18,11 @@ class RelationshipMapper: DeclarationNodeViewDelegate {
     
     private var usageMap: [String: Set<DeclarationNodeView>] = [:]
     
-    init(contentView: NSView) {
-        self.contentView = contentView
+    init(canvasView: CanvasView) {
+        self.canvasView = canvasView
     }
     
-    func map(_ nodes: [DeclarationNodeView]) {
+    func mapLines(_ nodes: [DeclarationNodeView]) {
         
         nodes.forEach { nodeView in
             let node = nodeView.declarationNode
@@ -35,6 +35,13 @@ class RelationshipMapper: DeclarationNodeViewDelegate {
         
         drawInheritanceLines()
         drawUsageLines()
+    }
+    
+    func clearAllLines() {
+        nodeIndex = [:]
+        inheritanceMap = [:]
+        usageMap = [:]
+        nodeIndex.values.forEach { $0.removeLines() }
     }
     
     private func drawInheritanceLines() {
@@ -55,7 +62,7 @@ class RelationshipMapper: DeclarationNodeViewDelegate {
                 node.incomingNodes.append(nodeView)
                 return line
             }
-            .forEach { contentView.layer?.addSublayer($0) }
+            .forEach { canvasView.documentView?.layer?.addSublayer($0) }
         }
     }
     
@@ -77,7 +84,7 @@ class RelationshipMapper: DeclarationNodeViewDelegate {
                 node.incomingNodes.append(nodeView)
                 return line
             }
-            .forEach { contentView.layer?.addSublayer($0) }
+            .forEach { canvasView.documentView?.layer?.addSublayer($0) }
         }
     }
     

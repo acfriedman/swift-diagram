@@ -15,16 +15,13 @@ class CanvasViewController: NSViewController, MainWindowControllerDelegate {
     var canvasView: CanvasView!
     
     private var coordinator: CanvasCoordinator!
-    
-    private var relationshipMapper: RelationshipMapper!
-        
+            
     override func viewDidLoad() {
         super.viewDidLoad()
         makeContentView()
         makeCanvasView()
         
-        coordinator = CanvasCoordinator(contentView: contentView)
-        relationshipMapper = RelationshipMapper(contentView: contentView)
+        coordinator = CanvasCoordinator(canvasView: canvasView)
     }
     
     override func viewDidAppear() {
@@ -39,13 +36,7 @@ class CanvasViewController: NSViewController, MainWindowControllerDelegate {
             switch result {
             case .success(let urls):
                 do {
-                    
-                    let nodes = try SwiftViewer.parse(urls)
-                    let nodeViews = self.makeNodeViews(from: nodes)
-                    self.canvasView.nodeViews = nodeViews
-                    self.coordinator.coordinate(nodeViews)
-                    self.relationshipMapper.map(nodeViews)
-                    
+                    self.coordinator.nodes = try SwiftViewer.parse(urls)
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -63,7 +54,7 @@ class CanvasViewController: NSViewController, MainWindowControllerDelegate {
     
     func myKeyDownEvent(event: NSEvent) -> NSEvent {
         if event.keyCode == 51 {
-            canvasView.selectedNodes.forEach { $0.remove() }
+            coordinator.remove(canvasView.selectedNodes)
         }
         return event
     }
@@ -71,8 +62,11 @@ class CanvasViewController: NSViewController, MainWindowControllerDelegate {
     // MARK: MainWindowControllerDelegate
     
     func mainWindowController(_ controller: MainWindowController, didSearchFor text: String) {
-        // Plot node view that matches text
-        print(text)
+        do {
+            try coordinator.plotNode(text)
+        } catch {
+            print("Failed to plot searched node \(text): \(error)")
+        }
     }
     
     // MARK: Private Methods
@@ -100,13 +94,6 @@ class CanvasViewController: NSViewController, MainWindowControllerDelegate {
             return
         }
         windowController.delegate = self
-    }
-    
-    private func makeNodeViews(from nodes: [DeclarationNode]) -> [DeclarationNodeView] {
-        return nodes.map {
-            let frame = CGRect(x: 0, y: 0, width: $0.displayWidth, height: $0.displayHeight)
-            return DeclarationNodeView(frame: frame, $0)
-        }
     }
 }
 

@@ -56,6 +56,11 @@ class DeclarationNodeView: RoundedTextView {
         removeFromSuperview()
     }
     
+    func removeLines() {
+        outgoingLines.forEach { $0.removeFromSuperlayer() }
+        incomingLines.forEach { $0.removeFromSuperlayer() }
+    }
+    
     override func mouseDragged(with event: NSEvent) {
         super.mouseDragged(with: event)
         delegate?.declarationNodeViewMouseDidDrag(self)
