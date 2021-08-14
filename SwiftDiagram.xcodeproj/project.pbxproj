@@ -16,6 +16,7 @@
 		497649F62688CF5D00293CCB /* Test_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F52688CF5D00293CCB /* Test_1.swift */; };
 		497649F82688CF8800293CCB /* Test_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F72688CF8700293CCB /* Test_2.swift */; };
 		497649FA2688CFB300293CCB /* Test_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F92688CFB300293CCB /* Test_3.swift */; };
+		49911B7926C8383500BB8926 /* NodeViewMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49911B7826C8383500BB8926 /* NodeViewMenu.swift */; };
 		49B3108E26BECF4D00C9DF20 /* CanvasToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B3108D26BECF4D00C9DF20 /* CanvasToolBar.swift */; };
 		49B3109026BED1E200C9DF20 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B3108F26BED1E200C9DF20 /* MainWindowController.swift */; };
 		49B3109226C1742300C9DF20 /* NSToolbar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B3109126C1742300C9DF20 /* NSToolbar+Extensions.swift */; };
@@ -82,6 +83,7 @@
 		497649F52688CF5D00293CCB /* Test_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_1.swift; sourceTree = "<group>"; };
 		497649F72688CF8700293CCB /* Test_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_2.swift; sourceTree = "<group>"; };
 		497649F92688CFB300293CCB /* Test_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_3.swift; sourceTree = "<group>"; };
+		49911B7826C8383500BB8926 /* NodeViewMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeViewMenu.swift; sourceTree = "<group>"; };
 		49B3108D26BECF4D00C9DF20 /* CanvasToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasToolBar.swift; sourceTree = "<group>"; };
 		49B3108F26BED1E200C9DF20 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		49B3109126C1742300C9DF20 /* NSToolbar+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbar+Extensions.swift"; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 			children = (
 				49DA116D268FC2380083DF05 /* Lines */,
 				4945BC0426507F2D00EF6224 /* Utilities */,
+				49911B7826C8383500BB8926 /* NodeViewMenu.swift */,
 				49DEF3602642D56800FD342D /* CanvasViewController.swift */,
 				49EE7CB7265556BC002953B7 /* DeclarationNodeView.swift */,
 				49DEF3982642E72300FD342D /* RoundedTextView.swift */,
@@ -438,6 +441,7 @@
 				49DA116F268FC5430083DF05 /* SolidLine.swift in Sources */,
 				49ED0F88264971A400A9C9FC /* SwiftNode.swift in Sources */,
 				49B3108E26BECF4D00C9DF20 /* CanvasToolBar.swift in Sources */,
+				49911B7926C8383500BB8926 /* NodeViewMenu.swift in Sources */,
 				4945BBFE265069C400EF6224 /* CanvasView.swift in Sources */,
 				493D636826A5002E00A224A2 /* Arrow.swift in Sources */,
 			);

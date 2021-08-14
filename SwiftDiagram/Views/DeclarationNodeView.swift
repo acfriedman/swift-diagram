@@ -41,6 +41,12 @@ class DeclarationNodeView: RoundedTextView {
         wantsLayer = true
         layer?.backgroundColor = node.displayColor.cgColor
         text = node.name
+        
+        let nodeViewMenu = NodeViewMenu()
+        nodeViewMenu.inheritance = Array(declarationNode.inheritance)
+        nodeViewMenu.usage = Array(declarationNode.usage)
+        nodeViewMenu.children = Array(declarationNode.children)
+        menu = nodeViewMenu
     }
     
     required init?(coder: NSCoder) {
