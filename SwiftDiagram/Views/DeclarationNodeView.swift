@@ -18,8 +18,10 @@ class DeclarationNodeView: RoundedTextView {
     var outgoingNodes: [DeclarationNodeView] = []
     var incomingNodes: [DeclarationNodeView] = []
     var declarationNode: DeclarationNode
+    
     weak var delegate: DeclarationNodeViewDelegate?
     
+    weak var relationshipMenu: NodeViewMenu!
     
     var isHighlighted: Bool = false {
         didSet {
@@ -47,6 +49,7 @@ class DeclarationNodeView: RoundedTextView {
         nodeViewMenu.usage = Array(declarationNode.usage)
         nodeViewMenu.children = Array(declarationNode.children)
         menu = nodeViewMenu
+        relationshipMenu = nodeViewMenu
     }
     
     required init?(coder: NSCoder) {

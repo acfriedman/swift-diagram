@@ -8,10 +8,11 @@
 import Foundation
 import AppKit
 
-struct CanvasCoordinator {
+class CanvasCoordinator: NodeViewMenuDelegate {
     
     enum Error: Swift.Error {
         case noSuchNodeName
+        case duplicatePlotAttempt
     }
     
     var nodes: [DeclarationNode] = [] {
@@ -34,24 +35,29 @@ struct CanvasCoordinator {
         self.relationshipMapper = RelationshipMapper(canvasView: canvasView)
     }
     
-    mutating func plotNode(_ name: String) throws {
+    func plotNode(_ name: String) throws {
         
         guard let node = nodeIndex[name] else {
             throw Error.noSuchNodeName
         }
         
+        guard nodeViewIndex[name] == nil else {
+            throw Error.duplicatePlotAttempt
+        }
+        
         let frame = CGRect(x: 0, y: 0, width: node.displayWidth, height: node.displayHeight)
         let nodeView = DeclarationNodeView(frame: frame, node)
+        nodeView.relationshipMenu.nodeViewDelegate = self
         
         relationshipMapper.clearAllLines()
         coordinate(nodeView)
     }
     
-    mutating func coordinate(_ node: DeclarationNodeView) {
+    func coordinate(_ node: DeclarationNodeView) {
         coordinate([node])
     }
     
-    mutating func coordinate(_ nodes: [DeclarationNodeView]) {
+    func coordinate(_ nodes: [DeclarationNodeView]) {
         
         let area = computeArea(for: nodes)
         let maxX = area/2
@@ -72,7 +78,7 @@ struct CanvasCoordinator {
         relationshipMapper.mapLines(Array(nodeViewIndex.values))
     }
     
-    mutating func remove(_ nodes: [DeclarationNodeView]) {
+    func remove(_ nodes: [DeclarationNodeView]) {
         nodes.forEach { node in
             nodeViewIndex.removeValue(forKey: node.declarationNode.name)
             node.remove()
@@ -83,5 +89,15 @@ struct CanvasCoordinator {
         guard let node = nodes.first else { return 0.0 }
         let maxDimension = max(node.frame.width, node.frame.height)
         return maxDimension * CGFloat(nodes.count)
+    }
+    
+    // MARK: NodeViewMenuDelegate
+    
+    func nodeViewMenu(_ menu: NodeViewMenu, didSelectItem menuItem: NSMenuItem) {
+        do {
+            try plotNode(menuItem.title)
+        } catch {
+            print("Failed to plot selected menu item with error: \(error)")
+        }
     }
 }

@@ -7,14 +7,21 @@
 
 import AppKit
 
+protocol NodeViewMenuDelegate: AnyObject {
+    func nodeViewMenu(_ menu: NodeViewMenu, didSelectItem menuItem: NSMenuItem)
+}
+
 class NodeViewMenu: NSMenu {
     
+    weak var nodeViewDelegate: NodeViewMenuDelegate?
     
     var inheritance: [String] = [] {
         didSet {
             let inheritanceMenu = NSMenu(title: "Inheritance")
             inheritanceMenu.items = inheritance.map {
-                NSMenuItem(title: $0, action: nil, keyEquivalent: "")
+                let item = NSMenuItem(title: $0, action: #selector(selectMenuItem(_:)), keyEquivalent: "")
+                item.target = self
+                return item
             }
             inheritanceMenuItem.submenu = inheritanceMenu
             inheritanceMenuItem.isEnabled = inheritance.count > 0
@@ -25,7 +32,9 @@ class NodeViewMenu: NSMenu {
         didSet {
             let usageMenu = NSMenu(title: "Usage")
             usageMenu.items = usage.map {
-                NSMenuItem(title: $0, action: nil, keyEquivalent: "")
+                let item = NSMenuItem(title: $0, action: #selector(selectMenuItem(_:)), keyEquivalent: "")
+                item.target = self
+                return item
             }
             usageMenuItem.submenu = usageMenu
             usageMenuItem.isEnabled = usage.count > 0
@@ -36,7 +45,9 @@ class NodeViewMenu: NSMenu {
         didSet {
             let childrenMenu = NSMenu(title: "Children")
             childrenMenu.items = children.map {
-                NSMenuItem(title: $0, action: nil, keyEquivalent: "")
+                let item = NSMenuItem(title: $0, action: #selector(selectMenuItem(_:)), keyEquivalent: "")
+                item.target = self
+                return item
             }
             childrenMenuItem.submenu = childrenMenu
             childrenMenuItem.isEnabled = children.count > 0
@@ -62,11 +73,15 @@ class NodeViewMenu: NSMenu {
     private func initView() {
         inheritanceMenuItem = NSMenuItem(title: "Inheritance", action: nil, keyEquivalent: "")
         addItem(inheritanceMenuItem)
-        
+                
         usageMenuItem = NSMenuItem(title: "Usage", action: nil, keyEquivalent: "")
         addItem(usageMenuItem)
         
         childrenMenuItem = NSMenuItem(title: "Children", action: nil, keyEquivalent: "")
         addItem(childrenMenuItem)
+    }
+    
+    @objc func selectMenuItem(_ menuItem: NSMenuItem) {
+        nodeViewDelegate?.nodeViewMenu(self, didSelectItem: menuItem)
     }
 }
