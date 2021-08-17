@@ -8,7 +8,7 @@
 import Foundation
 import AppKit
 
-class CanvasCoordinator: NodeViewMenuDelegate {
+class CanvasCoordinator: DeclarationNodeViewDelegate {
     
     enum Error: Swift.Error {
         case noSuchNodeName
@@ -47,7 +47,7 @@ class CanvasCoordinator: NodeViewMenuDelegate {
         
         let frame = CGRect(x: 0, y: 0, width: node.displayWidth, height: node.displayHeight)
         let nodeView = DeclarationNodeView(frame: frame, node)
-        nodeView.relationshipMenu.nodeViewDelegate = self
+        nodeView.delegate = self
         
         relationshipMapper.clearAllLines()
         coordinate(nodeView)
@@ -91,11 +91,15 @@ class CanvasCoordinator: NodeViewMenuDelegate {
         return maxDimension * CGFloat(nodes.count)
     }
     
-    // MARK: NodeViewMenuDelegate
+    // MARK: DeclarationNodeViewDelegate
     
-    func nodeViewMenu(_ menu: NodeViewMenu, didSelectItem menuItem: NSMenuItem) {
+    func nodeViewMouseDidDrag(_ nodeView: DeclarationNodeView) {
+        relationshipMapper.updatePaths(for: nodeView)
+    }
+    
+    func nodeView(_ nodeView: DeclarationNodeView, didSelectRelation nodeTitle: String) {
         do {
-            try plotNode(menuItem.title)
+            try plotNode(nodeTitle)
         } catch {
             print("Failed to plot selected menu item with error: \(error)")
         }

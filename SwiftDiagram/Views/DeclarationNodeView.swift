@@ -8,10 +8,11 @@
 import AppKit
 
 protocol DeclarationNodeViewDelegate: AnyObject {
-    func declarationNodeViewMouseDidDrag(_ nodeView: DeclarationNodeView)
+    func nodeViewMouseDidDrag(_ nodeView: DeclarationNodeView)
+    func nodeView(_ nodeView: DeclarationNodeView, didSelectRelation nodeTitle: String)
 }
 
-class DeclarationNodeView: RoundedTextView {
+class DeclarationNodeView: RoundedTextView, NodeViewMenuDelegate {
     
     var outgoingLines: [CAShapeLayer] = []
     var incomingLines: [CAShapeLayer] = []
@@ -48,6 +49,7 @@ class DeclarationNodeView: RoundedTextView {
         nodeViewMenu.inheritance = Array(declarationNode.inheritance)
         nodeViewMenu.usage = Array(declarationNode.usage)
         nodeViewMenu.children = Array(declarationNode.children)
+        nodeViewMenu.nodeViewDelegate = self
         menu = nodeViewMenu
         relationshipMenu = nodeViewMenu
     }
@@ -72,6 +74,12 @@ class DeclarationNodeView: RoundedTextView {
     
     override func mouseDragged(with event: NSEvent) {
         super.mouseDragged(with: event)
-        delegate?.declarationNodeViewMouseDidDrag(self)
+        delegate?.nodeViewMouseDidDrag(self)
+    }
+    
+    // MARK: NodeViewMenuDelegate
+    
+    func nodeViewMenu(_ menu: NodeViewMenu, didSelectItem menuItem: NSMenuItem) {
+        delegate?.nodeView(self, didSelectRelation: menuItem.title)
     }
 }

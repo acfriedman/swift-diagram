@@ -8,7 +8,7 @@
 import Foundation
 import AppKit
 
-class RelationshipMapper: DeclarationNodeViewDelegate {
+class RelationshipMapper {
     
     private let canvasView: CanvasView!
     
@@ -29,7 +29,6 @@ class RelationshipMapper: DeclarationNodeViewDelegate {
             nodeIndex[node.name] = nodeView
             node.inheritance.forEach { inheritanceMap[$0, default: []].insert(nodeView) }
             node.usage.forEach { usageMap[$0, default: []].insert(nodeView) }
-            nodeView.delegate = self
         }
         
         
@@ -42,6 +41,15 @@ class RelationshipMapper: DeclarationNodeViewDelegate {
         inheritanceMap = [:]
         usageMap = [:]
         nodeIndex.values.forEach { $0.removeLines() }
+    }
+    
+    func updatePaths(for nodeView: DeclarationNodeView) {
+        zip(nodeView.outgoingNodes, nodeView.outgoingLines).forEach { node, line in
+            line.path = makeArrowPath(from: node, to: nodeView).cgPath
+        }
+        zip(nodeView.incomingNodes, nodeView.incomingLines).forEach { node, line in
+            line.path = makeArrowPath(from: nodeView, to: node).cgPath
+        }
     }
     
     private func drawInheritanceLines() {
@@ -100,19 +108,6 @@ class RelationshipMapper: DeclarationNodeViewDelegate {
         let edgePoint = endNode.findEdgePoint(angle: startEndAngle)
         let computedEdge = CGPoint(x: endNode.center.x+edgePoint.x, y: endNode.center.y+edgePoint.y)
         return ArrowPath(start: startNode.center, end: computedEdge)
-    }
-    
-    
-    // MARK: DeclarationNodeViewDelegate
-    
-    func declarationNodeViewMouseDidDrag(_ nodeView: DeclarationNodeView) {
-        
-        zip(nodeView.outgoingNodes, nodeView.outgoingLines).forEach { node, line in
-            line.path = makeArrowPath(from: node, to: nodeView).cgPath
-        }
-        zip(nodeView.incomingNodes, nodeView.incomingLines).forEach { node, line in
-            line.path = makeArrowPath(from: nodeView, to: node).cgPath
-        }
     }
 }
 
