@@ -45,10 +45,7 @@ class DeclarationNodeView: RoundedTextView, NodeViewMenuDelegate {
         layer?.backgroundColor = node.displayColor.cgColor
         text = node.name
         
-        let nodeViewMenu = NodeViewMenu()
-        nodeViewMenu.inheritance = Array(declarationNode.inheritance)
-        nodeViewMenu.usage = Array(declarationNode.usage)
-        nodeViewMenu.children = Array(declarationNode.children)
+        let nodeViewMenu = NodeViewMenu(node: node)
         nodeViewMenu.nodeViewDelegate = self
         menu = nodeViewMenu
         relationshipMenu = nodeViewMenu

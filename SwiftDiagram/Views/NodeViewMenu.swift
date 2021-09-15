@@ -14,71 +14,37 @@ protocol NodeViewMenuDelegate: AnyObject {
 class NodeViewMenu: NSMenu {
     
     weak var nodeViewDelegate: NodeViewMenuDelegate?
-    
-    var inheritance: [String] = [] {
+            
+    var menusForNode: ((_ node: DeclarationNode) -> [NSMenu])? {
         didSet {
-            let inheritanceMenu = NSMenu(title: "Inheritance")
-            inheritanceMenu.items = inheritance.map {
-                let item = NSMenuItem(title: $0, action: #selector(selectMenuItem(_:)), keyEquivalent: "")
-                item.target = self
-                return item
+            
+            guard let menus = menusForNode?(node) else {
+                print("WARN: No data provided for menu at index")
+                return
             }
-            inheritanceMenuItem.submenu = inheritanceMenu
-            inheritanceMenuItem.isEnabled = inheritance.count > 0
+            
+            menus.forEach { menu in
+                menu.items.forEach {
+                    $0.action = #selector(selectMenuItem(_:))
+                    $0.target = self
+                }
+                let menuItem = NSMenuItem(title: menu.title, action: nil, keyEquivalent: "")
+                menuItem.submenu = menu
+                addItem(menuItem)
+            }
         }
     }
     
-    var usage: [String] = [] {
-        didSet {
-            let usageMenu = NSMenu(title: "Usage")
-            usageMenu.items = usage.map {
-                let item = NSMenuItem(title: $0, action: #selector(selectMenuItem(_:)), keyEquivalent: "")
-                item.target = self
-                return item
-            }
-            usageMenuItem.submenu = usageMenu
-            usageMenuItem.isEnabled = usage.count > 0
-        }
+    private let node: DeclarationNode
+    
+    init(node: DeclarationNode) {
+        self.node = node
+        super.init(title: "")
     }
     
-    var children: [String] = [] {
-        didSet {
-            let childrenMenu = NSMenu(title: "Children")
-            childrenMenu.items = children.map {
-                let item = NSMenuItem(title: $0, action: #selector(selectMenuItem(_:)), keyEquivalent: "")
-                item.target = self
-                return item
-            }
-            childrenMenuItem.submenu = childrenMenu
-            childrenMenuItem.isEnabled = children.count > 0
-        }
-    }
-    
-    private var inheritanceMenuItem: NSMenuItem!
-    
-    private var usageMenuItem: NSMenuItem!
-    
-    private var childrenMenuItem: NSMenuItem!
-    
-    override init(title: String) {
-        super.init(title: title)
-        initView()
-    }
-    
+    @available(*, unavailable)
     required init(coder: NSCoder) {
-        super.init(coder: coder)
-        initView()
-    }
-    
-    private func initView() {
-        inheritanceMenuItem = NSMenuItem(title: "Inheritance", action: nil, keyEquivalent: "")
-        addItem(inheritanceMenuItem)
-                
-        usageMenuItem = NSMenuItem(title: "Usage", action: nil, keyEquivalent: "")
-        addItem(usageMenuItem)
-        
-        childrenMenuItem = NSMenuItem(title: "Children", action: nil, keyEquivalent: "")
-        addItem(childrenMenuItem)
+        fatalError()
     }
     
     @objc func selectMenuItem(_ menuItem: NSMenuItem) {

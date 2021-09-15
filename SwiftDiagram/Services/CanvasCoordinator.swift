@@ -51,6 +51,33 @@ class CanvasCoordinator: DeclarationNodeViewDelegate {
         
         relationshipMapper.clearAllLines()
         coordinate(nodeView)
+        
+        nodeView.relationshipMenu.menusForNode = { node in
+            
+            let inheritanceMenu = NSMenu(title: "Inheritance")
+            inheritanceMenu.items = node.inheritance.map { node in
+                let item = NSMenuItem()
+                item.title = node
+                return item
+            }
+            
+            let usageMenu = NSMenu(title: "Usage")
+            usageMenu.items = node.usage.map { node in
+                let item = NSMenuItem()
+                item.title = node
+                return item
+            }
+            
+            let childrenMenu = NSMenu(title: "Children")
+            childrenMenu.items = node.children.map { node in
+                let item = NSMenuItem()
+                item.title = node
+                return item
+            }
+            
+            
+            return [inheritanceMenu, usageMenu, childrenMenu]
+        }
     }
     
     func coordinate(_ node: DeclarationNodeView) {
