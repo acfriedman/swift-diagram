@@ -74,7 +74,9 @@ struct SwiftViewer {
             }
         }
         
-        return constructChildRelationships(for: nodes)
+        let childRelationshipNodes = constructChildRelationships(for: nodes)
+        let usedByRelationshipNodes = constructUsedByRelationships(for: childRelationshipNodes)
+        return usedByRelationshipNodes
     }
     
     private static func constructChildRelationships(for nodes: [DeclarationNode]) -> [DeclarationNode] {
@@ -84,6 +86,19 @@ struct SwiftViewer {
         nodes.forEach { node in
             node.inheritance.forEach { parent in
                 map[parent]?.add(child: node)
+            }
+        }
+        
+        return Array(map.values)
+    }
+    
+    private static func constructUsedByRelationships(for nodes: [DeclarationNode]) -> [DeclarationNode] {
+        
+        var map = nodes.reduce(into: [String: DeclarationNode](), { $0[$1.name] = $1 })
+        
+        nodes.forEach { node in
+            node.usage.forEach { parent in
+                map[parent]?.add(usedBy: node.name)
             }
         }
         

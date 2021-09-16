@@ -20,9 +20,11 @@ protocol DeclarationNode: CustomDebugStringConvertible {
     var inheritance: Set<String> { get }
     var children: Set<String> { get }
     var usage: Set<String> { get }
+    var usedBy: Set<String> { get }
     
     mutating func add(child: DeclarationNode)
     mutating func add(use: String)
+    mutating func add(usedBy: String)
 }
 
 extension DeclarationNode {
@@ -44,12 +46,13 @@ extension DeclarationNode {
 }
 
 struct ClassNode: DeclarationNode {
-    
+
     var displayColor: NSColor { .red }
     var name: String
     private(set) var inheritance: Set<String> = []
     private(set) var children: Set<String> = []
     private(set) var usage: Set<String> = []
+    private(set) var usedBy: Set<String> = []
     
     mutating func add(child: DeclarationNode) {
         children.insert(child.name)
@@ -57,6 +60,10 @@ struct ClassNode: DeclarationNode {
     
     mutating func add(use: String) {
         usage.insert(use)
+    }
+
+    mutating func add(usedBy: String) {
+        self.usedBy.insert(usedBy)
     }
 }
 
@@ -67,6 +74,7 @@ struct StructNode: DeclarationNode {
     private(set) var inheritance: Set<String> = []
     private(set) var children: Set<String> = []
     private(set) var usage: Set<String> = []
+    private(set) var usedBy: Set<String> = []
     
     mutating func add(child: DeclarationNode) {
         children.insert(child.name)
@@ -74,6 +82,10 @@ struct StructNode: DeclarationNode {
     
     mutating func add(use: String) {
         usage.insert(use)
+    }
+    
+    mutating func add(usedBy: String) {
+        self.usedBy.insert(usedBy)
     }
 }
 
@@ -84,6 +96,7 @@ struct ProtocolNode: DeclarationNode {
     private(set) var inheritance: Set<String> = []
     private(set) var children: Set<String> = []
     private(set) var usage: Set<String> = []
+    private(set) var usedBy: Set<String> = []
     
     mutating func add(child: DeclarationNode) {
         children.insert(child.name)
@@ -92,25 +105,31 @@ struct ProtocolNode: DeclarationNode {
     mutating func add(use: String) {
         usage.insert(use)
     }
+    
+    mutating func add(usedBy: String) {
+        self.usedBy.insert(usedBy)
+    }
 }
 
 struct NullNode: DeclarationNode {
     
     var name: String { "Null" }
-    
     var displayColor: NSColor { .black }
     
     private(set) var inheritance: Set<String> = []
-    
     private(set) var children: Set<String> = []
-    
     private(set) var usage: Set<String> = []
+    private(set) var usedBy: Set<String> = []
     
     mutating func add(child: DeclarationNode) {
         //
     }
     
     mutating func add(use: String) {
+        //
+    }
+    
+    mutating func add(usedBy: String) {
         //
     }
 }
