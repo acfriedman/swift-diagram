@@ -17,6 +17,7 @@
 		497649F82688CF8800293CCB /* Test_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F72688CF8700293CCB /* Test_2.swift */; };
 		497649FA2688CFB300293CCB /* Test_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F92688CFB300293CCB /* Test_3.swift */; };
 		49911B7926C8383500BB8926 /* NodeViewMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49911B7826C8383500BB8926 /* NodeViewMenu.swift */; };
+		49AD8C0726F3896500C830AE /* lib_InternalSwiftSyntaxParser.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 49AD8C0626F3896500C830AE /* lib_InternalSwiftSyntaxParser.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		49B3108E26BECF4D00C9DF20 /* CanvasToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B3108D26BECF4D00C9DF20 /* CanvasToolBar.swift */; };
 		49B3109026BED1E200C9DF20 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B3108F26BED1E200C9DF20 /* MainWindowController.swift */; };
 		49B3109226C1742300C9DF20 /* NSToolbar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B3109126C1742300C9DF20 /* NSToolbar+Extensions.swift */; };
@@ -34,7 +35,6 @@
 		49DEF38D2642D81700FD342D /* SwiftViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF38B2642D81700FD342D /* SwiftViewer.swift */; };
 		49DEF3922642D89400FD342D /* SwiftSyntax in Frameworks */ = {isa = PBXBuildFile; productRef = 49DEF3912642D89400FD342D /* SwiftSyntax */; };
 		49DEF3952642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49DEF3942642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib */; };
-		49DEF3962642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 49DEF3942642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		49DEF3992642E72300FD342D /* RoundedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DEF3982642E72300FD342D /* RoundedTextView.swift */; };
 		49E8FE0E264C15AC00FF60B5 /* DraggableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8FE0D264C15AC00FF60B5 /* DraggableView.swift */; };
 		49ED0F88264971A400A9C9FC /* SwiftNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49ED0F87264971A400A9C9FC /* SwiftNode.swift */; };
@@ -67,7 +67,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				49DEF3962642D8BB00FD342D /* lib_InternalSwiftSyntaxParser.dylib in Embed Libraries */,
+				49AD8C0726F3896500C830AE /* lib_InternalSwiftSyntaxParser.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +84,7 @@
 		497649F72688CF8700293CCB /* Test_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_2.swift; sourceTree = "<group>"; };
 		497649F92688CFB300293CCB /* Test_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_3.swift; sourceTree = "<group>"; };
 		49911B7826C8383500BB8926 /* NodeViewMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeViewMenu.swift; sourceTree = "<group>"; };
+		49AD8C0626F3896500C830AE /* lib_InternalSwiftSyntaxParser.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = lib_InternalSwiftSyntaxParser.dylib; sourceTree = "<group>"; };
 		49B3108D26BECF4D00C9DF20 /* CanvasToolBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasToolBar.swift; sourceTree = "<group>"; };
 		49B3108F26BED1E200C9DF20 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		49B3109126C1742300C9DF20 /* NSToolbar+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSToolbar+Extensions.swift"; sourceTree = "<group>"; };
@@ -186,6 +187,7 @@
 		49DEF3522642D56800FD342D = {
 			isa = PBXGroup;
 			children = (
+				49AD8C0626F3896500C830AE /* lib_InternalSwiftSyntaxParser.dylib */,
 				49DEF35D2642D56800FD342D /* SwiftDiagram */,
 				49DEF3702642D56900FD342D /* SwiftDiagramTests */,
 				49DEF37B2642D56900FD342D /* SwiftDiagramUITests */,
