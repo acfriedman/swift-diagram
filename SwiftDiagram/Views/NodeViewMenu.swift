@@ -17,7 +17,7 @@ class NodeViewMenu: NSMenu {
     
     var inheritance: [String] = [] {
         didSet {
-            let inheritanceMenu = NSMenu(title: "Inheritance")
+            let inheritanceMenu = NSMenu(title: "Parents")
             inheritanceMenu.items = inheritance.map {
                 let item = NSMenuItem(title: $0, action: #selector(selectMenuItem(_:)), keyEquivalent: "")
                 item.target = self
@@ -30,7 +30,7 @@ class NodeViewMenu: NSMenu {
     
     var usage: [String] = [] {
         didSet {
-            let usageMenu = NSMenu(title: "Usage")
+            let usageMenu = NSMenu(title: "Uses")
             usageMenu.items = usage.map {
                 let item = NSMenuItem(title: $0, action: #selector(selectMenuItem(_:)), keyEquivalent: "")
                 item.target = self
@@ -54,11 +54,26 @@ class NodeViewMenu: NSMenu {
         }
     }
     
+    var usedBy: [String] = [] {
+        didSet {
+            let usedByMenu = NSMenu(title: "Used By")
+            usedByMenu.items = usedBy.map {
+                let item = NSMenuItem(title: $0, action: #selector(selectMenuItem(_:)), keyEquivalent: "")
+                item.target = self
+                return item
+            }
+            usedByMenuItem.submenu = usedByMenu
+            usedByMenuItem.isEnabled = usedBy.count > 0
+        }
+    }
+    
     private var inheritanceMenuItem: NSMenuItem!
     
     private var usageMenuItem: NSMenuItem!
     
     private var childrenMenuItem: NSMenuItem!
+    
+    private var usedByMenuItem: NSMenuItem!
     
     override init(title: String) {
         super.init(title: title)
@@ -71,14 +86,17 @@ class NodeViewMenu: NSMenu {
     }
     
     private func initView() {
-        inheritanceMenuItem = NSMenuItem(title: "Inheritance", action: nil, keyEquivalent: "")
+        inheritanceMenuItem = NSMenuItem(title: "Parents", action: nil, keyEquivalent: "")
         addItem(inheritanceMenuItem)
-                
-        usageMenuItem = NSMenuItem(title: "Usage", action: nil, keyEquivalent: "")
-        addItem(usageMenuItem)
         
         childrenMenuItem = NSMenuItem(title: "Children", action: nil, keyEquivalent: "")
         addItem(childrenMenuItem)
+                
+        usageMenuItem = NSMenuItem(title: "Uses", action: nil, keyEquivalent: "")
+        addItem(usageMenuItem)
+        
+        usedByMenuItem = NSMenuItem(title: "Used By", action: nil, keyEquivalent: "")
+        addItem(usedByMenuItem)
     }
     
     @objc func selectMenuItem(_ menuItem: NSMenuItem) {

@@ -49,6 +49,7 @@ class DeclarationNodeView: RoundedTextView, NodeViewMenuDelegate {
         nodeViewMenu.inheritance = Array(declarationNode.inheritance)
         nodeViewMenu.usage = Array(declarationNode.usage)
         nodeViewMenu.children = Array(declarationNode.children)
+        nodeViewMenu.usedBy = Array(declarationNode.usedBy)
         nodeViewMenu.nodeViewDelegate = self
         menu = nodeViewMenu
         relationshipMenu = nodeViewMenu
