@@ -31,6 +31,7 @@ struct SwiftViewer {
         }
         
         var nodes: [DeclarationNode] = []
+        var extensions: [(String, [String])] = []
         
         for syntax in declSyntax {
             
@@ -69,11 +70,20 @@ struct SwiftViewer {
                 typeCollector.walk(syntax)
                 nodes += [typeCollector.declNode]
                 
+            case let syntax as ExtensionDeclSyntax:
+                
+                let inheritance = syntax.inheritanceClause?
+                    .inheritedTypeCollection
+                    .map { $0.typeName.withoutTrivia().description
+                    } ?? []
+                extensions += [(syntax.extendedType.description, inheritance)]
+                
             default:
                 break
             }
         }
         
+        nodes = constructParentRelationships(for: nodes, from: extensions)
         let childRelationshipNodes = constructChildRelationships(for: nodes)
         let usedByRelationshipNodes = constructUsedByRelationships(for: childRelationshipNodes)
         return usedByRelationshipNodes
@@ -87,6 +97,16 @@ struct SwiftViewer {
             node.inheritance.forEach { parent in
                 map[parent]?.add(child: node)
             }
+        }
+        
+        return Array(map.values)
+    }
+    
+    private static func constructParentRelationships(for nodes: [DeclarationNode], from extensions: [(String, [String])]) -> [DeclarationNode] {
+        
+        var map = nodes.reduce(into: [String: DeclarationNode](), { $0[$1.name] = $1 })
+        extensions.forEach { ext in
+            map[ext.0]?.add(parents: ext.1)
         }
         
         return Array(map.values)
@@ -145,6 +165,10 @@ class DeclarationCollector: SyntaxVisitor {
     
     override func visitPost(_ node: StructDeclSyntax) {
         allNodeIds.insert(node.identifier.text)
+        allDeclSyntax.append(node)
+    }
+    
+    override func visitPost(_ node: ExtensionDeclSyntax) {
         allDeclSyntax.append(node)
     }
 }

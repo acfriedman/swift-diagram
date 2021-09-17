@@ -8,7 +8,7 @@
 import Foundation
 import AppKit
 
-class CanvasCoordinator: DeclarationNodeViewDelegate {
+class CanvasCoordinator {
     
     enum Error: Swift.Error {
         case noSuchNodeName
@@ -90,8 +90,9 @@ class CanvasCoordinator: DeclarationNodeViewDelegate {
         let maxDimension = max(node.frame.width, node.frame.height)
         return maxDimension * CGFloat(nodes.count)
     }
-    
-    // MARK: DeclarationNodeViewDelegate
+}
+
+extension CanvasCoordinator: DeclarationNodeViewDelegate {
     
     func nodeViewMouseDidDrag(_ nodeView: DeclarationNodeView) {
         relationshipMapper.updatePaths(for: nodeView)

@@ -22,6 +22,7 @@ protocol DeclarationNode: CustomDebugStringConvertible {
     var usage: Set<String> { get }
     var usedBy: Set<String> { get }
     
+    mutating func add(parents: [String])
     mutating func add(child: DeclarationNode)
     mutating func add(use: String)
     mutating func add(usedBy: String)
@@ -65,6 +66,11 @@ struct ClassNode: DeclarationNode {
     mutating func add(usedBy: String) {
         self.usedBy.insert(usedBy)
     }
+    
+    mutating func add(parents: [String]) {
+        inheritance.formUnion(parents)
+    }
+    
 }
 
 struct StructNode: DeclarationNode {
@@ -87,6 +93,11 @@ struct StructNode: DeclarationNode {
     mutating func add(usedBy: String) {
         self.usedBy.insert(usedBy)
     }
+    
+    mutating func add(parents: [String]) {
+        inheritance.formUnion(parents)
+    }
+    
 }
 
 struct ProtocolNode: DeclarationNode {
@@ -109,6 +120,11 @@ struct ProtocolNode: DeclarationNode {
     mutating func add(usedBy: String) {
         self.usedBy.insert(usedBy)
     }
+    
+    mutating func add(parents: [String]) {
+        inheritance.formUnion(parents)
+    }
+    
 }
 
 struct NullNode: DeclarationNode {
@@ -132,4 +148,9 @@ struct NullNode: DeclarationNode {
     mutating func add(usedBy: String) {
         //
     }
+    
+    mutating func add(parents: [String]) {
+        //
+    }
+    
 }
