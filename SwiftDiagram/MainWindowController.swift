@@ -84,6 +84,7 @@ extension MainWindowController: NSToolbarDelegate {
 }
 
 extension MainWindowController: NSSearchFieldDelegate {
+    
     func searchFieldDidStartSearching(_ sender: NSSearchField) {
         //
     }
@@ -96,7 +97,9 @@ extension MainWindowController: NSSearchFieldDelegate {
         if commandSelector == #selector(insertNewline) {
             delegate?.mainWindowController(self, didSearchFor: textView.string)
             textView.string = ""
+            window?.makeFirstResponder(nil)
+            return true
         }
-        return true
+        return false
     }
 }
