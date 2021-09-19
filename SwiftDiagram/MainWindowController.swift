@@ -11,9 +11,17 @@ protocol MainWindowControllerDelegate: AnyObject {
     func mainWindowController(_ controller: MainWindowController, didSearchFor text: String)
 }
 
-class MainWindowController: NSWindowController {
+class MainWindowController: NSWindowController, NSToolbarItemValidation {
     
     weak var delegate: MainWindowControllerDelegate?
+    
+    /// Items for the `NSMenuToolbarItem`
+    private var actionsMenu: NSMenu = {
+        var menu = NSMenu(title: "")
+        let menuItem1 = NSMenuItem(title: "Add", action: nil, keyEquivalent: "")
+        menu.items = [menuItem1]
+        return menu
+    }()
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -31,6 +39,16 @@ class MainWindowController: NSWindowController {
             unwrappedWindow.toolbar?.validateVisibleItems()
         }
     }
+    
+    @objc func addButtonPressed(_ sender: Any) {
+        print("hello world")
+    }
+    
+    // MARK: NSToolbarItemValidation
+    
+    func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
+        return true
+    }
 }
 
 extension MainWindowController: NSToolbarDelegate {
@@ -39,7 +57,7 @@ extension MainWindowController: NSToolbarDelegate {
                  itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,
                  willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
         
-        if  itemIdentifier == NSToolbarItem.Identifier.toolbarSearchItem {
+        if  itemIdentifier == NSToolbarItem.Identifier.searchItem {
             let searchItem = NSSearchToolbarItem(itemIdentifier: itemIdentifier)
             searchItem.resignsFirstResponderWithCancel = true
             searchItem.searchField.delegate = self
@@ -47,19 +65,36 @@ extension MainWindowController: NSToolbarDelegate {
             return searchItem
         }
         
+        if  itemIdentifier == NSToolbarItem.Identifier.addButtonItem {
+            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
+            toolbarItem.target = self
+            toolbarItem.action = #selector(addButtonPressed(_:))
+            toolbarItem.title = "Add"
+            toolbarItem.label = "Add"
+            toolbarItem.paletteLabel = "Add"
+            toolbarItem.toolTip = "Add blueprint object"
+            toolbarItem.visibilityPriority = .high
+            toolbarItem.isBordered = true
+            return toolbarItem
+        }
+        
         return nil
     }
     
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
         return [
-            NSToolbarItem.Identifier.toolbarSearchItem
+            NSToolbarItem.Identifier.flexibleSpace,
+            NSToolbarItem.Identifier.addButtonItem,
+            NSToolbarItem.Identifier.flexibleSpace,
+            NSToolbarItem.Identifier.searchItem,
         ]
         
     }
     
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
         return [
-            NSToolbarItem.Identifier.toolbarSearchItem,
+            NSToolbarItem.Identifier.searchItem,
+            NSToolbarItem.Identifier.addButtonItem,
             NSToolbarItem.Identifier.space,
             NSToolbarItem.Identifier.flexibleSpace]
     }

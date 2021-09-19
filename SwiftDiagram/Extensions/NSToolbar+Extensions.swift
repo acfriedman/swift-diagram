@@ -14,6 +14,7 @@ extension NSToolbar.Identifier {
 
 extension NSToolbarItem.Identifier
 {
-    /// Example of `NSSearchToolbarItem`
-    static let toolbarSearchItem = NSToolbarItem.Identifier("ToolbarSearchItem")
+    static let searchItem = NSToolbarItem.Identifier("ToolbarSearchItem")
+    
+    static let addButtonItem = NSToolbarItem.Identifier("ToolbarAddButtonItem")
 }
