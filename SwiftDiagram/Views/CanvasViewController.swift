@@ -69,6 +69,10 @@ class CanvasViewController: NSViewController, MainWindowControllerDelegate {
         }
     }
     
+    func mainWindowController(_ controller: MainWindowController, didSelectAdd construct: SwiftConstruct) {
+        // do something with the construct the user wants to add. PLOT IT! 
+    }
+    
     // MARK: Private Methods
     
     private func makeContentView() {

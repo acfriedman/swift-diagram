@@ -9,6 +9,7 @@ import AppKit
 
 protocol MainWindowControllerDelegate: AnyObject {
     func mainWindowController(_ controller: MainWindowController, didSearchFor text: String)
+    func mainWindowController(_ controller: MainWindowController, didSelectAdd construct: SwiftConstruct)
 }
 
 class MainWindowController: NSWindowController, NSToolbarItemValidation {
@@ -18,8 +19,13 @@ class MainWindowController: NSWindowController, NSToolbarItemValidation {
     /// Items for the `NSMenuToolbarItem`
     private var actionsMenu: NSMenu = {
         var menu = NSMenu(title: "")
-        let menuItem1 = NSMenuItem(title: "Add", action: nil, keyEquivalent: "")
-        menu.items = [menuItem1]
+        menu.items = SwiftConstruct.all
+            .map { $0.stringValue.capitalized }
+            .map {
+                NSMenuItem(title: $0,
+                           action: #selector(addButtonPressed(_:)),
+                           keyEquivalent: "")
+            }
         return menu
     }()
     
@@ -40,8 +46,13 @@ class MainWindowController: NSWindowController, NSToolbarItemValidation {
         }
     }
     
-    @objc func addButtonPressed(_ sender: Any) {
-        print("hello world")
+    @objc func addButtonPressed(_ addMenuItem: NSMenuItem) {
+        do {
+            let constructType = try SwiftConstruct.make(from: addMenuItem.title)
+            delegate?.mainWindowController(self, didSelectAdd: constructType)
+        } catch {
+            print("Attempting to add an unknown construct: \(error)")
+        }
     }
     
     // MARK: NSToolbarItemValidation
@@ -66,9 +77,9 @@ extension MainWindowController: NSToolbarDelegate {
         }
         
         if  itemIdentifier == NSToolbarItem.Identifier.addButtonItem {
-            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
+            let toolbarItem = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.target = self
-            toolbarItem.action = #selector(addButtonPressed(_:))
+            toolbarItem.menu = actionsMenu
             toolbarItem.title = "Add"
             toolbarItem.label = "Add"
             toolbarItem.paletteLabel = "Add"
