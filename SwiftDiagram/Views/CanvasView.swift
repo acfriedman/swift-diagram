@@ -11,6 +11,7 @@ import SnapKit
 class CanvasView: NSScrollView {
     
     var nodeViews: [DeclarationNodeView] = []
+    var sketchViews: [SketchNodeView] = []
     var selectedNodes: [DeclarationNodeView] = []
     
     private var mouseDownLocation: NSPoint!
@@ -29,6 +30,11 @@ class CanvasView: NSScrollView {
     
     func add(_ nodeView: DeclarationNodeView) {
         nodeViews += [nodeView]
+        documentView?.addSubview(nodeView)
+    }
+    
+    func add(_ nodeView: SketchNodeView) {
+        sketchViews += [nodeView]
         documentView?.addSubview(nodeView)
     }
     

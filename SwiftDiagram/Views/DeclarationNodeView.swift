@@ -84,3 +84,19 @@ class DeclarationNodeView: RoundedTextView, NodeViewMenuDelegate {
         delegate?.nodeView(self, didSelectRelation: menuItem.title)
     }
 }
+
+class SketchNodeView: RoundedTextView {
+    
+    init(constructType: SwiftConstruct) {
+        
+        super.init(frame: NSRect(x: 0, y: 0, width: 100.0, height: 80.0)) // default frame
+        wantsLayer = true
+        layer?.borderWidth = 2.0
+        layer?.borderColor = constructType.color.cgColor
+        layer?.backgroundColor = NSColor.lightGray.cgColor
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}

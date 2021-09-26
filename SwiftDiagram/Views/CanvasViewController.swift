@@ -70,7 +70,7 @@ class CanvasViewController: NSViewController, MainWindowControllerDelegate {
     }
     
     func mainWindowController(_ controller: MainWindowController, didSelectAdd construct: SwiftConstruct) {
-        // do something with the construct the user wants to add. PLOT IT! 
+        coordinator.plot(type: construct)
     }
     
     // MARK: Private Methods
@@ -78,7 +78,7 @@ class CanvasViewController: NSViewController, MainWindowControllerDelegate {
     private func makeContentView() {
         contentView = NSView()
         contentView.wantsLayer = true
-        contentView.layer?.backgroundColor = NSColor.lightGray.cgColor
+        contentView.layer?.backgroundColor = Color.offWhiteBackground.cgColor
     }
     
     private func makeCanvasView() {

@@ -16,6 +16,7 @@
 		497649F62688CF5D00293CCB /* Test_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F52688CF5D00293CCB /* Test_1.swift */; };
 		497649F82688CF8800293CCB /* Test_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F72688CF8700293CCB /* Test_2.swift */; };
 		497649FA2688CFB300293CCB /* Test_3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497649F92688CFB300293CCB /* Test_3.swift */; };
+		497FCBEC2700C4AA00FE0759 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FCBEB2700C4AA00FE0759 /* Color.swift */; };
 		49911B7926C8383500BB8926 /* NodeViewMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49911B7826C8383500BB8926 /* NodeViewMenu.swift */; };
 		4994AD0D26FA164E00253679 /* SwiftConstruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4994AD0C26FA164E00253679 /* SwiftConstruct.swift */; };
 		49AD8C0726F3896500C830AE /* lib_InternalSwiftSyntaxParser.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 49AD8C0626F3896500C830AE /* lib_InternalSwiftSyntaxParser.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -84,6 +85,7 @@
 		497649F52688CF5D00293CCB /* Test_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_1.swift; sourceTree = "<group>"; };
 		497649F72688CF8700293CCB /* Test_2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_2.swift; sourceTree = "<group>"; };
 		497649F92688CFB300293CCB /* Test_3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_3.swift; sourceTree = "<group>"; };
+		497FCBEB2700C4AA00FE0759 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		49911B7826C8383500BB8926 /* NodeViewMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeViewMenu.swift; sourceTree = "<group>"; };
 		4994AD0C26FA164E00253679 /* SwiftConstruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftConstruct.swift; sourceTree = "<group>"; };
 		49AD8C0626F3896500C830AE /* lib_InternalSwiftSyntaxParser.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = lib_InternalSwiftSyntaxParser.dylib; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 			children = (
 				49ED0F87264971A400A9C9FC /* SwiftNode.swift */,
 				4994AD0C26FA164E00253679 /* SwiftConstruct.swift */,
+				497FCBEB2700C4AA00FE0759 /* Color.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				49DEF3992642E72300FD342D /* RoundedTextView.swift in Sources */,
 				49EE7CB4265552E2002953B7 /* NSView+Extensions.swift in Sources */,
 				49CC407826BC1FDF0000F231 /* RelationshipMapper.swift in Sources */,
+				497FCBEC2700C4AA00FE0759 /* Color.swift in Sources */,
 				49DA116F268FC5430083DF05 /* SolidLine.swift in Sources */,
 				49ED0F88264971A400A9C9FC /* SwiftNode.swift in Sources */,
 				49B3108E26BECF4D00C9DF20 /* CanvasToolBar.swift in Sources */,

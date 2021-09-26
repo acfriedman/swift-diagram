@@ -78,6 +78,17 @@ class CanvasCoordinator {
         relationshipMapper.mapLines(Array(nodeViewIndex.values))
     }
     
+    func plot(type: SwiftConstruct) {
+        
+        let viewCenter = canvasView.documentView!.center
+        let sketchNodeView = SketchNodeView(constructType: type)
+        sketchNodeView.frame = CGRect(x: viewCenter.x,
+                                      y: viewCenter.y,
+                                      width: sketchNodeView.frame.width,
+                                      height: sketchNodeView.frame.height)
+        canvasView.add(sketchNodeView)
+    }
+    
     func remove(_ nodes: [DeclarationNodeView]) {
         nodes.forEach { node in
             nodeViewIndex.removeValue(forKey: node.declarationNode.name)

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AppKit
 
 enum SwiftConstruct {
     
@@ -22,7 +23,7 @@ enum SwiftConstruct {
     }()
     
     static func make(from constructName: String) throws -> Self {
-        switch constructName {
+        switch constructName.lowercased() {
         case SwiftConstruct.classKind.stringValue:
             return .classKind
         case SwiftConstruct.structKind.stringValue:
@@ -42,6 +43,17 @@ enum SwiftConstruct {
             return "struct"
         case .protocolKind:
             return "protocol"
+        }
+    }
+    
+    var color: NSColor {
+        switch self {
+        case .classKind:
+            return .red
+        case .structKind:
+            return .blue
+        case .protocolKind:
+            return .purple
         }
     }
 }
