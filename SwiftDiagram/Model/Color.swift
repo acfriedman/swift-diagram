@@ -9,8 +9,12 @@ import Foundation
 import AppKit
 
 enum Color {
-    static var offWhiteBackground: NSColor = NSColor(calibratedRed: 253.0,
-                                                     green: 253.0,
-                                                     blue: 253.0,
-                                                     alpha: 253.0)
+    static var offWhiteBackground: NSColor = NSColor(red: 253.0/255.0,
+                                                     green: 253.0/255.0,
+                                                     blue: 253.0/255.0,
+                                                     alpha: 1.0)
+    static var lightGrayBackground: NSColor = NSColor(red: 240.0/255.0,
+                                                      green: 240.0/255.0,
+                                                     blue: 240.0/255.0,
+                                                     alpha: 1.0)
 }

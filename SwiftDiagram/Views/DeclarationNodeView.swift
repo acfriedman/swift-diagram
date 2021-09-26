@@ -91,9 +91,9 @@ class SketchNodeView: RoundedTextView {
         
         super.init(frame: NSRect(x: 0, y: 0, width: 100.0, height: 80.0)) // default frame
         wantsLayer = true
-        layer?.borderWidth = 2.0
+        layer?.borderWidth = 3.0
         layer?.borderColor = constructType.color.cgColor
-        layer?.backgroundColor = NSColor.lightGray.cgColor
+        layer?.backgroundColor = Color.lightGrayBackground.cgColor
     }
     
     required init?(coder: NSCoder) {
