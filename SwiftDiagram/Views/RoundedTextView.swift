@@ -6,6 +6,7 @@
 //
 
 import AppKit
+import SnapKit
 
 class RoundedTextView: DraggableView {
     
@@ -47,18 +48,18 @@ class RoundedTextView: DraggableView {
         textField.wantsLayer = true
         textField.alignment = .center
         textField.maximumNumberOfLines = 0
+        textField.backgroundColor = .clear
+        textField.drawsBackground = false
+        textField.isBordered = false
         textField.sizeToFit()
         addSubview(textField)
     }
     
     private func setupConstraints() {
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            textField.centerYAnchor.constraint(equalTo: centerYAnchor),
-            textField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            textField.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor, constant: 8),
-        ])
+        textField.snp.makeConstraints {
+            $0.leading.trailing.equalTo(self).inset(8)
+            $0.centerY.equalTo(self)
+        }
     }
 }
 
@@ -77,3 +78,25 @@ struct RoundedTextView_Preview: PreviewProvider {
     }
 }
 #endif
+
+
+class AutoSizingTextField: NSTextField {
+    
+    override var intrinsicContentSize: NSSize {
+        // Guard the cell exists and wraps
+        guard let cell = self.cell, cell.wraps else { return super.intrinsicContentSize }
+
+        // Use intrinsic width to jive with auto-layout
+        let width = super.intrinsicContentSize.width
+
+        // Calculate height
+        let height = cell.cellSize(forBounds: self.frame).height
+
+        return NSMakeSize(width, height);
+    }
+
+    override func textDidChange(_ notification: Notification) {
+        super.textDidChange(notification)
+        super.invalidateIntrinsicContentSize()
+    }
+}

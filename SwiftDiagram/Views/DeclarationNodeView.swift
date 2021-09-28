@@ -94,9 +94,41 @@ class SketchNodeView: RoundedTextView {
         layer?.borderWidth = 3.0
         layer?.borderColor = constructType.color.cgColor
         layer?.backgroundColor = Color.lightGrayBackground.cgColor
+        
+        let menu = NSMenu(title: "Actions")
+        let ediTitle = NSMenuItem(title: "Rename", action: #selector(editTitle(_:)), keyEquivalent: "")
+        menu.addItem(ediTitle)
+        self.menu = menu
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func editTitle(_ sender: Any) {
+        guard let title = getTitle() else {
+            return
+        }
+        
+        text = title
+    }
+    
+    func getTitle() -> String? {
+        let msg = NSAlert()
+        msg.alertStyle = .informational
+        msg.addButton(withTitle: "OK")
+        msg.addButton(withTitle: "Cancel")
+        msg.messageText = "Title"
+
+        let txt = NSTextField(frame: NSRect(x: 0, y: 0, width: 200, height: 24))
+        msg.accessoryView = txt
+        let response: NSApplication.ModalResponse = msg.runModal()
+
+        if (response == NSApplication.ModalResponse.alertFirstButtonReturn) {
+            return txt.stringValue
+        }
+        
+        return nil
     }
 }
