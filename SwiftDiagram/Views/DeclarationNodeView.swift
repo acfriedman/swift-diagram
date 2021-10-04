@@ -98,8 +98,26 @@ class SketchNodeView: RoundedTextView {
         let menu = NSMenu(title: "Actions")
         let ediTitle = NSMenuItem(title: "Rename", action: #selector(editTitle(_:)), keyEquivalent: "")
         menu.addItem(ediTitle)
-        self.menu = menu
+        menu.addItem(NSMenuItem.separator())
         
+        let addRelationshipMenuItem = NSMenuItem(title: "Add Relationship", action: nil, keyEquivalent: "")
+        let addRelationshipMenu = NSMenu(title: "Add Relationship")
+        addRelationshipMenuItem.submenu = addRelationshipMenu
+        addRelationshipMenu.addItem(NSMenuItem(title: "Uses",
+                                               action: #selector(usesMenuItemTapped(_:)),
+                                               keyEquivalent: ""))
+        addRelationshipMenu.addItem(NSMenuItem(title: "Used By",
+                                               action: #selector(usedByMenuItemTapped(_:)),
+                                               keyEquivalent: ""))
+        addRelationshipMenu.addItem(NSMenuItem(title: "Child",
+                                               action: #selector(childMenuItemTapped(_:)),
+                                               keyEquivalent: ""))
+        addRelationshipMenu.addItem(NSMenuItem(title: "Parent",
+                                               action: #selector(parentMenuItemTapped(_:)),
+                                               keyEquivalent: ""))
+        menu.addItem(addRelationshipMenuItem)
+        
+        self.menu = menu
     }
     
     required init?(coder: NSCoder) {
@@ -130,5 +148,23 @@ class SketchNodeView: RoundedTextView {
         }
         
         return nil
+    }
+    
+    // MARK: Private Functions
+    
+    @objc func usesMenuItemTapped(_ sender: Any) {
+        print("Did tap uses menu item")
+    }
+    
+    @objc func usedByMenuItemTapped(_ sender: Any) {
+        print("Did tap used by menu item")
+    }
+    
+    @objc func childMenuItemTapped(_ sender: Any) {
+        print("Did tap child menu item")
+    }
+    
+    @objc func parentMenuItemTapped(_ sender: Any) {
+        print("Did tap parent menu item")
     }
 }
