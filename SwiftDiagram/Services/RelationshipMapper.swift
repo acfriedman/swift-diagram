@@ -109,5 +109,44 @@ class RelationshipMapper {
         let computedEdge = CGPoint(x: endNode.center.x+edgePoint.x, y: endNode.center.y+edgePoint.y)
         return ArrowPath(start: startNode.center, end: computedEdge)
     }
+    
+    var editingArrow: CAShapeLayer?
+    
+    func startEditing(_ relationship: RelationshipType, for view: NSView) {
+        
+        NSEvent.addLocalMonitorForEvents(matching: NSEvent.EventTypeMask.mouseMoved, handler: { [weak self] event in
+            guard let self = self else {
+                return event
+            }
+            
+            let mousePoint = self.canvasView.documentView!.convert(event.locationInWindow, from: nil)
+            print(mousePoint)
+            let arrowPath = ArrowPath(start: view.center, end: mousePoint)
+            
+            if let editingArrow = self.editingArrow {
+                editingArrow.path = arrowPath.cgPath
+                return event
+            }
+            
+            self.editingArrow = SolidLine(path: arrowPath.cgPath)
+            self.canvasView.documentView?.layer?.insertSublayer(self.editingArrow!, at: 0)
+            
+            return event
+        })
+        
+        switch relationship {
+        case .uses:
+            
+            
+            
+            break
+        case .usedBy:
+            break
+        case .child:
+            break
+        case .parent:
+            break
+        }
+    }
 }
 

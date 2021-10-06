@@ -82,6 +82,15 @@ class CanvasCoordinator {
         
         let viewCenter = canvasView.documentView!.center
         let sketchNodeView = SketchNodeView(constructType: type)
+        sketchNodeView.didSelectAddRelationship = { [weak self] view, relationship in
+            
+            guard let self = self else {
+                return
+            }
+            
+            self.relationshipMapper.startEditing(relationship, for: view)
+        }
+        
         sketchNodeView.frame = CGRect(x: viewCenter.x,
                                       y: viewCenter.y,
                                       width: sketchNodeView.frame.width,

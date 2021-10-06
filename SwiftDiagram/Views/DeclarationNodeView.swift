@@ -85,7 +85,16 @@ class DeclarationNodeView: RoundedTextView, NodeViewMenuDelegate {
     }
 }
 
+enum RelationshipType {
+    case child
+    case parent
+    case uses
+    case usedBy
+}
+
 class SketchNodeView: RoundedTextView {
+        
+    var didSelectAddRelationship: ((SketchNodeView, RelationshipType) -> Void)?
     
     init(constructType: SwiftConstruct) {
         
@@ -153,18 +162,18 @@ class SketchNodeView: RoundedTextView {
     // MARK: Private Functions
     
     @objc func usesMenuItemTapped(_ sender: Any) {
-        print("Did tap uses menu item")
+        didSelectAddRelationship?(self, .uses)
     }
     
     @objc func usedByMenuItemTapped(_ sender: Any) {
-        print("Did tap used by menu item")
+        didSelectAddRelationship?(self, .usedBy)
     }
     
     @objc func childMenuItemTapped(_ sender: Any) {
-        print("Did tap child menu item")
+        didSelectAddRelationship?(self, .child)
     }
     
     @objc func parentMenuItemTapped(_ sender: Any) {
-        print("Did tap parent menu item")
+        didSelectAddRelationship?(self, .parent)
     }
 }
