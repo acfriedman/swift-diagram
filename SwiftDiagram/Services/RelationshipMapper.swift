@@ -111,41 +111,64 @@ class RelationshipMapper {
     }
     
     var editingArrow: CAShapeLayer?
+    var mouseMovedMonitor: Any?
     
     func startEditing(_ relationship: RelationshipType, for view: NSView) {
         
-        NSEvent.addLocalMonitorForEvents(matching: NSEvent.EventTypeMask.mouseMoved, handler: { [weak self] event in
-            guard let self = self else {
-                return event
+        func addEditingSolidArrow() {
+            
+            let mouseLocation = self.canvasView.documentView!.window!.mouseLocationOutsideOfEventStream
+            let mousePoint = self.canvasView.documentView!.convert(mouseLocation, from: nil)
+            
+            let relationshipLine: CAShapeLayer
+            let arrowPath: NSBezierPath
+            switch relationship {
+            case .uses:
+                arrowPath = ArrowPath(start: view.center, end: mousePoint)
+                relationshipLine = SolidLine(path: arrowPath.cgPath)
+            case .usedBy:
+                arrowPath = ArrowPath(start: mousePoint, end: view.center)
+                relationshipLine = SolidLine(path: arrowPath.cgPath)
+            case .child:
+                arrowPath = ArrowPath(start: mousePoint, end: view.center)
+                relationshipLine = DashedLine(path: arrowPath.cgPath)
+            case .parent:
+                arrowPath = ArrowPath(start: mousePoint, end: view.center)
+                relationshipLine = DashedLine(path: arrowPath.cgPath)
             }
             
-            let mousePoint = self.canvasView.documentView!.convert(event.locationInWindow, from: nil)
-            print(mousePoint)
-            let arrowPath = ArrowPath(start: view.center, end: mousePoint)
             
             if let editingArrow = self.editingArrow {
                 editingArrow.path = arrowPath.cgPath
-                return event
+                return
             }
             
-            self.editingArrow = SolidLine(path: arrowPath.cgPath)
+            self.editingArrow = relationshipLine
             self.canvasView.documentView?.layer?.insertSublayer(self.editingArrow!, at: 0)
-            
+        }
+        
+        addEditingSolidArrow()
+        
+        mouseMovedMonitor = NSEvent.addLocalMonitorForEvents(matching: NSEvent.EventTypeMask.mouseMoved, handler: { event in
+            addEditingSolidArrow()
             return event
         })
         
-        switch relationship {
-        case .uses:
+        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
             
+            guard let self = self,
+                  let mouseMovedMonitor = self.mouseMovedMonitor else {
+                return event
+            }
             
+            if event.keyCode == 53 {
+                NSEvent.removeMonitor(mouseMovedMonitor)
+                self.editingArrow?.removeFromSuperlayer()
+                self.editingArrow = nil
+                self.mouseMovedMonitor = nil
+            }
             
-            break
-        case .usedBy:
-            break
-        case .child:
-            break
-        case .parent:
-            break
+            return event
         }
     }
 }
