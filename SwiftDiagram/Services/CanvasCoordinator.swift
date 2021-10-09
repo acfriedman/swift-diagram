@@ -125,4 +125,16 @@ extension CanvasCoordinator: DeclarationNodeViewDelegate {
             print("Failed to plot selected menu item with error: \(error)")
         }
     }
+    
+    func nodeViewDidEnterHover(_ nodeView: DeclarationNodeView) {
+        if relationshipMapper.editingArrow != nil {
+            nodeView.isHighlighted = true
+        }
+    }
+    
+    func nodeViewDidExitHover(_ nodeView: DeclarationNodeView) {
+        if relationshipMapper.editingArrow != nil {
+            nodeView.isHighlighted = false
+        }
+    }
 }

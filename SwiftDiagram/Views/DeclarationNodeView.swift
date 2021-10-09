@@ -10,6 +10,8 @@ import AppKit
 protocol DeclarationNodeViewDelegate: AnyObject {
     func nodeViewMouseDidDrag(_ nodeView: DeclarationNodeView)
     func nodeView(_ nodeView: DeclarationNodeView, didSelectRelation nodeTitle: String)
+    func nodeViewDidEnterHover(_ nodeView: DeclarationNodeView)
+    func nodeViewDidExitHover(_ nodeView: DeclarationNodeView)
 }
 
 class DeclarationNodeView: RoundedTextView, NodeViewMenuDelegate {
@@ -53,6 +55,15 @@ class DeclarationNodeView: RoundedTextView, NodeViewMenuDelegate {
         nodeViewMenu.nodeViewDelegate = self
         menu = nodeViewMenu
         relationshipMenu = nodeViewMenu
+        
+        let trackingArea = NSTrackingArea(
+            rect: bounds,
+            options: [.activeInKeyWindow, .mouseEnteredAndExited],
+            owner: self,
+            userInfo: nil
+        )
+
+        addTrackingArea(trackingArea)
     }
     
     required init?(coder: NSCoder) {
@@ -76,6 +87,16 @@ class DeclarationNodeView: RoundedTextView, NodeViewMenuDelegate {
     override func mouseDragged(with event: NSEvent) {
         super.mouseDragged(with: event)
         delegate?.nodeViewMouseDidDrag(self)
+    }
+    
+    override func mouseEntered(with event: NSEvent) {
+        super.mouseEntered(with: event)
+        delegate?.nodeViewDidEnterHover(self)
+    }
+
+    override func mouseExited(with event: NSEvent) {
+        super.mouseExited(with: event)
+        delegate?.nodeViewDidExitHover(self)
     }
     
     // MARK: NodeViewMenuDelegate
