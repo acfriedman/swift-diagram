@@ -127,20 +127,20 @@ extension CanvasCoordinator: DeclarationNodeViewDelegate {
     }
     
     func nodeViewDidEnterHover(_ nodeView: DeclarationNodeView) {
-        if relationshipMapper.isEditing {
+        if relationshipMapper.isAddingRelationship {
             nodeView.isHighlighted = true
         }
     }
     
     func nodeViewDidExitHover(_ nodeView: DeclarationNodeView) {
-        if relationshipMapper.isEditing {
+        if relationshipMapper.isAddingRelationship {
             nodeView.isHighlighted = false
         }
     }
     
     func nodeViewMouseDidTap(_ nodeView: DeclarationNodeView) {
-        if relationshipMapper.isEditing {
-           print("meep meep")
+        if relationshipMapper.isAddingRelationship {
+           relationshipMapper.addRelationship(to: nodeView)
         }
     }
 }

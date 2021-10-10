@@ -15,12 +15,25 @@ protocol DeclarationNodeViewDelegate: AnyObject {
     func nodeViewMouseDidTap(_ nodeView: DeclarationNodeView)
 }
 
-class DeclarationNodeView: RoundedTextView, NodeViewMenuDelegate {
+protocol NodeViewMappable: NSView {
     
+    var outgoingLines: [CAShapeLayer] { get }
+    var incomingLines: [CAShapeLayer] { get }
+    var outgoingNodes: [NSView] { get }
+    var incomingNodes: [NSView] { get }
+
+    func addIncomingLine(_ line: CAShapeLayer)
+    func addOutgoingLine(_ line: CAShapeLayer)
+    func addIncomingNode(_ node: NSView)
+    func addOutgoingNode(_ node: NSView)
+}
+
+class DeclarationNodeView: RoundedTextView, NodeViewMenuDelegate, NodeViewMappable {
+
     var outgoingLines: [CAShapeLayer] = []
     var incomingLines: [CAShapeLayer] = []
-    var outgoingNodes: [DeclarationNodeView] = []
-    var incomingNodes: [DeclarationNodeView] = []
+    var outgoingNodes: [NSView] = []
+    var incomingNodes: [NSView] = []
     var declarationNode: DeclarationNode
     
     weak var delegate: DeclarationNodeViewDelegate?
@@ -85,6 +98,22 @@ class DeclarationNodeView: RoundedTextView, NodeViewMenuDelegate {
         incomingLines.forEach { $0.removeFromSuperlayer() }
     }
     
+    func addOutgoingNode(_ node: NSView) {
+        outgoingNodes.append(node)
+    }
+    
+    func addIncomingLine(_ line: CAShapeLayer) {
+        incomingLines.append(line)
+    }
+    
+    func addOutgoingLine(_ line: CAShapeLayer) {
+        outgoingLines.append(line)
+    }
+    
+    func addIncomingNode(_ node: NSView) {
+        incomingNodes.append(node)
+    }
+    
     override func mouseDragged(with event: NSEvent) {
         super.mouseDragged(with: event)
         delegate?.nodeViewMouseDidDrag(self)
@@ -116,9 +145,27 @@ enum RelationshipType {
     case parent
     case uses
     case usedBy
+    
+    var line: RelationshipLine {
+        switch self {
+        case .child:
+            return DashedLine()
+        case .parent:
+            return DashedLine()
+        case .uses:
+            return SolidLine()
+        case .usedBy:
+            return SolidLine()
+        }
+    }
 }
 
-class SketchNodeView: RoundedTextView {
+class SketchNodeView: RoundedTextView, NodeViewMappable {
+    
+    var outgoingLines: [CAShapeLayer] = []
+    var incomingLines: [CAShapeLayer] = []
+    var outgoingNodes: [NSView] = []
+    var incomingNodes: [NSView] = []
         
     var didSelectAddRelationship: ((SketchNodeView, RelationshipType) -> Void)?
     
@@ -183,6 +230,22 @@ class SketchNodeView: RoundedTextView {
         }
         
         return nil
+    }
+    
+    func addIncomingLine(_ line: CAShapeLayer) {
+        incomingLines.append(line)
+    }
+    
+    func addOutgoingLine(_ line: CAShapeLayer) {
+        outgoingLines.append(line)
+    }
+    
+    func addIncomingNode(_ node: NSView) {
+        incomingNodes.append(node)
+    }
+    
+    func addOutgoingNode(_ node: NSView) {
+        outgoingNodes.append(node)
     }
     
     // MARK: Private Functions

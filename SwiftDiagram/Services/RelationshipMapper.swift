@@ -10,7 +10,7 @@ import AppKit
 
 class RelationshipMapper {
     
-    var isEditing: Bool = false
+    var isAddingRelationship: Bool = false
     
     private let canvasView: CanvasView!
     
@@ -102,23 +102,51 @@ class RelationshipMapper {
         }
     }
     
-    func makeArrowPath(from startNode: DeclarationNodeView,
-                       to endNode: DeclarationNodeView) -> ArrowPath {
+    func makeArrowPath(from startNode: NSView,
+                       to endNode: NSView) -> ArrowPath {
         
         var startEndAngle = atan((endNode.center.y - startNode.center.y) / (endNode.center.x - startNode.center.x)) + ((endNode.center.x - startNode.center.x) < 0 ? CGFloat.pi : 0)
         let degreeToRadian = CGFloat.pi / 180
         if startEndAngle < 0 {
             startEndAngle = 360 * degreeToRadian + startEndAngle
         }
-
+        
         let edgePoint = endNode.findEdgePoint(angle: startEndAngle)
         let computedEdge = CGPoint(x: endNode.center.x+edgePoint.x, y: endNode.center.y+edgePoint.y)
         return ArrowPath(start: startNode.center, end: computedEdge)
     }
     
-    func startEditing(_ relationship: RelationshipType, for view: NSView) {
+    var fromEditNode: NodeViewMappable?
+    
+    func addRelationship(to toView: NodeViewMappable) {
+        guard isAddingRelationship,
+        let editingArrow = editingArrow else {
+            fatalError("ERROR: Attempting to add relationship but isAddingRelationship == false")
+        }
         
-        isEditing = true
+        guard let fromEditNode = fromEditNode else {
+            fatalError("ERROR: Attempting to add relationship but fromEditNode == nil")
+        }
+        
+        
+        let arrowPath = makeArrowPath(from: fromEditNode, to: toView)
+        editingArrow.path = arrowPath.cgPath
+        
+        toView.addIncomingLine(editingArrow)
+        toView.addIncomingNode(toView)
+        fromEditNode.addOutgoingLine(editingArrow)
+        fromEditNode.addOutgoingNode(toView)
+        
+        isAddingRelationship = false
+        NSEvent.removeMonitor(mouseMovedMonitor)
+        self.editingArrow = nil
+        self.fromEditNode = nil
+    }
+    
+    func startEditing(_ relationship: RelationshipType, for view: NodeViewMappable) {
+        
+        isAddingRelationship = true
+        fromEditNode = view
         
         func addEditingSolidArrow() {
             
@@ -171,7 +199,8 @@ class RelationshipMapper {
                 self.editingArrow?.removeFromSuperlayer()
                 self.editingArrow = nil
                 self.mouseMovedMonitor = nil
-                self.isEditing = false
+                self.isAddingRelationship = false
+                self.fromEditNode = nil
             }
             
             return event

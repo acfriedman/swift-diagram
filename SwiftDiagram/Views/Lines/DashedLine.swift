@@ -7,6 +7,9 @@
 
 import AppKit
 
+protocol RelationshipLine { }
+extension CAShapeLayer: RelationshipLine { }
+
 class DashedLine: CAShapeLayer {
     
     convenience init(path: CGPath) {
