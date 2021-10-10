@@ -10,6 +10,8 @@ import AppKit
 
 class RelationshipMapper {
     
+    var isEditing: Bool = false
+    
     private let canvasView: CanvasView!
     
     private var nodeIndex: [String: DeclarationNodeView] = [:]
@@ -17,6 +19,10 @@ class RelationshipMapper {
     private var inheritanceMap: [String: Set<DeclarationNodeView>] = [:]
     
     private var usageMap: [String: Set<DeclarationNodeView>] = [:]
+    
+    private var editingArrow: CAShapeLayer?
+    
+    private var mouseMovedMonitor: Any?
     
     init(canvasView: CanvasView) {
         self.canvasView = canvasView
@@ -110,10 +116,9 @@ class RelationshipMapper {
         return ArrowPath(start: startNode.center, end: computedEdge)
     }
     
-    var editingArrow: CAShapeLayer?
-    var mouseMovedMonitor: Any?
-    
     func startEditing(_ relationship: RelationshipType, for view: NSView) {
+        
+        isEditing = true
         
         func addEditingSolidArrow() {
             
@@ -166,6 +171,7 @@ class RelationshipMapper {
                 self.editingArrow?.removeFromSuperlayer()
                 self.editingArrow = nil
                 self.mouseMovedMonitor = nil
+                self.isEditing = false
             }
             
             return event

@@ -12,6 +12,7 @@ protocol DeclarationNodeViewDelegate: AnyObject {
     func nodeView(_ nodeView: DeclarationNodeView, didSelectRelation nodeTitle: String)
     func nodeViewDidEnterHover(_ nodeView: DeclarationNodeView)
     func nodeViewDidExitHover(_ nodeView: DeclarationNodeView)
+    func nodeViewMouseDidTap(_ nodeView: DeclarationNodeView)
 }
 
 class DeclarationNodeView: RoundedTextView, NodeViewMenuDelegate {
@@ -97,6 +98,10 @@ class DeclarationNodeView: RoundedTextView, NodeViewMenuDelegate {
     override func mouseExited(with event: NSEvent) {
         super.mouseExited(with: event)
         delegate?.nodeViewDidExitHover(self)
+    }
+    
+    override func mouseUp(with event: NSEvent) {
+        delegate?.nodeViewMouseDidTap(self)
     }
     
     // MARK: NodeViewMenuDelegate
