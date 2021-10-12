@@ -95,6 +95,7 @@ class CanvasCoordinator {
                                       y: viewCenter.y,
                                       width: sketchNodeView.frame.width,
                                       height: sketchNodeView.frame.height)
+        sketchNodeView.delegate = self
         canvasView.add(sketchNodeView)
     }
     
@@ -142,5 +143,11 @@ extension CanvasCoordinator: DeclarationNodeViewDelegate {
         if relationshipMapper.isAddingRelationship {
            relationshipMapper.addRelationship(to: nodeView)
         }
+    }
+}
+
+extension CanvasCoordinator: SketchNodeViewDelegate {
+    func nodeViewMouseDidDrag(_ nodeView: NodeViewMappable) {
+        relationshipMapper.updatePaths(for: nodeView)
     }
 }

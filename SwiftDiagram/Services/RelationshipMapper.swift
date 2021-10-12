@@ -49,7 +49,7 @@ class RelationshipMapper {
         nodeIndex.values.forEach { $0.removeLines() }
     }
     
-    func updatePaths(for nodeView: DeclarationNodeView) {
+    func updatePaths(for nodeView: NodeViewMappable) {
         zip(nodeView.outgoingNodes, nodeView.outgoingLines).forEach { node, line in
             line.path = makeArrowPath(from: node, to: nodeView).cgPath
         }
@@ -138,7 +138,7 @@ class RelationshipMapper {
         fromEditNode.addIncomingNode(toView)
         
         isAddingRelationship = false
-        NSEvent.removeMonitor(mouseMovedMonitor)
+        NSEvent.removeMonitor(mouseMovedMonitor as Any)
         self.editingArrow = nil
         self.fromEditNode = nil
     }

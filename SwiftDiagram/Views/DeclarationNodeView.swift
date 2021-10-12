@@ -160,6 +160,10 @@ enum RelationshipType {
     }
 }
 
+protocol SketchNodeViewDelegate: AnyObject {
+    func nodeViewMouseDidDrag(_ nodeView: NodeViewMappable)
+}
+
 class SketchNodeView: RoundedTextView, NodeViewMappable {
     
     var outgoingLines: [CAShapeLayer] = []
@@ -168,6 +172,8 @@ class SketchNodeView: RoundedTextView, NodeViewMappable {
     var incomingNodes: [NSView] = []
         
     var didSelectAddRelationship: ((SketchNodeView, RelationshipType) -> Void)?
+    
+    weak var delegate: SketchNodeViewDelegate?
     
     init(constructType: SwiftConstruct) {
         
@@ -264,5 +270,10 @@ class SketchNodeView: RoundedTextView, NodeViewMappable {
     
     @objc func parentMenuItemTapped(_ sender: Any) {
         didSelectAddRelationship?(self, .parent)
+    }
+    
+    override func mouseDragged(with event: NSEvent) {
+        super.mouseDragged(with: event)
+        delegate?.nodeViewMouseDidDrag(self)
     }
 }
