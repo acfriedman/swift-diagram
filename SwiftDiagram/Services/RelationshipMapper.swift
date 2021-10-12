@@ -132,10 +132,10 @@ class RelationshipMapper {
         let arrowPath = makeArrowPath(from: fromEditNode, to: toView)
         editingArrow.path = arrowPath.cgPath
         
-        toView.addIncomingLine(editingArrow)
-        toView.addIncomingNode(toView)
-        fromEditNode.addOutgoingLine(editingArrow)
-        fromEditNode.addOutgoingNode(toView)
+        fromEditNode.addIncomingLine(editingArrow)
+        toView.addOutgoingLine(editingArrow)
+        toView.addOutgoingNode(fromEditNode)
+        fromEditNode.addIncomingNode(toView)
         
         isAddingRelationship = false
         NSEvent.removeMonitor(mouseMovedMonitor)
