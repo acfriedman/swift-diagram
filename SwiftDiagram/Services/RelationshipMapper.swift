@@ -117,10 +117,13 @@ class RelationshipMapper {
     }
     
     var fromEditNode: NodeViewMappable?
+    var editRelationship: RelationshipType?
     
     func addRelationship(to toView: NodeViewMappable) {
+        
         guard isAddingRelationship,
-        let editingArrow = editingArrow else {
+        let editingArrow = editingArrow,
+        let relationshipType = editRelationship else {
             fatalError("ERROR: Attempting to add relationship but isAddingRelationship == false")
         }
         
@@ -129,18 +132,35 @@ class RelationshipMapper {
         }
         
         
-        let arrowPath = makeArrowPath(from: fromEditNode, to: toView)
-        editingArrow.path = arrowPath.cgPath
+        let arrowPath: ArrowPath
+        switch relationshipType {
+        case .parent, .uses:
+            
+            arrowPath = makeArrowPath(from: fromEditNode, to: toView)
+            editingArrow.path = arrowPath.cgPath
+            
+            fromEditNode.addIncomingLine(editingArrow)
+            toView.addOutgoingLine(editingArrow)
+            toView.addOutgoingNode(fromEditNode)
+            fromEditNode.addIncomingNode(toView)
+            
+        case .child, .usedBy:
+            
+            arrowPath = makeArrowPath(from: toView, to: fromEditNode)
+            editingArrow.path = arrowPath.cgPath
+            
+            toView.addIncomingLine(editingArrow)
+            fromEditNode.addOutgoingLine(editingArrow)
+            fromEditNode.addOutgoingNode(toView)
+            toView.addIncomingNode(fromEditNode)
+        }
         
-        fromEditNode.addIncomingLine(editingArrow)
-        toView.addOutgoingLine(editingArrow)
-        toView.addOutgoingNode(fromEditNode)
-        fromEditNode.addIncomingNode(toView)
         
         isAddingRelationship = false
         NSEvent.removeMonitor(mouseMovedMonitor as Any)
         self.editingArrow = nil
         self.fromEditNode = nil
+        self.editRelationship = nil
     }
     
     func startEditing(_ relationship: RelationshipType, for view: NodeViewMappable) {
@@ -153,6 +173,7 @@ class RelationshipMapper {
             let mouseLocation = self.canvasView.documentView!.window!.mouseLocationOutsideOfEventStream
             let mousePoint = self.canvasView.documentView!.convert(mouseLocation, from: nil)
             
+            self.editRelationship = relationship
             let relationshipLine: CAShapeLayer
             let arrowPath: NSBezierPath
             switch relationship {
@@ -166,7 +187,7 @@ class RelationshipMapper {
                 arrowPath = ArrowPath(start: mousePoint, end: view.center)
                 relationshipLine = DashedLine(path: arrowPath.cgPath)
             case .parent:
-                arrowPath = ArrowPath(start: mousePoint, end: view.center)
+                arrowPath = ArrowPath(start: view.center, end: mousePoint)
                 relationshipLine = DashedLine(path: arrowPath.cgPath)
             }
             
@@ -201,6 +222,7 @@ class RelationshipMapper {
                 self.mouseMovedMonitor = nil
                 self.isAddingRelationship = false
                 self.fromEditNode = nil
+                self.editRelationship = nil
             }
             
             return event
